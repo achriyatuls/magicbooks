@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:magicbook/state_util.dart';
 import '../service/dashboard_service.dart';
 import '../view/dashboard_view.dart';
@@ -16,6 +18,10 @@ class DashboardController extends State<DashboardView>
   int nextLevelRequirement = 100;
   int completedModules = 0;
   int currentStreak = 0;
+
+  // Profile Photo
+  File? profilePhoto;
+  final ImagePicker _picker = ImagePicker();
 
   List<Map<String, dynamic>> achievements = [
     {
@@ -231,5 +237,86 @@ class DashboardController extends State<DashboardView>
     return achievements
         .where((achievement) => achievement['unlocked'] == true)
         .length;
+  }
+
+  // Method untuk mengambil foto profil dari galeri
+  Future<void> pickProfilePhoto() async {
+    try {
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 300,
+        maxHeight: 300,
+        imageQuality: 80,
+      );
+
+      if (image != null) {
+        profilePhoto = File(image.path);
+        setState(() {});
+
+        // Tampilkan pesan sukses
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Foto profil berhasil diubah!'),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      // Tampilkan pesan error
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error mengambil foto: $e'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
+  }
+
+  // Method untuk menampilkan dialog pilihan foto
+  void showPhotoPickerDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Pilih Foto Profil'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Pilih dari Galeri'),
+              onTap: () {
+                Navigator.pop(context);
+                pickProfilePhoto();
+              },
+            ),
+            if (profilePhoto != null)
+              ListTile(
+                leading: const Icon(Icons.delete),
+                title: const Text('Hapus Foto Profil'),
+                onTap: () {
+                  Navigator.pop(context);
+                  profilePhoto = null;
+                  setState(() {});
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Foto profil dihapus!'),
+                      backgroundColor: Colors.orange,
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+              ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Batal'),
+          ),
+        ],
+      ),
+    );
   }
 }

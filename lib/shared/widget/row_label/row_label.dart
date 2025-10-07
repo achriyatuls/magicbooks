@@ -50,7 +50,8 @@ Widget rowAction(Function func) {
     ),
     child: ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.purple.shade300,
+        foregroundColor: Colors.white,
       ),
       onPressed: () {
         print("~..~~~~~~~~~..~");

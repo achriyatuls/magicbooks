@@ -5,6 +5,8 @@ it means you have to rename it to something more unique.
 fileCount: 160
 */
 export 'package:magicbook/core_package.dart';
+export 'package:magicbook/module/splash_screen/controller/splash_screen_controller.dart';
+export 'package:magicbook/module/splash_screen/view/splash_screen_view.dart';
 export 'package:magicbook/module/dashboard/controller/dashboard_controller.dart';
 export 'package:magicbook/module/dashboard/service/dashboard_service.dart';
 export 'package:magicbook/module/dashboard/view/dashboard_view.dart';

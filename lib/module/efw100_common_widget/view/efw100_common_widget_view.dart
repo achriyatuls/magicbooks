@@ -88,33 +88,52 @@ class Efw100CommonWidgetView extends StatefulWidget {
     controller.view = this;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFD5C6FF),
       appBar: AppBar(
         title: const Text("EFW100 - Common Widget"),
+        backgroundColor: Colors.purple,
+        foregroundColor: Colors.white,
+        elevation: 0,
         actions: const [],
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              rowLabel(exercise1),
-              rowLabel(exercise2),
-              rowLabel(exercise3),
-              rowLabel(exercise4),
-              rowLabel(exercise5),
-              rowLabel(exercise6),
-              rowLabel(exercise7),
-              rowLabel(exercise8),
-              rowLabel(exercise9),
-              rowLabel(exercise10),
-              rowLabel(exercise11),
-              rowLabel(exercise12),
-              rowLabel(exercise13),
-              rowLabel(exercise14),
-              rowLabel(exercise15),
+              _buildExerciseCard(rowLabel(exercise1)),
+              _buildExerciseCard(rowLabel(exercise2)),
+              _buildExerciseCard(rowLabel(exercise3)),
+              _buildExerciseCard(rowLabel(exercise4)),
+              _buildExerciseCard(rowLabel(exercise5)),
+              _buildExerciseCard(rowLabel(exercise6)),
+              _buildExerciseCard(rowLabel(exercise7)),
+              _buildExerciseCard(rowLabel(exercise8)),
+              _buildExerciseCard(rowLabel(exercise9)),
+              _buildExerciseCard(rowLabel(exercise10)),
+              _buildExerciseCard(rowLabel(exercise11)),
+              _buildExerciseCard(rowLabel(exercise12)),
+              _buildExerciseCard(rowLabel(exercise13)),
+              _buildExerciseCard(rowLabel(exercise14)),
+              _buildExerciseCard(rowLabel(exercise15)),
+              const SizedBox(height: 20),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildExerciseCard(Widget child) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12.0),
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: child,
       ),
     );
   }

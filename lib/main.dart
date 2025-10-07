@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MagicBook - Digital Worksheet',
       navigatorKey: Get.navigatorKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -31,8 +31,11 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: !kIsWeb && Platform.isAndroid
-          ? const DashboardView()
+          ? const SplashScreenView()
           : const UnsupportedPlatformView(),
+      routes: {
+        '/dashboard': (context) => const DashboardView(),
+      },
     );
   }
 }

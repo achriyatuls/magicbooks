@@ -335,48 +335,62 @@ class Efb100NullSafetyView extends StatefulWidget {
     controller.view = this;
 
     return Scaffold(
+      backgroundColor: const Color(0xFFE8DCFF),
       appBar: AppBar(
-        title: const Text("Efb100 - Null Safety"),
+        title: const Text("EFB100 - Null Safety"),
+        backgroundColor: Colors.purple,
+        foregroundColor: Colors.white,
+        elevation: 0,
         actions: const [],
       ),
       body: SingleChildScrollView(
         controller: ScrollController(),
         child: Container(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const Text(
-                "productName",
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+              Card(
+                margin: const EdgeInsets.only(bottom: 16.0),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: const Text(
+                    "productName",
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-              rowAction(exercise1),
-              rowAction(exercise2),
-              rowAction(exercise3),
-              rowAction(exercise4),
-              rowAction(exercise5),
-              rowAction(exercise6),
-              rowAction(exercise7),
-              rowAction(exercise8),
-              rowAction(exercise9),
-              rowAction(exercise10),
-              rowAction(exercise11),
-              rowAction(exercise12),
-              rowAction(exercise13),
-              rowAction(exercise14),
-              rowAction(exercise15),
-              rowAction(exercise16),
-              rowAction(exercise17),
-              rowAction(exercise18),
-              rowAction(exercise19),
-              rowAction(exercise20),
-              rowAction(exercise21),
-              rowAction(exercise22),
-              rowAction(exercise23),
-              rowAction(exercise24),
-              rowAction(exercise25),
+              _buildActionCard(rowAction(exercise1)),
+              _buildActionCard(rowAction(exercise2)),
+              _buildActionCard(rowAction(exercise3)),
+              _buildActionCard(rowAction(exercise4)),
+              _buildActionCard(rowAction(exercise5)),
+              _buildActionCard(rowAction(exercise6)),
+              _buildActionCard(rowAction(exercise7)),
+              _buildActionCard(rowAction(exercise8)),
+              _buildActionCard(rowAction(exercise9)),
+              _buildActionCard(rowAction(exercise10)),
+              _buildActionCard(rowAction(exercise11)),
+              _buildActionCard(rowAction(exercise12)),
+              _buildActionCard(rowAction(exercise13)),
+              _buildActionCard(rowAction(exercise14)),
+              _buildActionCard(rowAction(exercise15)),
+              _buildActionCard(rowAction(exercise16)),
+              _buildActionCard(rowAction(exercise17)),
+              _buildActionCard(rowAction(exercise18)),
+              _buildActionCard(rowAction(exercise19)),
+              _buildActionCard(rowAction(exercise20)),
+              _buildActionCard(rowAction(exercise21)),
+              _buildActionCard(rowAction(exercise22)),
+              _buildActionCard(rowAction(exercise23)),
+              _buildActionCard(rowAction(exercise24)),
+              _buildActionCard(rowAction(exercise25)),
 
               // rowAction(exercise26),
               // rowAction(exercise27),
@@ -389,12 +403,27 @@ class Efb100NullSafetyView extends StatefulWidget {
               // rowAction(exercise34),
               // rowAction(exercise35),
               const Divider(),
-              rowAction(exercise001),
-              rowAction(exercise002),
-              rowAction(exercise003),
+              _buildActionCard(rowAction(exercise001)),
+              _buildActionCard(rowAction(exercise002)),
+              _buildActionCard(rowAction(exercise003)),
+              const SizedBox(height: 20),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildActionCard(Widget child) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12.0),
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+        child: child,
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
 
@@ -13,44 +14,69 @@ class DashboardView extends StatefulWidget {
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         actions: [
-          // Profile Avatar dengan Level
-          Container(
-            margin: const EdgeInsets.only(right: 16),
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: Colors.white,
-                  child: CircleAvatar(
-                    radius: 18,
-                    backgroundColor: Colors.purple.shade300,
-                    child: Text(
-                      '${controller.userLevel}',
-                      style: const TextStyle(
+          // Profile Avatar dengan Level dan Foto Profil
+          GestureDetector(
+            onTap: () => controller.showPhotoPickerDialog(),
+            child: Container(
+              margin: const EdgeInsets.only(right: 16),
+              child: Stack(
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.white,
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.purple.shade300,
+                      backgroundImage: controller.profilePhoto != null
+                          ? FileImage(controller.profilePhoto!)
+                          : null,
+                      child: controller.profilePhoto == null
+                          ? Text(
+                              '${controller.userLevel}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            )
+                          : null,
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.star,
+                        size: 12,
                         color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Icon(
-                      Icons.star,
-                      size: 12,
-                      color: Colors.white,
+                  // Icon untuk menunjukkan bahwa bisa diklik
+                  Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(
+                        Icons.camera_alt,
+                        size: 8,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
