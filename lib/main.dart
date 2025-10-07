@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         scaffoldBackgroundColor: Colors.grey[200],
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 1.0,
           shape: ContinuousRectangleBorder(
             borderRadius: BorderRadius.circular(32.0),

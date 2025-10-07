@@ -2,7 +2,9 @@
 We believe, the class name must be unique. 
 If there is a conflicting class name in this file,
 it means you have to rename it to something more unique.
+fileCount: 160
 */
+export 'package:magicbook/core_package.dart';
 export 'package:magicbook/module/dashboard/controller/dashboard_controller.dart';
 export 'package:magicbook/module/dashboard/service/dashboard_service.dart';
 export 'package:magicbook/module/dashboard/view/dashboard_view.dart';
@@ -161,4 +163,4 @@ export 'package:magicbook/module/unsupported_platform/view/unsupported_platform_
 export 'package:magicbook/service/dummy_service/dummy_service.dart';
 export 'package:magicbook/shared/widget/paging_list/paging_list.dart';
 export 'package:magicbook/shared/widget/row_label/row_label.dart';
-export 'state_util.dart';
+export 'package:magicbook/state_util.dart';

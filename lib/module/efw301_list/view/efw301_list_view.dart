@@ -1,68 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import '../controller/efw301_list_controller.dart';
 
 class Efw301ListView extends StatefulWidget {
   const Efw301ListView({Key? key}) : super(key: key);
+
+  // Exercise methods - siswa akan mengisi ini
+  bool? exercise1() {
+    // Buat ListView dengan Dismissible widget
+    return false;
+  }
+
+  bool? exercise2() {
+    // Buat ListView dengan RefreshIndicator
+    return false;
+  }
+
+  bool? exercise3() {
+    // Buat ListView dengan AnimatedList
+    return false;
+  }
+
+  bool? exercise4() {
+    // Buat ListView dengan ReorderableListView
+    return false;
+  }
+
+  bool? exercise5() {
+    // Buat ListView dengan SliverList
+    return false;
+  }
+
+  bool? exercise6() {
+    // Buat ListView dengan CustomScrollView
+    return false;
+  }
+
+  bool? exercise7() {
+    // Buat ListView dengan PageView
+    return false;
+  }
+
+  bool? exercise8() {
+    // Buat ListView dengan TabBarView
+    return false;
+  }
+
+  bool? exercise9() {
+    // Buat ListView dengan NestedScrollView
+    return false;
+  }
+
+  @override
+  State<Efw301ListView> createState() => Efw301ListController();
 
   Widget build(context, Efw301ListController controller) {
     controller.view = this;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Efw301List"),
+        title: const Text("EFW301 - ListView Advanced"),
         actions: const [],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10.0),
-        child: PagingListView(
-          children: [
-            //Buatlah List<Map<String,dynamic>> eventList dengan 10 data?
-            /*--------
-            1. Tampilkan List dibawah ini dengan ListView.builder!
-            - if gender == male , name == Colors.green
-            - if gender == female , name == Colors.pink
-
-            List<Map<String, dynamic>> peoples = [
-              {
-                'name': 'John',
-                'age': 20,
-                'gender': 'male',
-              },
-              {
-                'name': 'Sarah',
-                'age': 25,
-                'gender': 'female',
-              },
-              {
-                'name': 'Peter',
-                'age': 30,
-                'gender': 'male',
-              },
-              {
-                'name': 'Mary',
-                'age': 35,
-                'gender': 'female',
-              },
-              {
-                'name': 'David',
-                'age': 40,
-                'gender': 'male',
-              },
-            ];
-            --------*/
-
-            Builder(
-              builder: (context) {
-                // Silakan isi kode di sini
-                return Container();
-              },
-            ),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              rowLabel(exercise1),
+              rowLabel(exercise2),
+              rowLabel(exercise3),
+              rowLabel(exercise4),
+              rowLabel(exercise5),
+              rowLabel(exercise6),
+              rowLabel(exercise7),
+              rowLabel(exercise8),
+              rowLabel(exercise9),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  @override
-  State<Efw301ListView> createState() => Efw301ListController();
 }
