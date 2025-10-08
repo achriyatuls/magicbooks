@@ -1,332 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import '../../../shared/widget/row_label/row_label_validated.dart';
+
+/// 🎓 EFD1100 Variable View - DENGAN SISTEM VALIDASI
+///
+/// Sistem Baru:
+/// - Anti-curang: Multiple test cases per exercise
+/// - Feedback lebih baik: Siswa tahu error di mana
+/// - Grading objektif: A-F berdasarkan test pass rate
+/// - Gamifikasi: XP, achievements, progress tracking
 
 class Efd1100VariableView extends StatefulWidget {
   const Efd1100VariableView({Key? key}) : super(key: key);
 
-  bool? exercise1() {
-    //Ubah tipe data variable dibawah ini menjadi String
-    int price = 100;
-    return price is String;
-  }
-
-  bool? exercise2() {
-    double? price;
-    String text = "100.24";
-    //Ubahlah variable text di atas menjadi double,
-    //dan isilah varibel price dengan hasil konversinya
-    //di bagian bawah
-    return price == 100.24;
-  }
-
-  bool? exercise3() {
-    double? price;
-    //Uncomment kode dibawah ini
-    //Perbaiki kode-nya agar tidak error
-    //[TIPS] Hilangkan semua String selain angka 0-9 dan titik.
-    //Gunakan Regex seperti ini: .replaceAll(RegExp(r'[^\d.]'), '')
-
-    String text = "300.24a";
-    // price = double.tryParse(text) ?? 0;
-    return price == 300.24;
-  }
-
-  bool exercise4() {
-    int input = 12;
-    // Tuliskan kode untuk memverifikasi apakah input adalah bilangan ganjil
-    bool? output;
-    return output == false;
-  }
-
-  bool? exercise5() {
-    double? total;
-
-    //Uncomment kode dibawah ini!
-    //Kode dibawah akan error jika di jalankan,
-    //Perbaiki dengan meng-gunakan .tryParse("300aa")??0
-    //Sehingga ketika parameter-nya tidak valid, nilainya menjadi 0
-    /*
-          total = double.parse("300aa");
-          */
-    return total != null;
-  }
-
-  bool? exercise6() {
-    int? age;
-
-    //Uncomment kode dibawah ini!
-    //Kode dibawah akan error jika di jalankan,
-    //Perbaiki dengan meng-gunakan .tryParse("39ads")??0
-    //Sehingga ketika parameter-nya tidak valid, nilainya menjadi 0
-
-    /*
-    age = int.parse("39ads");
-    */
-
-    return age != null;
-  }
-
-  bool? exercise7() {
-    int price = 0;
-    String value = "5000";
-
-    // Uncomment kode dibawah, dan perbaiki agar tidak error
-    /*
-    value = price;
-    */
-    return price == 5000;
-  }
-
-  bool? exercise8() {
-    //Ini adalah contoh kode untuk mengambil Text diantara ' dan '.
-    /*
-    String str = "The text is between 'this'";
-    int startIndex = str.indexOf("'") + 1;
-    int endIndex = str.lastIndexOf("'");
-    String textBetweenQuotes = str.substring(startIndex, endIndex);
-    */
-
-    String text = "hello 'Deny', apa kabar?";
-    String? name;
-    //Berdasarkan referensi di atas,
-    //Ambil text diantara ' dan ' pada variable text
-    return name == "Deny";
-  }
-
-  bool? exercise9() {
-    List numbers = [70, 23, 44, 33, 100, 23, 109];
-    double average = 0;
-    double total = 0;
-    /*
-          Hitunglah nilai rata2 dari List di atas.
-          [TIPS] Gunakan for untuk mendapatkan total.
-          Gunakan numbers.length untuk mendapatkan panjang List
-          */
-    return average.toStringAsFixed(2) == "57.43";
-  }
-
-  bool? exercise10() {
-    List numbers = [70, 23, 44, 33, 100, 23, 109];
-    /*
-          Hitunglah minValue dan maxValue dari List numbers di atas.
-          [Tips] - Gunakan .sort, ambil minValue dari .first dan ambil maxValue
-          dari .last
-          */
-    int minValue = 0;
-    int maxValue = 0;
-
-    return minValue == 23 && maxValue == 109;
-  }
-
-  bool exercise11() {
-    int input = 10;
-    // Tuliskan kode untuk menambahkan 5 pada input
-    int? output;
-
-    return output == 15;
-  }
-
-  bool exercise12() {
-    int input = 10;
-    // Tuliskan kode untuk mengurangi 5 pada input
-    int? output;
-
-    return output == 5;
-  }
-
-  bool exercise13() {
-    int input1 = 10;
-    int input2 = 20;
-    // Tuliskan kode untuk menjumlahkan input1 dan input2
-    int? output;
-
-    return output == 30;
-  }
-
-  bool exercise14() {
-    int input1 = 10;
-    int input2 = 20;
-    // Tuliskan kode untuk mengurangi input2 dengan input1
-    int? output;
-
-    return output == 10;
-  }
-
-  bool exercise15() {
-    int input1 = 10;
-    int input2 = 20;
-    // Tuliskan kode untuk membagi input2 dengan input1
-    double? output;
-
-    return output == 2.0;
-  }
-
-  bool exercise16() {
-    int input1 = 10;
-    int input2 = 20;
-    // Tuliskan kode untuk mengalikan input1 dan input2
-    int? output;
-
-    return output == 200;
-  }
-
-  bool exercise17() {
-    int input1 = 10;
-    int input2 = 20;
-    // Tuliskan kode untuk menghitung sisa bagi input2 dengan input1
-    int? output;
-
-    return output == 0;
-  }
-
-  bool exercise18() {
-    String input = "Hello";
-    // Tuliskan kode untuk menambahkan " World!" pada input
-    String? output;
-
-    return output == "Hello World!";
-  }
-
-  bool exercise19() {
-    String input = "Hello World!";
-    // Tuliskan kode untuk mengambil kata pertama dari input
-    String? output;
-
-    return output == "Hello";
-  }
-
-  bool exercise20() {
-    String input = "Hello World!";
-    // Tuliskan kode untuk mengambil kata kedua dari input
-    String? output;
-
-    return output == "World!";
-  }
-
-  bool exercise21() {
-    int input = 12345;
-    // Tuliskan kode untuk memverifikasi apakah input adalah bilangan genap
-    bool? output;
-
-    return output == false;
-  }
-
-  bool exercise22() {
-    int input = 12345;
-    // Tuliskan kode untuk memverifikasi apakah input adalah bilangan ganjil
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise23() {
-    String input = "Dart";
-    // Tuliskan kode untuk memverifikasi apakah input memiliki panjang lebih dari 3 karakter
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise24() {
-    String input = "Dart";
-    // Tuliskan kode untuk memverifikasi apakah input memiliki panjang sama dengan 3 karakter
-    bool? output;
-
-    return output == false;
-  }
-
-  bool exercise25() {
-    String input = "Dart";
-    // Tuliskan kode untuk memverifikasi apakah input memiliki huruf pertama 'D'
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise26() {
-    String input = "Dart";
-    // Tuliskan kode untuk memverifikasi apakah input memiliki huruf terakhir 't'
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise27() {
-    int input = 12345;
-    // Tuliskan kode untuk memverifikasi apakah input memiliki 5 digit
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise28() {
-    int input = 12345;
-    // Tuliskan kode untuk memverifikasi apakah input memiliki 4 digit
-    bool? output;
-
-    return output == false;
-  }
-
-  bool exercise29() {
-    double input = 123.45;
-    // Tuliskan kode untuk memverifikasi apakah input memiliki 2 digit setelah koma
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise30() {
-    double input = 123.45;
-    // Tuliskan kode untuk memverifikasi apakah input memiliki 3 digit setelah koma
-    bool? output;
-
-    return output == false;
-  }
-
-  bool exercise31() {
-    String input = "Hello World";
-    // Tuliskan kode untuk memverifikasi apakah input adalah palindrome
-    bool? output;
-
-    return output == false;
-  }
-
-  bool exercise32() {
-    String input = "Dart is Awesome";
-    // Tuliskan kode untuk mengubah input menjadi huruf kecil semua dan memisahkan kata dengan spasi menjadi underscore
-    String? output;
-
-    return output == "dart_is_awesome";
-  }
-
-  bool exercise33() {
-    String input = "1234";
-    // Tuliskan kode untuk memverifikasi apakah input adalah angka
-    bool? output;
-
-    return output == true;
-  }
-
-  bool exercise34() {
-    String input =
-        "Dart is a client-optimized programming language for fast apps on multiple platforms.";
-    // Tuliskan kode untuk membatasi jumlah karakter pada input menjadi 50 karakter
-    String? output = input.substring(0, 30);
-
-    return output.length == 50;
-  }
-
-  bool exercise35() {
-    String input =
-        "Dart is a client-optimized programming language for fast apps on multiple platforms.";
-    // Tuliskan kode untuk memverifikasi apakah kata "Dart" muncul pada input
-    bool? output = input.contains("Dart");
-
-    return output == true;
-  }
-
   Widget build(context, Efd1100VariableController controller) {
     controller.view = this;
+
     return Scaffold(
       backgroundColor: const Color(0xFFE5D9F2),
       appBar: AppBar(
@@ -334,53 +23,267 @@ class Efd1100VariableView extends StatefulWidget {
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         elevation: 0,
-        actions: const [],
+        actions: [
+          // Tombol untuk lihat overall stats
+          IconButton(
+            icon: const Icon(Icons.analytics),
+            tooltip: "View Statistics",
+            onPressed: () {
+              OverallStats stats = Efd1100Validator.getOverallStats();
+              showOverallStatsDialog(stats);
+            },
+          ),
+          // Tombol untuk run all tests
+          IconButton(
+            icon: const Icon(Icons.play_arrow),
+            tooltip: "Run All Tests",
+            onPressed: () {
+              _showRunAllTestsDialog(context);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         controller: ScrollController(),
         child: Container(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildExerciseCard(rowLabel(exercise1)),
-              _buildExerciseCard(rowLabel(exercise2)),
-              _buildExerciseCard(rowLabel(exercise3)),
-              _buildExerciseCard(rowLabel(exercise4)),
-              _buildExerciseCard(rowLabel(exercise5)),
-              _buildExerciseCard(rowLabel(exercise6)),
-              _buildExerciseCard(rowLabel(exercise7)),
-              _buildExerciseCard(rowLabel(exercise8)),
-              _buildExerciseCard(rowLabel(exercise9)),
-              _buildExerciseCard(rowLabel(exercise10)),
-              _buildExerciseCard(rowLabel(exercise11)),
-              _buildExerciseCard(rowLabel(exercise12)),
-              _buildExerciseCard(rowLabel(exercise13)),
-              _buildExerciseCard(rowLabel(exercise14)),
-              _buildExerciseCard(rowLabel(exercise15)),
-              _buildExerciseCard(rowLabel(exercise16)),
-              _buildExerciseCard(rowLabel(exercise17)),
-              _buildExerciseCard(rowLabel(exercise18)),
-              _buildExerciseCard(rowLabel(exercise19)),
-              _buildExerciseCard(rowLabel(exercise20)),
-              _buildExerciseCard(rowLabel(exercise21)),
-              _buildExerciseCard(rowLabel(exercise22)),
-              _buildExerciseCard(rowLabel(exercise23)),
-              _buildExerciseCard(rowLabel(exercise24)),
-              _buildExerciseCard(rowLabel(exercise25)),
-              _buildExerciseCard(rowLabel(exercise26)),
-              _buildExerciseCard(rowLabel(exercise27)),
-              _buildExerciseCard(rowLabel(exercise28)),
-              _buildExerciseCard(rowLabel(exercise29)),
-              _buildExerciseCard(rowLabel(exercise30)),
-              _buildExerciseCard(rowLabel(exercise31)),
-              _buildExerciseCard(rowLabel(exercise32)),
-              _buildExerciseCard(rowLabel(exercise33)),
-              _buildExerciseCard(rowLabel(exercise34)),
-              _buildExerciseCard(rowLabel(exercise35)),
+              // Info Banner
+              _buildInfoBanner(),
+              const SizedBox(height: 16),
+
+              // Quick Stats Card
+              _buildQuickStatsCard(),
+              const SizedBox(height: 16),
+
+              // Exercise List
+              _buildSectionTitle("📝 Exercise List (35 Exercises)"),
+              const SizedBox(height: 8),
+              _buildExerciseCard(rowLabelValidated(1)),
+              _buildExerciseCard(rowLabelValidated(2)),
+              _buildExerciseCard(rowLabelValidated(3)),
+              _buildExerciseCard(rowLabelValidated(4)),
+              _buildExerciseCard(rowLabelValidated(5)),
+              _buildExerciseCard(rowLabelValidated(6)),
+              _buildExerciseCard(rowLabelValidated(7)),
+              _buildExerciseCard(rowLabelValidated(8)),
+              _buildExerciseCard(rowLabelValidated(9)),
+              _buildExerciseCard(rowLabelValidated(10)),
+              _buildExerciseCard(rowLabelValidated(11)),
+              _buildExerciseCard(rowLabelValidated(12)),
+              _buildExerciseCard(rowLabelValidated(13)),
+              _buildExerciseCard(rowLabelValidated(14)),
+              _buildExerciseCard(rowLabelValidated(15)),
+              _buildExerciseCard(rowLabelValidated(16)),
+              _buildExerciseCard(rowLabelValidated(17)),
+              _buildExerciseCard(rowLabelValidated(18)),
+              _buildExerciseCard(rowLabelValidated(19)),
+              _buildExerciseCard(rowLabelValidated(20)),
+              _buildExerciseCard(rowLabelValidated(21)),
+              _buildExerciseCard(rowLabelValidated(22)),
+              _buildExerciseCard(rowLabelValidated(23)),
+              _buildExerciseCard(rowLabelValidated(24)),
+              _buildExerciseCard(rowLabelValidated(25)),
+              _buildExerciseCard(rowLabelValidated(26)),
+              _buildExerciseCard(rowLabelValidated(27)),
+              _buildExerciseCard(rowLabelValidated(28)),
+              _buildExerciseCard(rowLabelValidated(29)),
+              _buildExerciseCard(rowLabelValidated(30)),
+              _buildExerciseCard(rowLabelValidated(31)),
+              _buildExerciseCard(rowLabelValidated(32)),
+              _buildExerciseCard(rowLabelValidated(33)),
+              _buildExerciseCard(rowLabelValidated(34)),
+              _buildExerciseCard(rowLabelValidated(35)),
+              const SizedBox(height: 20),
+
+              // Instructions
+              _buildInstructionsCard(),
               const SizedBox(height: 20),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          OverallStats stats = Efd1100Validator.getOverallStats();
+          showOverallStatsDialog(stats);
+        },
+        icon: const Icon(Icons.assessment),
+        label: const Text("View Stats"),
+        backgroundColor: Colors.purple,
+      ),
+    );
+  }
+
+  Widget _buildInfoBanner() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade400, Colors.purple.shade400],
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Row(
+        children: [
+          Icon(Icons.info_outline, color: Colors.white),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              "Sistem Validasi Aktif! Tap exercise untuk melihat detail test results.",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickStatsCard() {
+    OverallStats stats = Efd1100Validator.getOverallStats();
+
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Quick Stats",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    stats.overallGrade,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildStatItem(
+                    "Perfect",
+                    "${stats.perfectExercises}",
+                    Colors.green,
+                    Icons.check_circle,
+                  ),
+                ),
+                Expanded(
+                  child: _buildStatItem(
+                    "Partial",
+                    "${stats.partialExercises}",
+                    Colors.orange,
+                    Icons.pending,
+                  ),
+                ),
+                Expanded(
+                  child: _buildStatItem(
+                    "Failed",
+                    "${stats.failedExercises}",
+                    Colors.red,
+                    Icons.cancel,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            // Progress Bar
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Overall Progress",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                    Text(
+                      "${stats.testPercentage.toStringAsFixed(1)}%",
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                LinearProgressIndicator(
+                  value: stats.testPercentage / 100,
+                  backgroundColor: Colors.grey.shade200,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    stats.testPercentage >= 70 ? Colors.green : Colors.orange,
+                  ),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatItem(
+      String label, String value, Color color, IconData icon) {
+    return Column(
+      children: [
+        Icon(icon, color: color, size: 24),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 11,
+            color: Colors.grey.shade600,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
@@ -397,6 +300,127 @@ class Efd1100VariableView extends StatefulWidget {
         child: child,
       ),
     );
+  }
+
+  Widget _buildInstructionsCard() {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Icon(Icons.school, color: Colors.purple),
+                SizedBox(width: 8),
+                Text(
+                  "How to Use",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            _buildInstructionItem("1",
+                "Open file: lib/module/efd1100_variable/exercises/efd1100_exercises.dart"),
+            _buildInstructionItem(
+                "2", "Write your code in the designated area"),
+            _buildInstructionItem("3", "Save the file and come back here"),
+            _buildInstructionItem("4", "Tap on exercise to see test results"),
+            _buildInstructionItem("5", "Fix errors based on feedback"),
+            _buildInstructionItem(
+                "6", "Get green checkmark when all tests pass!"),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.orange.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.orange),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.warning, color: Colors.orange, size: 20),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Tip: You CANNOT cheat by just returning true. Multiple test cases validate your logic!",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildInstructionItem(String number, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: Colors.purple,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Center(
+              child: Text(
+                number,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 13),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showRunAllTestsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 16),
+            Text("Running Tests..."),
+          ],
+        ),
+        content: const Text("Please wait while we validate all exercises."),
+      ),
+    );
+
+    // Simulate async test running
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.pop(context);
+      OverallStats stats = Efd1100Validator.getOverallStats();
+      showOverallStatsDialog(stats);
+    });
   }
 
   @override

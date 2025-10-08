@@ -14,6 +14,9 @@ export 'package:magicbook/module/efb100_null_safety/controller/efb100_null_safet
 export 'package:magicbook/module/efb100_null_safety/view/efb100_null_safety_view.dart';
 export 'package:magicbook/module/efd1100_variable/controller/efd1100_variable_controller.dart';
 export 'package:magicbook/module/efd1100_variable/view/efd1100_variable_view.dart';
+export 'package:magicbook/module/efd1100_variable/exercises/efd1100_exercises.dart';
+export 'package:magicbook/module/efd1100_variable/tests/efd1100_tests.dart';
+export 'package:magicbook/module/efd1100_variable/validator/efd1100_validator.dart';
 export 'package:magicbook/module/efd1200_datetime/controller/efd1200_datetime_controller.dart';
 export 'package:magicbook/module/efd1200_datetime/view/efd1200_datetime_view.dart';
 export 'package:magicbook/module/efd1300_string/controller/efd1300_string_controller.dart';
