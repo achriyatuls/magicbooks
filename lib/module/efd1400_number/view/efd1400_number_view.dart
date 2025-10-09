@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import '../../../shared/widget/row_label/row_label_validated_efd1400.dart';
 
 class Efd1400NumberView extends StatefulWidget {
   const Efd1400NumberView({Key? key}) : super(key: key);
@@ -343,52 +344,94 @@ class Efd1400NumberView extends StatefulWidget {
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         elevation: 0,
-        actions: const [],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.analytics),
+            tooltip: "View Statistics",
+            onPressed: () {
+              final stats = Efd1400Validator.getOverallStats();
+              _showOverallStatsDialogEfd1400(stats);
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.play_arrow),
+            tooltip: "Run All Tests",
+            onPressed: () {
+              _showRunAllTestsDialog(context);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
+        controller: ScrollController(),
         child: Container(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildExerciseCard(rowLabel(exercise1)),
-              _buildExerciseCard(rowLabel(exercise2)),
-              _buildExerciseCard(rowLabel(exercise3)),
-              _buildExerciseCard(rowLabel(exercise4)),
-              _buildExerciseCard(rowLabel(exercise5)),
-              _buildExerciseCard(rowLabel(exercise6)),
-              _buildExerciseCard(rowLabel(exercise7)),
-              _buildExerciseCard(rowLabel(exercise8)),
-              _buildExerciseCard(rowLabel(exercise9)),
-              _buildExerciseCard(rowLabel(exercise10)),
-              _buildExerciseCard(rowLabel(exercise11)),
-              _buildExerciseCard(rowLabel(exercise12)),
-              _buildExerciseCard(rowLabel(exercise13)),
-              _buildExerciseCard(rowLabel(exercise14)),
-              _buildExerciseCard(rowLabel(exercise15)),
-              _buildExerciseCard(rowLabel(exercise16)),
-              _buildExerciseCard(rowLabel(exercise17)),
-              _buildExerciseCard(rowLabel(exercise18)),
-              _buildExerciseCard(rowLabel(exercise19)),
-              _buildExerciseCard(rowLabel(exercise20)),
-              _buildExerciseCard(rowLabel(exercise21)),
-              _buildExerciseCard(rowLabel(exercise22)),
-              _buildExerciseCard(rowLabel(exercise23)),
-              _buildExerciseCard(rowLabel(exercise24)),
-              _buildExerciseCard(rowLabel(exercise25)),
-              _buildExerciseCard(rowLabel(exercise26)),
-              _buildExerciseCard(rowLabel(exercise27)),
-              _buildExerciseCard(rowLabel(exercise28)),
-              _buildExerciseCard(rowLabel(exercise29)),
-              _buildExerciseCard(rowLabel(exercise30)),
-              _buildExerciseCard(rowLabel(exercise31)),
-              _buildExerciseCard(rowLabel(exercise32)),
-              _buildExerciseCard(rowLabel(exercise33)),
-              _buildExerciseCard(rowLabel(exercise34)),
-              _buildExerciseCard(rowLabel(exercise35)),
+              // Info Banner
+              _buildInfoBanner(),
+              const SizedBox(height: 16),
+
+              // Quick Stats Card
+              _buildQuickStatsCard(),
+              const SizedBox(height: 16),
+
+              // Instructions (moved just below Quick Stats)
+              _buildInstructionsCard(),
+              const SizedBox(height: 16),
+
+              // Exercise List
+              _buildSectionTitle("📝 Exercise List (35 Exercises)"),
+              const SizedBox(height: 8),
+              _buildExerciseCard(rowLabelValidatedEfd1400(1)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(2)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(3)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(4)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(5)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(6)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(7)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(8)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(9)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(10)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(11)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(12)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(13)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(14)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(15)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(16)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(17)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(18)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(19)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(20)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(21)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(22)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(23)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(24)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(25)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(26)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(27)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(28)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(29)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(30)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(31)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(32)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(33)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(34)),
+              _buildExerciseCard(rowLabelValidatedEfd1400(35)),
               const SizedBox(height: 20),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          final stats = Efd1400Validator.getOverallStats();
+          _showOverallStatsDialogEfd1400(stats);
+        },
+        icon: const Icon(Icons.assessment),
+        label: const Text("View Stats"),
+        backgroundColor: Colors.purple,
       ),
     );
   }
@@ -403,6 +446,351 @@ class Efd1400NumberView extends StatefulWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         child: child,
+      ),
+    );
+  }
+
+  Widget _buildInfoBanner() {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade400, Colors.purple.shade400],
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Row(
+        children: [
+          Icon(Icons.info_outline, color: Colors.white),
+          SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              "Sistem Validasi Aktif! Tap exercise untuk melihat detail test results.",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 13,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickStatsCard() {
+    final stats = Efd1400Validator.getOverallStats();
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Quick Stats",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Text(
+                    stats.overallGrade,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                    child: _buildStatItem(
+                        "Perfect",
+                        "${stats.perfectExercises}",
+                        Colors.green,
+                        Icons.check_circle)),
+                Expanded(
+                    child: _buildStatItem(
+                        "Partial",
+                        "${stats.partialExercises}",
+                        Colors.orange,
+                        Icons.pending)),
+                Expanded(
+                    child: _buildStatItem("Failed", "${stats.failedExercises}",
+                        Colors.red, Icons.cancel)),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text("Overall Progress",
+                        style: TextStyle(fontSize: 12)),
+                    Text(
+                      "${stats.testPercentage.toStringAsFixed(1)}%",
+                      style: const TextStyle(
+                          fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                LinearProgressIndicator(
+                  value: stats.testPercentage / 100,
+                  backgroundColor: Colors.grey.shade200,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    stats.testPercentage >= 70 ? Colors.green : Colors.orange,
+                  ),
+                  minHeight: 8,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatItem(
+      String label, String value, Color color, IconData icon) {
+    return Column(
+      children: [
+        Icon(icon, color: color, size: 24),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: color),
+        ),
+        Text(label,
+            style: TextStyle(fontSize: 11, color: Colors.grey.shade600)),
+      ],
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _buildInstructionsCard() {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Icon(Icons.school, color: Colors.purple),
+                SizedBox(width: 8),
+                Text(
+                  "How to Use",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            _numberedItem(1,
+                "Open file: lib/module/efd1400_number/exercises/efd1400_exercises.dart"),
+            _numberedItem(2,
+                "Write your code in the designated area inside each exerciseXSolution(...)"),
+            _numberedItem(3, "Save the file, then come back to this page"),
+            _numberedItem(4,
+                "Tap an exercise to see detailed test results (passed/failed, hints)"),
+            _numberedItem(5,
+                "Use the Run All Tests button in the AppBar to validate everything at once"),
+            _numberedItem(
+                6, "Aim for all tests to pass to earn the green checkmark!"),
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.amber.shade50,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.amber),
+              ),
+              child: const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.warning_amber_rounded, color: Colors.amber),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Tip: You CANNOT cheat by just returning true. Multiple test cases validate your logic.",
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _numberedItem(int number, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CircleAvatar(
+            radius: 14,
+            backgroundColor: Colors.purple,
+            child: Text(
+              "$number",
+              style: const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showRunAllTestsDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const AlertDialog(
+        title: Row(
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(width: 16),
+            Text("Running Tests..."),
+          ],
+        ),
+        content: Text("Please wait while we validate all exercises."),
+      ),
+    );
+    Future.delayed(const Duration(seconds: 1), () {
+      Navigator.pop(context);
+      final stats = Efd1400Validator.getOverallStats();
+      _showOverallStatsDialogEfd1400(stats);
+    });
+  }
+
+  void _showOverallStatsDialogEfd1400(Efd1400OverallStats stats) {
+    showDialog(
+      context: Get.currentContext,
+      builder: (context) => AlertDialog(
+        title: const Row(
+          children: [
+            Icon(Icons.analytics, color: Colors.purple),
+            SizedBox(width: 8),
+            Text("Overall Statistics"),
+          ],
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.purple.shade400, Colors.purple.shade600],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    const Text("Overall Grade",
+                        style: TextStyle(color: Colors.white, fontSize: 14)),
+                    const SizedBox(height: 8),
+                    Text(
+                      stats.overallGrade,
+                      style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "${stats.testPercentage.toStringAsFixed(1)}%",
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              _buildStatRow(
+                  "Total Exercises", "${stats.totalExercises}", Icons.list_alt),
+              _buildStatRow("Perfect Exercises", "${stats.perfectExercises}",
+                  Icons.check_circle, Colors.green),
+              _buildStatRow("Partial Exercises", "${stats.partialExercises}",
+                  Icons.pending, Colors.orange),
+              _buildStatRow("Failed Exercises", "${stats.failedExercises}",
+                  Icons.cancel, Colors.red),
+              const Divider(height: 24),
+              _buildStatRow(
+                  "Total Tests", "${stats.totalTests}", Icons.assignment),
+              _buildStatRow("Passed Tests", "${stats.passedTests}", Icons.check,
+                  Colors.green),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Close"),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatRow(String label, String value, IconData icon,
+      [Color? color]) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 18, color: color ?? Colors.grey),
+              const SizedBox(width: 8),
+              Text(label),
+            ],
+          ),
+          Text(
+            value,
+            style: TextStyle(fontWeight: FontWeight.bold, color: color),
+          ),
+        ],
       ),
     );
   }

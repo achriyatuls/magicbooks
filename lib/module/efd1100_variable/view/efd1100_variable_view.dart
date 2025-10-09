@@ -58,6 +58,10 @@ class Efd1100VariableView extends StatefulWidget {
               _buildQuickStatsCard(),
               const SizedBox(height: 16),
 
+              // Instructions (moved just below Quick Stats)
+              _buildInstructionsCard(),
+              const SizedBox(height: 16),
+
               // Exercise List
               _buildSectionTitle("📝 Exercise List (35 Exercises)"),
               const SizedBox(height: 8),
@@ -96,10 +100,6 @@ class Efd1100VariableView extends StatefulWidget {
               _buildExerciseCard(rowLabelValidated(33)),
               _buildExerciseCard(rowLabelValidated(34)),
               _buildExerciseCard(rowLabelValidated(35)),
-              const SizedBox(height: 20),
-
-              // Instructions
-              _buildInstructionsCard(),
               const SizedBox(height: 20),
             ],
           ),
