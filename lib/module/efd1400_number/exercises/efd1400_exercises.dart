@@ -1,324 +1,625 @@
-// 📝 LEMBAR KERJA SISWA - EFD1400 NUMBER
-// Isi fungsi-fungsi berikut sesuai instruksi. Jangan ubah signature.
+// LEMBAR KERJA SISWA - EFD1400 NUMBER
+//
+// ════════════════════════════════════════════════════════════════════════════
+// PETUNJUK PENGGUNAAN:
+// ════════════════════════════════════════════════════════════════════════════
+//
+// 1. File ini BOLEH diubah untuk menjawab exercise
+// 2. Tulis kode HANYA di area yang ditandai dengan "TULIS KODE DI SINI"
+// 3. JANGAN mengubah:
+//    - Nama function
+//    - Parameter function
+//    - Return statement (kecuali diminta)
+//    - Variable yang sudah dideklarasikan (hanya boleh MENGISI nilainya)
+//
+// 4. Exercise dengan = VALIDATED (Multiple test cases)
+// 5. Centang hijau untuk VALIDATED = SEMUA test cases passed
+//
+// ════════════════════════════════════════════════════════════════════════════
 
+/// Class yang berisi jawaban siswa untuk semua exercise
 class Efd1400Exercises {
-  // 1. Try parse dengan default value 0
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 1: Try Parse dengan Default Value (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Parse string ke int dengan aman
+  // - Jika gagal, gunakan default value 0
+  //
+  // HINT: Gunakan int.tryParse() ?? 0
+
   static int? exercise1Solution(String input) {
     int? number;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan int.tryParse, jika null set ke 0
 
-    return number;
+    // TULIS KODE DI SINI:
+
+    return number; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 2. Clean non-numeric characters dengan regex
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 2: Clean Non-Numeric Characters (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Hilangkan semua karakter non-numeric dari string
+  // - Parse hasilnya ke int
+  //
+  // HINT:
+  // 1. Gunakan .replaceAll(RegExp(r'[^0-9]+'), '') untuk hapus non-numeric
+  // 2. Parse dengan int.parse()
+
   static int? exercise2Solution(String input) {
     int? number;
-    // 👇 TULIS KODE DI SINI:
-    // Hapus semua non-numeric dengan .replaceAll(RegExp(r'[^0-9]+'), '')
-    // Lalu parse ke int
 
-    return number;
+    // TULIS KODE DI SINI:
+
+    return number; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 3. Parse double dengan string input
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 3: Assign Double Value (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Input sudah bertipe double, langsung assign ke number
+  //
+  // HINT: number = input
+
   static double? exercise3Solution(double input) {
     double? number;
-    // 👇 TULIS KODE DI SINI:
-    // Input sudah double, langsung assign
 
-    return number;
+    // TULIS KODE DI SINI:
+
+    return number; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 4. Try parse double dengan default 0
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 4: Try Parse Double dengan Default Value (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Parse string ke double dengan aman
+  // - Jika gagal, gunakan default value 0.0
+  //
+  // HINT: Gunakan double.tryParse() ?? 0.0
+
   static double? exercise4Solution(String input) {
     double? number;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan double.tryParse, jika null set ke 0
 
-    return number;
+    // TULIS KODE DI SINI:
+
+    return number; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 5. Fix variable types untuk function call
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 5: Calculate Total (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Hitung total = qty * price
+  //
+  // HINT: total = qty * price
+
   static double? exercise5Solution() {
     double? total;
     double qty = 2;
     double price = 100;
-    // 👇 TULIS KODE DI SINI:
-    // Hitung total = qty * price
 
-    return total;
+    // TULIS KODE DI SINI:
+
+    return total; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 6. Fix division result type
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 6: Division Result (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Hitung total = 23 / 2
+  //
+  // HINT: total = 23 / 2
+
   static double? exercise6Solution() {
     double? total;
-    // 👇 TULIS KODE DI SINI:
-    // total = 23 / 2
 
-    return total;
+    // TULIS KODE DI SINI:
+
+    return total; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 7. Format double dengan toStringAsFixed
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 7: Format Double dengan toStringAsFixed (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Format double dengan 2 desimal
+  //
+  // HINT: Gunakan price.toStringAsFixed(2)
+
   static String? exercise7Solution(double price) {
     String? output;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan price.toStringAsFixed(2)
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 8. Pad left dengan zero
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 8: Pad Left dengan Zero (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Konversi id ke string dengan panjang 8 digit
+  // - Tambahkan leading zero jika kurang dari 8 digit
+  //
+  // CONTOH:
+  // Input:  123
+  // Output: "00000123"
+  //
+  // HINT: Gunakan id.toString().padLeft(8, "0")
+
   static String? exercise8Solution(int id) {
     String? output;
-    // 👇 TULIS KODE DI SINI:
-    // id.toString().padLeft(8, "0")
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 9. Format currency rupiah
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 9: Format Currency Rupiah (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Format angka menjadi format rupiah (Rp10.000)
+  //
+  // CONTOH:
+  // Input:  10000
+  // Output: "Rp10.000"
+  //
+  // HINT: Gunakan regex untuk menambah titik ribuan, tambah "Rp" di depan
+
   static String? exercise9Solution(int input) {
     String? formattedInput;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan regex untuk menambah titik ribuan, tambah "Rp" di depan
 
-    return formattedInput;
+    // TULIS KODE DI SINI:
+
+    return formattedInput; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 10. Format currency dollar
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 10: Format Currency Dollar (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Format angka menjadi format dollar ($10,000)
+  //
+  // CONTOH:
+  // Input:  10000
+  // Output: "$10,000"
+  //
+  // HINT: Gunakan regex untuk menambah koma ribuan, tambah "$" di depan
+
   static String? exercise10Solution(int input) {
     String? formattedInput;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan regex untuk menambah titik ribuan, tambah "\$" di depan
 
-    return formattedInput;
+    // TULIS KODE DI SINI:
+
+    return formattedInput; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 11. Ceil (bulatkan ke atas)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 11: Ceil (Bulatkan ke Atas) (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Bulatkan angka ke atas
+  //
+  // CONTOH:
+  // Input:  3.2
+  // Output: 4.0
+  //
+  // HINT: Gunakan number.ceilToDouble()
+
   static double? exercise11Solution(double number) {
     double? output;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan number.ceil()
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 12. Floor (bulatkan ke bawah)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 12: Floor (Bulatkan ke Bawah) (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Bulatkan angka ke bawah
+  //
+  // CONTOH:
+  // Input:  3.8
+  // Output: 3.0
+  //
+  // HINT: Gunakan number.floorToDouble()
+
   static double? exercise12Solution(double number) {
     double? output;
-    // 👇 TULIS KODE DI SINI:
-    // Gunakan number.floor()
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 13. Check even number
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 13: Check Even Number (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka adalah bilangan genap
+  //
+  // HINT: input % 2 == 0
+
   static bool? exercise13Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input % 2 == 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 14. Round to 2 decimal places
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 14: Round to 2 Decimal Places (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Bulatkan ke 2 desimal
+  //
+  // HINT: double.parse(input.toStringAsFixed(2))
+
   static double? exercise14Solution(double input) {
     double? output;
-    // 👇 TULIS KODE DI SINI:
-    // double.parse(input.toStringAsFixed(2))
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 15. Check divisible by 3
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 15: Check Divisible by 3 (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka habis dibagi 3
+  //
+  // HINT: input % 3 == 0
+
   static bool? exercise15Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input % 3 == 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 16. Check divisible by 6
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 16: Check Divisible by 6 (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka habis dibagi 6
+  //
+  // HINT: input % 6 == 0
+
   static bool? exercise16Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input % 6 == 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 17. Swap two numbers
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 17: Swap Two Numbers (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Tukar nilai a dan b
+  //
+  // CONTOH:
+  // Input:  a=5, b=10
+  // Output: c=10, d=5
+  //
+  // HINT: Gunakan variable temporary untuk swap
+
   static Map<String, int>? exercise17Solution(int a, int b) {
     int? c;
     int? d;
-    // 👇 TULIS KODE DI SINI:
-    // Tukar nilai a dan b
+
+    // TULIS KODE DI SINI:
 
     if (c == null || d == null) return null;
-    return {"c": c, "d": d};
+    return {"c": c, "d": d}; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 18. Check prime number
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 18: Check Prime Number (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka adalah bilangan prima
+  //
+  // HINT:
+  // 1. Bilangan prima adalah bilangan > 1 yang hanya habis dibagi 1 dan dirinya sendiri
+  // 2. Loop dari 2 sampai input-1, cek apakah ada yang habis dibagi
+
   static bool? exercise18Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // Cek apakah input adalah bilangan prima
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 19. Round to 1 decimal place
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 19: Round to 1 Decimal Place (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Bulatkan ke 1 desimal
+  //
+  // HINT: double.parse(input.toStringAsFixed(1))
+
   static double? exercise19Solution(double input) {
     double? output;
-    // 👇 TULIS KODE DI SINI:
-    // double.parse(input.toStringAsFixed(1))
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 20. Check divisible by 9
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 20: Check Divisible by 9 (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka habis dibagi 9
+  //
+  // HINT: input % 9 == 0
+
   static bool? exercise20Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input % 9 == 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 21. String to int
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 21: String to Int (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Konversi string ke int
+  //
+  // HINT: int.parse(input)
+
   static int? exercise21Solution(String input) {
     int? output;
-    // 👇 TULIS KODE DI SINI:
-    // int.parse(input)
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 22. String to double
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 22: String to Double (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Konversi string ke double
+  //
+  // HINT: double.parse(input)
+
   static double? exercise22Solution(String input) {
     double? output;
-    // 👇 TULIS KODE DI SINI:
-    // double.parse(input)
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 23. Int to string
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 23: Int to String (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Konversi int ke string
+  //
+  // HINT: input.toString()
+
   static String? exercise23Solution(int input) {
     String? output;
-    // 👇 TULIS KODE DI SINI:
-    // input.toString()
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 24. Double to string
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 24: Double to String (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Konversi double ke string
+  //
+  // HINT: input.toString()
+
   static String? exercise24Solution(double input) {
     String? output;
-    // 👇 TULIS KODE DI SINI:
-    // input.toString()
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 25. Check if string is integer
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 25: Check if String is Integer (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah string bisa di-parse ke int
+  //
+  // HINT: int.tryParse(input) != null
+
   static bool? exercise25Solution(String input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // int.tryParse(input) != null
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 26. Check if string is double
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 26: Check if String is Double (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah string bisa di-parse ke double
+  //
+  // HINT: double.tryParse(input) != null
+
   static bool? exercise26Solution(String input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // double.tryParse(input) != null
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 27. Check if string is NOT integer
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 27: Check if String is NOT Integer (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah string TIDAK bisa di-parse ke int
+  //
+  // HINT: int.tryParse(input) == null
+
   static bool? exercise27Solution(String input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // int.tryParse(input) == null
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 28. Check if string is NOT double
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 28: Check if String is NOT Double (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah string TIDAK bisa di-parse ke double
+  //
+  // HINT: double.tryParse(input) == null
+
   static bool? exercise28Solution(String input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // double.tryParse(input) == null
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 29. Check if number is negative
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 29: Check if Number is Negative (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka negatif
+  //
+  // HINT: input < 0
+
   static bool? exercise29Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input < 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 30. Check if number is negative (true case)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 30: Check if Number is Negative (True Case) (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka negatif
+  //
+  // HINT: input < 0
+
   static bool? exercise30Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input < 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 31. Check if number is positive
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 31: Check if Number is Positive (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka positif
+  //
+  // HINT: input > 0
+
   static bool? exercise31Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input > 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 32. Check if number is positive (false case)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 32: Check if Number is Positive (False Case) (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah angka positif
+  //
+  // HINT: input > 0
+
   static bool? exercise32Solution(int input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // input > 0
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 33. Parse comma-separated decimal
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 33: Parse Comma-Separated Decimal (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Parse string dengan koma sebagai desimal separator
+  //
+  // CONTOH:
+  // Input:  "123,45"
+  // Output: 123.45
+  //
+  // HINT: Ganti koma dengan titik, lalu parse ke double
+
   static double? exercise33Solution(String input) {
     double? output;
-    // 👇 TULIS KODE DI SINI:
-    // Hapus koma, parse ke double
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 34. Parse comma-separated integer
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 34: Parse Comma-Separated Integer (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Parse string dengan koma sebagai pemisah ribuan
+  //
+  // CONTOH:
+  // Input:  "1,234"
+  // Output: 1234
+  //
+  // HINT: Hapus koma, lalu parse ke int
+
   static int? exercise34Solution(String input) {
     int? output;
-    // 👇 TULIS KODE DI SINI:
-    // Hapus koma, parse ke int
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 
-  // 35. Check if string can be parsed to double
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EXERCISE 35: Check if String Can Be Parsed to Double (VALIDATED)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INSTRUKSI:
+  // - Cek apakah string bisa di-parse ke double
+  //
+  // HINT: double.tryParse(input) != null
+
   static bool? exercise35Solution(String input) {
     bool? output;
-    // 👇 TULIS KODE DI SINI:
-    // double.tryParse(input) != null
 
-    return output;
+    // TULIS KODE DI SINI:
+
+    return output; // ← JANGAN UBAH BARIS INI!
   }
 }
