@@ -1,306 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
-import '../controller/efd1700_regex_controller.dart';
+import '../tests/efd1700_tests.dart';
 
 class Efd1700RegexView extends StatefulWidget {
   const Efd1700RegexView({Key? key}) : super(key: key);
-
-  bool? exercise1() {
-    String text = "Hello Flutter World";
-    RegExp exp = RegExp(r"Flutter");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "Flutter"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise2() {
-    String text = "Dart Programming Language";
-    RegExp exp = RegExp(r"\bDart\b");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\bDart\b"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise3() {
-    String text = "dart programming";
-    RegExp exp = RegExp(r"\bdart\b", caseSensitive: false);
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\bdart\b" dengan case sensitive false
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise4() {
-    String text = "dart programming";
-    RegExp exp = RegExp(r"\b[a-z]+\b");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\b[a-z]+\b"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise5() {
-    String text = "dart programming";
-    RegExp exp = RegExp(r"\b\w+\b");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\b\w+\b"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise6() {
-    String text = "dart programming";
-    RegExp exp = RegExp(r"\b\w{3,}\b");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\b\w{3,}\b"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise7() {
-    String text = "dart programming";
-    RegExp exp = RegExp(r"\b[a-z]{3,}\b");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\b[a-z]{3,}\b"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise8() {
-    String text = "dart programming";
-    RegExp exp = RegExp(r"\b\w*\b");
-    // Tuliskan kode untuk menentukan apakah text memenuhi RegExp "\b\w*\b"
-    bool isMatch = exp.hasMatch(text);
-    return isMatch == true;
-  }
-
-  bool? exercise9() {
-    var pattern = r'\d{3}-\d{2}-\d{4}';
-    var string = '123-45-6789';
-    // Tuliskan kode untuk memastikan apakah string sesuai dengan pattern
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise10() {
-    var pattern = r'\b\w{5}\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan 5 huruf
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise11() {
-    var pattern = r'^[A-Z]{1}\w+$';
-    var string = 'Hello';
-    // Tuliskan kode untuk memastikan apakah string dimulai dengan huruf kapital
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise12() {
-    var pattern = r'\b\w*[aeiou]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan vokal
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise13() {
-    var pattern = r'\b\d+\b';
-    var string = 'I have 25 apples';
-    // Tuliskan kode untuk memastikan apakah string memiliki angka
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise14() {
-    var pattern = r'\b[A-Z][a-z]+\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan huruf kapital di awal
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise15() {
-    var pattern = r'\b\w{4,}\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan minimal 4 huruf
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise16() {
-    var pattern = r'\b[a-z]+\b';
-    var string = 'hello world';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan huruf kecil
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise17() {
-    var pattern = r'\b\w*[0-9]\w*\b';
-    var string = 'Hello123 World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan angka
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise18() {
-    var pattern = r'\b\w*[A-Z]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan huruf kapital
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise19() {
-    var pattern = r'\b\w*[a-z]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan huruf kecil
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise20() {
-    var pattern = r'\b\w*[^a-zA-Z0-9]\w*\b';
-    var string = 'Hello-World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan karakter khusus
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise21() {
-    var pattern = r'\b\w*[aeiouAEIOU]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan vokal
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise22() {
-    var pattern = r'\b\w*[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan konsonan
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise23() {
-    var pattern = r'\b\w*[0-9]\w*[0-9]\w*\b';
-    var string = 'Hello123 World456';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan minimal 2 angka
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise24() {
-    var pattern = r'\b\w*[A-Z]\w*[A-Z]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan minimal 2 huruf kapital
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise25() {
-    var pattern = r'\b\w*[a-z]\w*[a-z]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan minimal 2 huruf kecil
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise26() {
-    var pattern = r'\b\w*[aeiou]\w*[aeiou]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan minimal 2 vokal
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise27() {
-    var pattern =
-        r'\b\w*[bcdfghjklmnpqrstvwxyz]\w*[bcdfghjklmnpqrstvwxyz]\w*\b';
-    var string = 'Hello World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan minimal 2 konsonan
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise28() {
-    var pattern = r'\b\w*[0-9]\w*[A-Z]\w*\b';
-    var string = 'Hello123 World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan angka dan huruf kapital
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise29() {
-    var pattern = r'\b\w*[A-Z]\w*[0-9]\w*\b';
-    var string = 'Hello123 World';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan huruf kapital dan angka
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise30() {
-    var pattern = r'\b\w*[a-z]\w*[0-9]\w*\b';
-    var string = 'hello123 world';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan huruf kecil dan angka
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise31() {
-    var pattern = r'\b\w*[0-9]\w*[a-z]\w*\b';
-    var string = 'hello123 world';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan angka dan huruf kecil
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise32() {
-    var pattern = r'\b\w*[aeiou]\w*[0-9]\w*\b';
-    var string = 'hello123 world';
-    // Tuliskan kode untuk memastikan apakah string memiliki kata dengan vokal dan angka
-    var exp = RegExp(pattern);
-    var isMatch = exp.hasMatch(string);
-    return isMatch == true;
-  }
-
-  bool? exercise33() {
-    String input = "My email address is example@email.com";
-    // Tuliskan kode untuk mengambil alamat email dari input
-    RegExp exp = RegExp(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b');
-    String? output = exp.firstMatch(input)?.group(0);
-    return output == "example@email.com";
-  }
-
-  bool? exercise34() {
-    String input = "My phone number is +62 812-3456-7890";
-    // Tuliskan kode untuk mengambil nomor telepon dari input
-    RegExp exp = RegExp(r'\+?\d{1,3}[-\s]?\d{1,4}[-\s]?\d{1,4}[-\s]?\d{1,9}');
-    String? output = exp.firstMatch(input)?.group(0);
-    return output == "+62 812-3456-7890";
-  }
 
   @override
   State<Efd1700RegexView> createState() => Efd1700RegexController();
@@ -311,55 +14,270 @@ class Efd1700RegexView extends StatefulWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFE5D4FF),
       appBar: AppBar(
-        title: const Text("EFD1700 - Regex Challenge"),
+        title: const Text("EFD1700 - Regex"),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         elevation: 0,
-        actions: const [],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.analytics_outlined),
+            tooltip: 'View Statistics',
+            onPressed: () => _showOverallStatsDialogEfd1700(context),
+          ),
+          IconButton(
+            icon: const Icon(Icons.play_arrow),
+            tooltip: 'Run All Tests',
+            onPressed: () => _showRunAllTestsDialog(context),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildExerciseCard(rowLabel(exercise1)),
-              _buildExerciseCard(rowLabel(exercise2)),
-              _buildExerciseCard(rowLabel(exercise3)),
-              _buildExerciseCard(rowLabel(exercise4)),
-              _buildExerciseCard(rowLabel(exercise5)),
-              _buildExerciseCard(rowLabel(exercise6)),
-              _buildExerciseCard(rowLabel(exercise7)),
-              _buildExerciseCard(rowLabel(exercise8)),
-              _buildExerciseCard(rowLabel(exercise9)),
-              _buildExerciseCard(rowLabel(exercise10)),
-              _buildExerciseCard(rowLabel(exercise11)),
-              _buildExerciseCard(rowLabel(exercise12)),
-              _buildExerciseCard(rowLabel(exercise13)),
-              _buildExerciseCard(rowLabel(exercise14)),
-              _buildExerciseCard(rowLabel(exercise15)),
-              _buildExerciseCard(rowLabel(exercise16)),
-              _buildExerciseCard(rowLabel(exercise17)),
-              _buildExerciseCard(rowLabel(exercise18)),
-              _buildExerciseCard(rowLabel(exercise19)),
-              _buildExerciseCard(rowLabel(exercise20)),
-              _buildExerciseCard(rowLabel(exercise21)),
-              _buildExerciseCard(rowLabel(exercise22)),
-              _buildExerciseCard(rowLabel(exercise23)),
-              _buildExerciseCard(rowLabel(exercise24)),
-              _buildExerciseCard(rowLabel(exercise25)),
-              _buildExerciseCard(rowLabel(exercise26)),
-              _buildExerciseCard(rowLabel(exercise27)),
-              _buildExerciseCard(rowLabel(exercise28)),
-              _buildExerciseCard(rowLabel(exercise29)),
-              _buildExerciseCard(rowLabel(exercise30)),
-              _buildExerciseCard(rowLabel(exercise31)),
-              _buildExerciseCard(rowLabel(exercise32)),
-              _buildExerciseCard(rowLabel(exercise33)),
-              _buildExerciseCard(rowLabel(exercise34)),
+              // Info Banner
+              _buildInfoBanner(),
+              const SizedBox(height: 16),
+
+              // Quick Stats
+              _buildQuickStatsCard(),
+              const SizedBox(height: 16),
+
+              // How to Use
+              _buildInstructionsCard(),
+              const SizedBox(height: 16),
+
+              // Section Title
+              _buildSectionTitle("📝 Exercises"),
+              const SizedBox(height: 12),
+
+              // All Exercises
+              ...List.generate(
+                34,
+                (index) => _buildExerciseCard(
+                  rowLabelValidatedEfd1700(index + 1),
+                ),
+              ),
+
               const SizedBox(height: 20),
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showOverallStatsDialogEfd1700(context),
+        backgroundColor: Colors.purple,
+        icon: const Icon(Icons.analytics),
+        label: const Text('View Stats'),
+      ),
+    );
+  }
+
+  Widget _buildInfoBanner() {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.purple.shade400, Colors.purple.shade600],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: const Row(
+        children: [
+          Icon(Icons.lightbulb_outline, color: Colors.white, size: 28),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Regular Expression Exercises',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Master regex patterns with validated exercises',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildQuickStatsCard() {
+    final stats = Efd1700Validator.getOverallStats();
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Icon(Icons.speed, color: Colors.purple),
+                SizedBox(width: 8),
+                Text(
+                  'Quick Stats',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _buildStatItem(
+                  Icons.assignment_outlined,
+                  'Total',
+                  '${stats['totalExercises']}',
+                  Colors.blue,
+                ),
+                _buildStatItem(
+                  Icons.check_circle_outline,
+                  'Completed',
+                  '${stats['completedExercises']}',
+                  Colors.green,
+                ),
+                _buildStatItem(
+                  Icons.grade_outlined,
+                  'Grade',
+                  stats['grade'].toString().split(' ')[0],
+                  Colors.orange,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStatItem(
+      IconData icon, String label, String value, Color color) {
+    return Column(
+      children: [
+        Icon(icon, color: color, size: 28),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInstructionsCard() {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ExpansionTile(
+        leading: const Icon(Icons.help_outline, color: Colors.purple),
+        title: const Text(
+          'How to Use',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _numberedItem(1, 'Edit code di file efd1700_exercises.dart'),
+                _numberedItem(2, 'Tap tombol "Test" untuk validasi jawaban'),
+                _numberedItem(3, 'Lihat detail hasil dengan tap icon ℹ️'),
+                _numberedItem(4, 'Centang hijau = semua test cases passed ✅'),
+                const SizedBox(height: 12),
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.purple.shade50,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.tips_and_updates,
+                          color: Colors.purple, size: 20),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          'Tip: Gunakan "Run All Tests" untuk cek semua exercise sekaligus!',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _numberedItem(int number, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 24,
+            height: 24,
+            decoration: BoxDecoration(
+              color: Colors.purple,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                '$number',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(text, style: const TextStyle(fontSize: 14)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Text(
+      title,
+      style: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
@@ -372,8 +290,236 @@ class Efd1700RegexView extends StatefulWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         child: child,
+      ),
+    );
+  }
+
+  void _showRunAllTestsDialog(BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: const Text('Running All Tests'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            CircularProgressIndicator(),
+            SizedBox(height: 16),
+            Text('Please wait...'),
+          ],
+        ),
+      ),
+    );
+
+    final results = await Efd1700Validator.runAllTests();
+
+    if (context.mounted) {
+      Navigator.pop(context);
+
+      final completed = results.where((r) => r.isPerfect).length;
+      final total = results.length;
+
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('All Tests Complete'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Completed: $completed/$total exercises',
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              LinearProgressIndicator(
+                value: completed / total,
+                backgroundColor: Colors.grey.shade300,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  completed == total ? Colors.green : Colors.orange,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Success Rate: ${(completed / total * 100).toStringAsFixed(1)}%',
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _showOverallStatsDialogEfd1700(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('View Details'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  void _showOverallStatsDialogEfd1700(BuildContext context) {
+    final stats = Efd1700Validator.getOverallStats();
+    final results = stats['results'] as List<TestResult>;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text(
+          'Overall Statistics',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Summary Card
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.purple.shade400, Colors.purple.shade600],
+                  ),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      stats['grade'],
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${stats['completionRate'].toStringAsFixed(1)}% Complete',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white70,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Stats Grid
+              Row(
+                children: [
+                  Expanded(
+                    child: _buildStatCard(
+                      'Exercises',
+                      '${stats['completedExercises']}/${stats['totalExercises']}',
+                      Colors.blue,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: _buildStatCard(
+                      'Test Cases',
+                      '${stats['passedTests']}/${stats['totalTests']}',
+                      Colors.green,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Exercise List
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Exercise Details:',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: results.length,
+                  itemBuilder: (context, index) {
+                    final result = results[index];
+                    return ListTile(
+                      dense: true,
+                      leading: Icon(
+                        result.isPerfect ? Icons.check_circle : Icons.cancel,
+                        color: result.isPerfect ? Colors.green : Colors.grey,
+                        size: 20,
+                      ),
+                      title: Text(
+                        'Exercise ${result.exerciseNumber}',
+                        style: const TextStyle(fontSize: 14),
+                      ),
+                      trailing: Text(
+                        '${result.passed}/${result.total}',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color:
+                              result.isPerfect ? Colors.green : Colors.orange,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildStatCard(String label, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: color,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.grey.shade700,
+            ),
+          ),
+        ],
       ),
     );
   }

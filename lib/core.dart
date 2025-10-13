@@ -38,6 +38,8 @@ export 'package:magicbook/module/efd1600_list_and_map/controller/efd1600_list_an
 export 'package:magicbook/module/efd1600_list_and_map/view/efd1600_list_and_map_view.dart';
 export 'package:magicbook/module/efd1700_regex/controller/efd1700_regex_controller.dart';
 export 'package:magicbook/module/efd1700_regex/view/efd1700_regex_view.dart';
+export 'package:magicbook/module/efd1700_regex/exercises/efd1700_exercises.dart';
+export 'package:magicbook/module/efd1700_regex/validator/efd1700_validator.dart';
 export 'package:magicbook/module/efd1800_async_function/controller/efd1800_async_function_controller.dart';
 export 'package:magicbook/module/efd1800_async_function/view/efd1800_async_function_view.dart';
 export 'package:magicbook/module/efd1800_product_detail/controller/efd1800_product_detail_controller.dart';
@@ -181,3 +183,4 @@ export 'package:magicbook/state_util.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1500.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1200.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1400.dart';
+export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1700.dart';
