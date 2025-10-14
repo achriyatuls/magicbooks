@@ -8,11 +8,6 @@ class Efw100CommonWidgetView extends StatefulWidget {
   // Exercise methods - siswa akan mengisi ini
   bool? exercise1() {
     // Buat sebuah Container dengan lebar 100, tinggi 100, dan warna merah
-    // Container(
-    //   width: 100,
-    //   height: 100,
-    //   color: Colors.red,
-    // );
 
     return false;
   }

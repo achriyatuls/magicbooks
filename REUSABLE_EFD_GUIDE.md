@@ -94,6 +94,13 @@ flutter run
 rm efd1100_variable_view_old.dart
 ```
 
+### **Step 5: Controller **
+
+```bash
+# perhatikan pada controller , harus merujuk pada view yg  baru
+
+```
+
 ---
 
 ## 🔧 **CONFIGURATION REFERENCE**
