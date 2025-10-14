@@ -34,7 +34,7 @@ class Efd1100Exercises {
 
     // TULIS KODE DI SINI:
     // Contoh benar:
-    // price = "100";
+    price = "100";
 
     bool? result = price is String;
     return result; // ← JANGAN UBAH BARIS INI!

@@ -184,3 +184,10 @@ export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1500.da
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1200.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1400.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1700.dart';
+// Removed to avoid symbol conflicts with module-specific TestResult/OverallStats
+// Use direct import with alias instead: import 'package:magicbook/shared/model/test_result.dart' as shared;
+export 'package:magicbook/shared/model/efd_config.dart';
+export 'package:magicbook/shared/widget/efd_layout/efd_widgets.dart';
+export 'package:magicbook/shared/widget/efd_layout/efd_dialogs.dart';
+export 'package:magicbook/shared/widget/efd_layout/efd_generic_view.dart';
+export 'package:magicbook/shared/util/efd_adapter.dart';

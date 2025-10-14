@@ -83,7 +83,7 @@ class Efd1100Tests {
           passed++;
         } else {
           errors.add(
-              "❌ ${testCase.description}: Input '${testCase.input}' → Expected: ${testCase.expected}, Got: $result");
+              "${testCase.description}: Input '${testCase.input}' → Expected: ${testCase.expected}, Got: $result");
         }
       } catch (e) {
         errors.add("💥 Error dengan input '${testCase.input}': $e");
@@ -137,7 +137,7 @@ class Efd1100Tests {
           passed++;
         } else {
           errors.add(
-              "❌ ${testCase.description}: Input '${testCase.input}' → Expected: ${testCase.expected}, Got: $result");
+              "${testCase.description}: Input '${testCase.input}' → Expected: ${testCase.expected}, Got: $result");
         }
       } catch (e) {
         errors.add("💥 Error dengan input '${testCase.input}': $e");

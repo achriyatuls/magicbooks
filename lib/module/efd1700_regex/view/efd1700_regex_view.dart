@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
-import '../tests/efd1700_tests.dart';
+import '../tests/efd1700_tests.dart' as efd1700_tests;
 
 class Efd1700RegexView extends StatefulWidget {
   const Efd1700RegexView({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class Efd1700RegexView extends StatefulWidget {
               const SizedBox(height: 16),
 
               // Section Title
-              _buildSectionTitle("📝 Exercises"),
+              _buildSectionTitle("Exercises"),
               const SizedBox(height: 12),
 
               // All Exercises
@@ -374,7 +374,7 @@ class Efd1700RegexView extends StatefulWidget {
 
   void _showOverallStatsDialogEfd1700(BuildContext context) {
     final stats = Efd1700Validator.getOverallStats();
-    final results = stats['results'] as List<TestResult>;
+    final results = stats['results'] as List<efd1700_tests.TestResult>;
 
     showDialog(
       context: context,
