@@ -51,7 +51,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ input=${c.input}");
+        errors.add("input=${c.input}");
     }
     return TestResult(
         exerciseName: "EFD1300 E1",
@@ -60,7 +60,7 @@ class Efd1300Tests {
         total: cases.length,
         isPerfect: passed == cases.length,
         errors: errors,
-        hints: ["💡 Gunakan productName.contains(query)"]);
+        hints: ["Gunakan productName.contains(query)"]);
   }
 
   static TestResult test2() {
@@ -75,7 +75,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ input='${c.input}'");
+        errors.add("input='${c.input}'");
     }
     return TestResult(
         exerciseName: "EFD1300 E2",
@@ -84,7 +84,7 @@ class Efd1300Tests {
         total: cases.length,
         isPerfect: passed == cases.length,
         errors: errors,
-        hints: ["💡 Gunakan .isEmpty"]);
+        hints: ["Gunakan .isEmpty"]);
   }
 
   static TestResult test3() {
@@ -99,7 +99,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ input='${c.input}'");
+        errors.add("input='${c.input}'");
     }
     return TestResult(
         exerciseName: "EFD1300 E3",
@@ -108,7 +108,7 @@ class Efd1300Tests {
         total: cases.length,
         isPerfect: passed == cases.length,
         errors: errors,
-        hints: ["💡 Gunakan input.length >= 2"]);
+        hints: ["Gunakan input.length >= 2"]);
   }
 
   static TestResult test4() {
@@ -123,7 +123,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ ${c.input}");
+        errors.add("${c.input}");
     }
     return TestResult(
         exerciseName: "EFD1300 E4",
@@ -132,7 +132,7 @@ class Efd1300Tests {
         total: cases.length,
         isPerfect: passed == cases.length,
         errors: errors,
-        hints: ["💡 number.toString().padLeft(4, '0')"]);
+        hints: ["number.toString().padLeft(4, '0')"]);
   }
 
   static TestResult test5() {
@@ -147,7 +147,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ ${c.input}");
+        errors.add("${c.input}");
     }
     return TestResult(
         exerciseName: "EFD1300 E5",
@@ -156,7 +156,7 @@ class Efd1300Tests {
         total: cases.length,
         isPerfect: passed == cases.length,
         errors: errors,
-        hints: ["💡 number.toString().padLeft(5, '0')"]);
+        hints: ["number.toString().padLeft(5, '0')"]);
   }
 
   static TestResult test6() {
@@ -174,7 +174,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ ${c.description}: '${c.input}'");
+        errors.add("${c.description}: '${c.input}'");
     }
     return TestResult(
       exerciseName: "EFD1300 E6",
@@ -184,8 +184,8 @@ class Efd1300Tests {
       isPerfect: passed == cases.length,
       errors: errors,
       hints: [
-        "💡 Gunakan RegExp.hasMatch(email)",
-        "💡 Lihat pola regex pada instruksi",
+        "Gunakan RegExp.hasMatch(email)",
+        "Lihat pola regex pada instruksi",
       ],
     );
   }
@@ -210,7 +210,7 @@ class Efd1300Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ input=${c.input}");
+        errors.add(" input=${c.input}");
     }
     return TestResult(
       exerciseName: "EFD1300 E7",
@@ -219,7 +219,7 @@ class Efd1300Tests {
       total: cases.length,
       isPerfect: passed == cases.length,
       errors: errors,
-      hints: ["💡 input[index] == target"],
+      hints: ["input[index] == target"],
     );
   }
 
@@ -232,8 +232,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'andrea', Got: '$res'"],
-      hints: ["💡 input.toLowerCase()"],
+      errors: ok ? [] : ["Expected 'andrea', Got: '$res'"],
+      hints: ["input.toLowerCase()"],
     );
   }
 
@@ -246,8 +246,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'DANIEL GOLEMAN', Got: '$res'"],
-      hints: ["💡 input.toUpperCase()"],
+      errors: ok ? [] : ["Expected 'DANIEL GOLEMAN', Got: '$res'"],
+      hints: ["input.toUpperCase()"],
     );
   }
 
@@ -261,8 +261,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected length 4"],
-      hints: ["💡 line.split(sep)"],
+      errors: ok ? [] : ["Expected length 4"],
+      hints: ["line.split(sep)"],
     );
   }
 
@@ -275,8 +275,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected length 4"],
-      hints: ["💡 line.split(',')"],
+      errors: ok ? [] : ["Expected length 4"],
+      hints: ["line.split(',')"],
     );
   }
 
@@ -290,8 +290,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ product_name tidak sesuai"],
-      hints: ["💡 Gunakan jsonDecode(jsonStr)"],
+      errors: ok ? [] : ["product_name tidak sesuai"],
+      hints: ["Gunakan jsonDecode(jsonStr)"],
     );
   }
 
@@ -304,8 +304,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'HELLO WORLD', Got: '$res'"],
-      hints: ["💡 input.toUpperCase()"],
+      errors: ok ? [] : ["Expected 'HELLO WORLD', Got: '$res'"],
+      hints: ["input.toUpperCase()"],
     );
   }
 
@@ -318,8 +318,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'hello world', Got: '$res'"],
-      hints: ["💡 input.toLowerCase()"],
+      errors: ok ? [] : ["Expected 'hello world', Got: '$res'"],
+      hints: ["input.toLowerCase()"],
     );
   }
 
@@ -332,8 +332,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Hello World', Got: '$res'"],
-      hints: ["💡 Pisah kata, uppercase huruf pertama tiap kata"],
+      errors: ok ? [] : ["Expected 'Hello World', Got: '$res'"],
+      hints: ["Pisah kata, uppercase huruf pertama tiap kata"],
     );
   }
 
@@ -346,8 +346,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 1234, Got: $res"],
-      hints: ["💡 int.parse(input)"],
+      errors: ok ? [] : ["Expected 1234, Got: $res"],
+      hints: ["int.parse(input)"],
     );
   }
 
@@ -360,8 +360,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 1234.56, Got: $res"],
-      hints: ["💡 double.parse(input)"],
+      errors: ok ? [] : ["Expected 1234.56, Got: $res"],
+      hints: ["double.parse(input)"],
     );
   }
 
@@ -374,10 +374,10 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 1234.56, Got: $res"],
+      errors: ok ? [] : ["Expected 1234.56, Got: $res"],
       hints: [
-        "💡 Hapus semua non-digit selain . dan ,",
-        "💡 Ganti '.' jadi '' dan ',' jadi '.' sebelum parse",
+        "Hapus semua non-digit selain . dan ,",
+        "Ganti '.' jadi '' dan ',' jadi '.' sebelum parse",
       ],
     );
   }
@@ -391,8 +391,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Rp. 1.234,56', Got: '$res'"],
-      hints: ["💡 Format angka ke rupiah (titik ribuan, koma desimal)"],
+      errors: ok ? [] : ["Expected 'Rp. 1.234,56', Got: '$res'"],
+      hints: ["Format angka ke rupiah (titik ribuan, koma desimal)"],
     );
   }
 
@@ -405,8 +405,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Rp. 1.234,56', Got: '$res'"],
-      hints: ["💡 Parse ke double, lalu format rupiah"],
+      errors: ok ? [] : ["Expected 'Rp. 1.234,56', Got: '$res'"],
+      hints: ["Parse ke double, lalu format rupiah"],
     );
   }
 
@@ -419,8 +419,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input.contains('Hello')"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input.contains('Hello')"],
     );
   }
 
@@ -433,8 +433,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Hello World', Got: '$res'"],
-      hints: ["💡 Hapus tanda koma atau ganti dengan ''"],
+      errors: ok ? [] : ["Expected 'Hello World', Got: '$res'"],
+      hints: ["Hapus tanda koma atau ganti dengan ''"],
     );
   }
 
@@ -447,8 +447,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Hello,World!', Got: '$res'"],
-      hints: ["💡 Hapus spasi setelah koma"],
+      errors: ok ? [] : ["Expected 'Hello,World!', Got: '$res'"],
+      hints: ["Hapus spasi setelah koma"],
     );
   }
 
@@ -461,8 +461,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 Pencarian case-sensitive ('world' != 'World')"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["Pencarian case-sensitive ('world' != 'World')"],
     );
   }
 
@@ -475,8 +475,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input.contains('World')"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input.contains('World')"],
     );
   }
 
@@ -489,8 +489,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 10000, Got: $res"],
-      hints: ["💡 Hapus non-digit dan parse ke int"],
+      errors: ok ? [] : ["Expected 10000, Got: $res"],
+      hints: ["Hapus non-digit dan parse ke int"],
     );
   }
 
@@ -503,8 +503,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 10.0, Got: $res"],
-      hints: ["💡 Ambil 2 digit terdepan (10) atau bagi 1000 sesuai instruksi"],
+      errors: ok ? [] : ["Expected 10.0, Got: $res"],
+      hints: ["Ambil 2 digit terdepan (10) atau bagi 1000 sesuai instruksi"],
     );
   }
 
@@ -517,8 +517,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '10,000.00', Got: '$res'"],
-      hints: ["💡 Format angka menjadi US-style grouping"],
+      errors: ok ? [] : ["Expected '10,000.00', Got: '$res'"],
+      hints: [" Format angka menjadi US-style grouping"],
     );
   }
 
@@ -531,8 +531,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 Regex [A-Z]"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["Regex [A-Z]"],
     );
   }
 
@@ -545,8 +545,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 Regex [a-z], validasi hasilnya"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["Regex [a-z], validasi hasilnya"],
     );
   }
 
@@ -559,8 +559,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.67, Got: $res"],
-      hints: ["💡 Hapus koma, parse double"],
+      errors: ok ? [] : ["Expected 12345.67, Got: $res"],
+      hints: ["Hapus koma, parse double"],
     );
   }
 
@@ -573,8 +573,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.67, Got: $res"],
-      hints: ["💡 '.' sebagai pemisah ribuan, ',' desimal"],
+      errors: ok ? [] : ["Expected 12345.67, Got: $res"],
+      hints: ["'.' sebagai pemisah ribuan, ',' desimal"],
     );
   }
 
@@ -587,8 +587,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.67, Got: $res"],
-      hints: ["💡 Hapus huruf, hapus koma, parse double"],
+      errors: ok ? [] : ["Expected 12345.67, Got: $res"],
+      hints: ["Hapus huruf, hapus koma, parse double"],
     );
   }
 
@@ -601,8 +601,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.67, Got: $res"],
-      hints: ["💡 Lihat contoh parsing di soal"],
+      errors: ok ? [] : ["Expected 12345.67, Got: $res"],
+      hints: ["Lihat contoh parsing di soal"],
     );
   }
 
@@ -615,8 +615,8 @@ class Efd1300Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.67, Got: $res"],
-      hints: ["💡 Hapus non-digit kecuali titik, parse"],
+      errors: ok ? [] : ["Expected 12345.67, Got: $res"],
+      hints: ["Hapus non-digit kecuali titik, parse"],
     );
   }
 }

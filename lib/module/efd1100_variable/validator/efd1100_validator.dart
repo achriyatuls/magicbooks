@@ -1,4 +1,4 @@
-// 🔄 TEST RUNNER - EFD1100 VARIABLE
+// TEST RUNNER - EFD1100 VARIABLE
 //
 // ════════════════════════════════════════════════════════════════════════════
 // File ini menjalankan tests dan mengumpulkan hasil
@@ -89,8 +89,8 @@ class Efd1100Validator {
           passed: 0,
           total: 1,
           isPerfect: false,
-          errors: ["⚠️ Test untuk exercise ini belum diimplementasi"],
-          hints: ["💡 Silakan hubungi guru untuk menambahkan test cases"],
+          errors: ["Test untuk exercise ini belum diimplementasi"],
+          hints: ["Silakan hubungi guru untuk menambahkan test cases"],
         );
     }
   }
@@ -149,7 +149,7 @@ class Efd1100Validator {
           passed: 0,
           total: 1,
           isPerfect: false,
-          errors: ["💥 Fatal error: $e"],
+          errors: ["Fatal error: $e"],
         );
       }
     }
@@ -249,13 +249,13 @@ class OverallStats {
   List<String> get achievements {
     List<String> earned = [];
 
-    if (perfectExercises >= 1) earned.add("🌟 First Perfect!");
-    if (perfectExercises >= 5) earned.add("🔥 On Fire!");
-    if (perfectExercises == totalExercises) earned.add("💯 Perfect Score!");
+    if (perfectExercises >= 1) earned.add("First Perfect!");
+    if (perfectExercises >= 5) earned.add("On Fire!");
+    if (perfectExercises == totalExercises) earned.add("Perfect Score!");
 
-    if (testPercentage >= 50) earned.add("📈 Half Way There");
-    if (testPercentage >= 75) earned.add("🎯 Expert Level");
-    if (testPercentage == 100) earned.add("🏆 Master of Variables");
+    if (testPercentage >= 50) earned.add("Half Way There");
+    if (testPercentage >= 75) earned.add("Expert Level");
+    if (testPercentage == 100) earned.add("Master of Variables");
 
     return earned;
   }

@@ -3,24 +3,6 @@ import '../../model/efd_config.dart';
 import 'efd_widgets.dart';
 import 'efd_dialogs.dart';
 
-/// Generic View untuk semua EFD modules
-/// Menggantikan duplicated view code di setiap module
-///
-/// Usage:
-/// ```dart
-/// class Efd1100VariableView extends StatelessWidget {
-///   @override
-///   Widget build(BuildContext context) {
-///     return EfdGenericView(
-///       config: EfdModuleConfig(
-///         moduleCode: "EFD1100",
-///         moduleName: "Variable",
-///         // ... other config
-///       ),
-///     );
-///   }
-/// }
-/// ```
 class EfdGenericView extends StatefulWidget {
   final EfdModuleConfig config;
 

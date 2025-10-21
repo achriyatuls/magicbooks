@@ -51,7 +51,7 @@ class Efd1400Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ ${c.description}: '${c.input}'");
+        errors.add("${c.description}: '${c.input}'");
     }
     return TestResult(
       exerciseName: "EFD1400 E1",
@@ -60,7 +60,7 @@ class Efd1400Tests {
       total: cases.length,
       isPerfect: passed == cases.length,
       errors: errors,
-      hints: ["💡 int.tryParse(input) ?? 0"],
+      hints: ["int.tryParse(input) ?? 0"],
     );
   }
 
@@ -79,7 +79,7 @@ class Efd1400Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ ${c.description}: '${c.input}'");
+        errors.add("${c.description}: '${c.input}'");
     }
     return TestResult(
       exerciseName: "EFD1400 E2",
@@ -88,7 +88,7 @@ class Efd1400Tests {
       total: cases.length,
       isPerfect: passed == cases.length,
       errors: errors,
-      hints: ["💡 input.replaceAll(RegExp(r'[^0-9]+'), '') lalu int.parse"],
+      hints: ["input.replaceAll(RegExp(r'[^0-9]+'), '') lalu int.parse"],
     );
   }
 
@@ -101,8 +101,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 29.23, Got: $res"],
-      hints: ["💡 Input sudah double, langsung assign"],
+      errors: ok ? [] : [" Expected 29.23, Got: $res"],
+      hints: ["Input sudah double, langsung assign"],
     );
   }
 
@@ -115,8 +115,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 0, Got: $res"],
-      hints: ["💡 double.tryParse(input) ?? 0"],
+      errors: ok ? [] : ["Expected 0, Got: $res"],
+      hints: ["double.tryParse(input) ?? 0"],
     );
   }
 
@@ -129,8 +129,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 200.0, Got: $res"],
-      hints: ["💡 total = qty * price"],
+      errors: ok ? [] : ["Expected 200.0, Got: $res"],
+      hints: ["total = qty * price"],
     );
   }
 
@@ -143,8 +143,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 11.5, Got: $res"],
-      hints: ["💡 total = 23 / 2 (division gives double)"],
+      errors: ok ? [] : ["Expected 11.5, Got: $res"],
+      hints: [" total = 23 / 2 (division gives double)"],
     );
   }
 
@@ -157,8 +157,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '2500.25', Got: '$res'"],
-      hints: ["💡 price.toStringAsFixed(2)"],
+      errors: ok ? [] : ["Expected '2500.25', Got: '$res'"],
+      hints: ["price.toStringAsFixed(2)"],
     );
   }
 
@@ -171,8 +171,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '00001001', Got: '$res'"],
-      hints: ["💡 id.toString().padLeft(8, '0')"],
+      errors: ok ? [] : ["Expected '00001001', Got: '$res'"],
+      hints: ["id.toString().padLeft(8, '0')"],
     );
   }
 
@@ -185,8 +185,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Rp25.000', Got: '$res'"],
-      hints: ["💡 Regex untuk titik ribuan + 'Rp' prefix"],
+      errors: ok ? [] : ["Expected 'Rp25.000', Got: '$res'"],
+      hints: ["Regex untuk titik ribuan + 'Rp' prefix"],
     );
   }
 
@@ -199,8 +199,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '\$2.250', Got: '$res'"],
-      hints: ["💡 Regex untuk titik ribuan + '\$' prefix"],
+      errors: ok ? [] : ["Expected '\$2.250', Got: '$res'"],
+      hints: ["Regex untuk titik ribuan + '\$' prefix"],
     );
   }
 
@@ -213,8 +213,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 24, Got: $res"],
-      hints: ["💡 number.ceil()"],
+      errors: ok ? [] : ["Expected 24, Got: $res"],
+      hints: ["number.ceil()"],
     );
   }
 
@@ -227,8 +227,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 23, Got: $res"],
-      hints: ["💡 number.floor()"],
+      errors: ok ? [] : ["Expected 23, Got: $res"],
+      hints: ["number.floor()"],
     );
   }
 
@@ -241,8 +241,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 input % 2 == 0"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["input % 2 == 0"],
     );
   }
 
@@ -255,8 +255,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.68, Got: $res"],
-      hints: ["💡 double.parse(input.toStringAsFixed(2))"],
+      errors: ok ? [] : ["Expected 12345.68, Got: $res"],
+      hints: ["double.parse(input.toStringAsFixed(2))"],
     );
   }
 
@@ -269,8 +269,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input % 3 == 0"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input % 3 == 0"],
     );
   }
 
@@ -283,8 +283,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input % 6 == 0"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input % 6 == 0"],
     );
   }
 
@@ -297,8 +297,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected c=20, d=10"],
-      hints: ["💡 Tukar nilai dengan variabel sementara"],
+      errors: ok ? [] : ["Expected c=20, d=10"],
+      hints: ["Tukar nilai dengan variabel sementara"],
     );
   }
 
@@ -311,8 +311,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 Cek apakah input habis dibagi angka 2 sampai sqrt(input)"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["Cek apakah input habis dibagi angka 2 sampai sqrt(input)"],
     );
   }
 
@@ -325,8 +325,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345.7, Got: $res"],
-      hints: ["💡 double.parse(input.toStringAsFixed(1))"],
+      errors: ok ? [] : ["Expected 12345.7, Got: $res"],
+      hints: ["double.parse(input.toStringAsFixed(1))"],
     );
   }
 
@@ -339,8 +339,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input % 9 == 0"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input % 9 == 0"],
     );
   }
 
@@ -353,8 +353,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12345, Got: $res"],
-      hints: ["💡 int.parse(input)"],
+      errors: ok ? [] : ["Expected 12345, Got: $res"],
+      hints: ["int.parse(input)"],
     );
   }
 
@@ -367,8 +367,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 12.345, Got: $res"],
-      hints: ["💡 double.parse(input)"],
+      errors: ok ? [] : ["Expected 12.345, Got: $res"],
+      hints: ["double.parse(input)"],
     );
   }
 
@@ -381,8 +381,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '12345', Got: '$res'"],
-      hints: ["💡 input.toString()"],
+      errors: ok ? [] : ["Expected '12345', Got: '$res'"],
+      hints: ["input.toString()"],
     );
   }
 
@@ -395,8 +395,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '12345.678', Got: '$res'"],
-      hints: ["💡 input.toString()"],
+      errors: ok ? [] : ["Expected '12345.678', Got: '$res'"],
+      hints: ["input.toString()"],
     );
   }
 
@@ -409,8 +409,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 int.tryParse(input) != null"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["int.tryParse(input) != null"],
     );
   }
 
@@ -423,8 +423,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 double.tryParse(input) != null"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["double.tryParse(input) != null"],
     );
   }
 
@@ -437,8 +437,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 int.tryParse(input) == null"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["int.tryParse(input) == null"],
     );
   }
 
@@ -451,8 +451,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 double.tryParse(input) == null"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["double.tryParse(input) == null"],
     );
   }
 
@@ -465,8 +465,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 input < 0"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["input < 0"],
     );
   }
 
@@ -479,8 +479,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input < 0"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input < 0"],
     );
   }
 
@@ -493,8 +493,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 input > 0"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["input > 0"],
     );
   }
 
@@ -507,8 +507,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected false"],
-      hints: ["💡 input > 0"],
+      errors: ok ? [] : ["Expected false"],
+      hints: ["input > 0"],
     );
   }
 
@@ -521,8 +521,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 1000.5, Got: $res"],
-      hints: ["💡 Hapus koma, lalu double.parse"],
+      errors: ok ? [] : ["Expected 1000.5, Got: $res"],
+      hints: ["Hapus koma, lalu double.parse"],
     );
   }
 
@@ -535,8 +535,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 100000, Got: $res"],
-      hints: ["💡 Hapus koma, lalu int.parse"],
+      errors: ok ? [] : ["Expected 100000, Got: $res"],
+      hints: ["Hapus koma, lalu int.parse"],
     );
   }
 
@@ -549,8 +549,8 @@ class Efd1400Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true"],
-      hints: ["💡 double.tryParse(input) != null"],
+      errors: ok ? [] : ["Expected true"],
+      hints: ["double.tryParse(input) != null"],
     );
   }
 }

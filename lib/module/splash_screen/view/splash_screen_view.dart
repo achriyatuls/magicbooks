@@ -14,7 +14,7 @@ class SplashScreenView extends StatefulWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
-          color: Color(0xFFE1AFD1),
+          color: Color.fromARGB(255, 187, 119, 165),
         ),
         child: SafeArea(
           child: Column(
@@ -45,12 +45,12 @@ class SplashScreenView extends StatefulWidget {
               )
                   .animate()
                   .scale(
-                    duration: 800.ms,
+                    duration: 15.ms,
                     curve: Curves.elasticOut,
                   )
                   .shimmer(
-                    delay: 800.ms,
-                    duration: 1000.ms,
+                    delay: 15.ms,
+                    duration: 15.ms,
                   ),
 
               const SizedBox(height: 40),
@@ -80,7 +80,7 @@ class SplashScreenView extends StatefulWidget {
               const Text(
                 'Lembar Kerja Digital Interaktif',
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 18,
                   color: Colors.white70,
                   letterSpacing: 1,
                 ),
@@ -102,21 +102,21 @@ class SplashScreenView extends StatefulWidget {
                       icon: Icons.book_outlined,
                       title: 'Pembelajaran Interaktif',
                       description: 'Belajar dengan cara yang menyenangkan',
-                      delay: 1200,
+                      delay: 120,
                     ),
                     const SizedBox(height: 16),
                     _buildFeatureCard(
                       icon: Icons.emoji_events_outlined,
                       title: 'Sistem Gamifikasi',
                       description: 'Raih achievement dan tingkatkan level',
-                      delay: 1400,
+                      delay: 140,
                     ),
                     const SizedBox(height: 16),
                     _buildFeatureCard(
                       icon: Icons.trending_up,
                       title: 'Track Progress',
                       description: 'Pantau perkembangan belajarmu',
-                      delay: 1600,
+                      delay: 160,
                     ),
                   ],
                 ),
@@ -133,7 +133,7 @@ class SplashScreenView extends StatefulWidget {
                     child: CircularProgressIndicator(
                       valueColor:
                           const AlwaysStoppedAnimation<Color>(Colors.white),
-                      strokeWidth: 3,
+                      strokeWidth: 6,
                     ),
                   )
                       .animate(
@@ -151,9 +151,9 @@ class SplashScreenView extends StatefulWidget {
                       .animate(
                         onPlay: (controller) => controller.repeat(),
                       )
-                      .fadeIn(duration: 1000.ms)
+                      .fadeIn(duration: 500.ms)
                       .then()
-                      .fadeOut(duration: 1000.ms),
+                      .fadeOut(duration: 500.ms),
                 ],
               ),
 
@@ -164,9 +164,9 @@ class SplashScreenView extends StatefulWidget {
                 'Untuk Siswa SMK',
                 style: TextStyle(
                   color: Colors.white60,
-                  fontSize: 12,
+                  fontSize: 18,
                 ),
-              ).animate().fadeIn(delay: 2000.ms, duration: 600.ms),
+              ).animate().fadeIn(delay: 200.ms, duration: 600.ms),
 
               const SizedBox(height: 20),
             ],
@@ -189,7 +189,7 @@ class SplashScreenView extends StatefulWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: Colors.white.withOpacity(0.2),
-          width: 1,
+          width: 2,
         ),
       ),
       child: Row(
@@ -233,11 +233,11 @@ class SplashScreenView extends StatefulWidget {
           ),
         ],
       ),
-    ).animate().fadeIn(delay: delay.ms, duration: 600.ms).slideX(
+    ).animate().fadeIn(delay: delay.ms, duration: 100.ms).slideX(
           begin: -0.2,
           end: 0,
           delay: delay.ms,
-          duration: 600.ms,
+          duration: 100.ms,
           curve: Curves.easeOut,
         );
   }

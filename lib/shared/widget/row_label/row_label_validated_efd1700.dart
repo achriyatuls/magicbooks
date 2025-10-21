@@ -126,7 +126,7 @@ class _Efd1700ExerciseRowState extends State<_Efd1700ExerciseRow> {
               // Errors
               if (_testResult!.errors.isNotEmpty) ...[
                 const Text(
-                  '❌ Errors:',
+                  'Errors:',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.red,

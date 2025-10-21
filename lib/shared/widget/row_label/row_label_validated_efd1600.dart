@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../../state_util.dart';
-import '../../../module/efd1500_if_statement/validator/efd1500_validator.dart';
-import '../../../module/efd1500_if_statement/tests/efd1500_tests.dart';
+import '../../../module/efd1600_list_and_map/validator/efd1600_validator.dart';
+import '../../../module/efd1600_list_and_map/tests/efd1600_tests.dart'
+    as efd1600;
 
-Widget rowLabelValidatedEfd1500(int exerciseNumber) {
-  TestResult result = Efd1500Validator.runTest(exerciseNumber);
+Widget rowLabelValidatedEfd1600(int exerciseNumber) {
+  efd1600.TestResult result = Efd1600Validator.runTest(exerciseNumber);
 
   return InkWell(
-    onTap: () => showTestResultDialogEfd1500(result),
+    onTap: () => showTestResultDialogEfd1600(result),
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
@@ -69,14 +70,14 @@ Widget rowLabelValidatedEfd1500(int exerciseNumber) {
             ),
           ),
           const SizedBox(width: 8),
-          _buildStatusIconEfd1500(result),
+          _buildStatusIconEfd1600(result),
         ],
       ),
     ),
   );
 }
 
-Widget _buildStatusIconEfd1500(TestResult result) {
+Widget _buildStatusIconEfd1600(efd1600.TestResult result) {
   if (result.isPerfect) {
     return const Icon(Icons.check_circle, color: Colors.green, size: 36.0);
   } else if (result.passed > 0) {
@@ -99,7 +100,7 @@ Widget _buildStatusIconEfd1500(TestResult result) {
   }
 }
 
-void showTestResultDialogEfd1500(TestResult result) {
+void showTestResultDialogEfd1600(efd1600.TestResult result) {
   showDialog(
     context: Get.currentContext,
     builder: (context) => AlertDialog(

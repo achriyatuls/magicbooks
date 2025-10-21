@@ -12,7 +12,7 @@ class Efd1500Validator {
           passed: 0,
           total: 1,
           isPerfect: false,
-          errors: ["⚠️ Test untuk exercise ini belum diimplementasi"],
+          errors: ["Test untuk exercise ini belum diimplementasi"],
         );
     }
   }
@@ -70,6 +70,10 @@ class Efd1500OverallStats {
 
   double get testPercentage =>
       totalTests > 0 ? (passedTests / totalTests) * 100 : 0.0;
+
+  double get exercisePercentage =>
+      totalExercises > 0 ? (perfectExercises / totalExercises) * 100 : 0.0;
+
   String get overallGrade {
     final p = testPercentage;
     if (p == 100) return "A+ (Perfect!)";

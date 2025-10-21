@@ -1,78 +1,78 @@
-import '../tests/efd1400_tests.dart';
+import '../tests/efd1600_tests.dart';
 
-class Efd1400Validator {
+class Efd1600Validator {
   static TestResult runTest(int exerciseNumber) {
     switch (exerciseNumber) {
       case 1:
-        return Efd1400Tests.test1();
+        return Efd1600Tests.testExercise1();
       case 2:
-        return Efd1400Tests.test2();
+        return Efd1600Tests.testExercise2();
       case 3:
-        return Efd1400Tests.test3();
+        return Efd1600Tests.testExercise3();
       case 4:
-        return Efd1400Tests.test4();
+        return Efd1600Tests.testExercise4();
       case 5:
-        return Efd1400Tests.test5();
+        return Efd1600Tests.testExercise5();
       case 6:
-        return Efd1400Tests.test6();
+        return Efd1600Tests.testExercise6();
       case 7:
-        return Efd1400Tests.test7();
+        return Efd1600Tests.testExercise7();
       case 8:
-        return Efd1400Tests.test8();
+        return Efd1600Tests.testExercise8();
       case 9:
-        return Efd1400Tests.test9();
+        return Efd1600Tests.testExercise9();
       case 10:
-        return Efd1400Tests.test10();
+        return Efd1600Tests.testExercise10();
       case 11:
-        return Efd1400Tests.test11();
+        return Efd1600Tests.testExercise11();
       case 12:
-        return Efd1400Tests.test12();
+        return Efd1600Tests.testExercise12();
       case 13:
-        return Efd1400Tests.test13();
+        return Efd1600Tests.testExercise13();
       case 14:
-        return Efd1400Tests.test14();
+        return Efd1600Tests.testExercise14();
       case 15:
-        return Efd1400Tests.test15();
+        return Efd1600Tests.testExercise15();
       case 16:
-        return Efd1400Tests.test16();
+        return Efd1600Tests.testExercise16();
       case 17:
-        return Efd1400Tests.test17();
+        return Efd1600Tests.testExercise17();
       case 18:
-        return Efd1400Tests.test18();
+        return Efd1600Tests.testExercise18();
       case 19:
-        return Efd1400Tests.test19();
+        return Efd1600Tests.testExercise19();
       case 20:
-        return Efd1400Tests.test20();
+        return Efd1600Tests.testExercise20();
       case 21:
-        return Efd1400Tests.test21();
+        return Efd1600Tests.testExercise21();
       case 22:
-        return Efd1400Tests.test22();
+        return Efd1600Tests.testExercise22();
       case 23:
-        return Efd1400Tests.test23();
+        return Efd1600Tests.testExercise23();
       case 24:
-        return Efd1400Tests.test24();
+        return Efd1600Tests.testExercise24();
       case 25:
-        return Efd1400Tests.test25();
+        return Efd1600Tests.testExercise25();
       case 26:
-        return Efd1400Tests.test26();
+        return Efd1600Tests.testExercise26();
       case 27:
-        return Efd1400Tests.test27();
+        return Efd1600Tests.testExercise27();
       case 28:
-        return Efd1400Tests.test28();
+        return Efd1600Tests.testExercise28();
       case 29:
-        return Efd1400Tests.test29();
+        return Efd1600Tests.testExercise29();
       case 30:
-        return Efd1400Tests.test30();
+        return Efd1600Tests.testExercise30();
       case 31:
-        return Efd1400Tests.test31();
+        return Efd1600Tests.testExercise31();
       case 32:
-        return Efd1400Tests.test32();
+        return Efd1600Tests.testExercise32();
       case 33:
-        return Efd1400Tests.test33();
+        return Efd1600Tests.testExercise33();
       case 34:
-        return Efd1400Tests.test34();
+        return Efd1600Tests.testExercise34();
       case 35:
-        return Efd1400Tests.test35();
+        return Efd1600Tests.testExercise35();
       default:
         return TestResult(
           exerciseName: "Exercise $exerciseNumber",
@@ -81,20 +81,20 @@ class Efd1400Validator {
           total: 1,
           isPerfect: false,
           errors: ["Test untuk exercise ini belum diimplementasi"],
+          hints: ["Silakan hubungi guru untuk menambahkan test cases"],
         );
     }
   }
 
   static Map<int, TestResult> runAllTests() {
     final results = <int, TestResult>{};
-    final implemented = List<int>.generate(35, (i) => i + 1);
-    for (final n in implemented) {
-      results[n] = runTest(n);
+    for (int i = 1; i <= 35; i++) {
+      results[i] = runTest(i);
     }
     return results;
   }
 
-  static Efd1400OverallStats getOverallStats() {
+  static Efd1600OverallStats getOverallStats() {
     final all = runAllTests();
     final totalExercises = all.length;
     final perfect = all.values.where((r) => r.isPerfect).length;
@@ -109,7 +109,7 @@ class Efd1400Validator {
       passedTests += r.passed;
     }
 
-    return Efd1400OverallStats(
+    return Efd1600OverallStats(
       totalExercises: totalExercises,
       perfectExercises: perfect,
       partialExercises: partial,
@@ -120,7 +120,7 @@ class Efd1400Validator {
   }
 }
 
-class Efd1400OverallStats {
+class Efd1600OverallStats {
   final int totalExercises;
   final int perfectExercises;
   final int partialExercises;
@@ -128,7 +128,7 @@ class Efd1400OverallStats {
   final int totalTests;
   final int passedTests;
 
-  Efd1400OverallStats({
+  Efd1600OverallStats({
     required this.totalExercises,
     required this.perfectExercises,
     required this.partialExercises,

@@ -50,7 +50,7 @@ class Efd1500Tests {
       if (res == c.expected)
         passed++;
       else
-        errors.add("❌ ${c.input}");
+        errors.add(" ${c.input}");
     }
     return TestResult(
         exerciseName: "EFD1500 E1: Genap/Ganjil",
@@ -59,7 +59,7 @@ class Efd1500Tests {
         total: cases.length,
         isPerfect: passed == cases.length,
         errors: errors,
-        hints: ["💡 number % 2 == 0 ? 'Genap' : 'Ganjil'"]);
+        hints: ["number % 2 == 0 ? 'Genap' : 'Ganjil'"]);
   }
 
   static TestResult test2() {
@@ -71,9 +71,9 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Positif', Got: '$res'"],
+        errors: ok ? [] : ["Expected 'Positif', Got: '$res'"],
         hints: [
-          "💡 if (num > 0) 'Positif' else if (num < 0) 'Negatif' else 'Nol'"
+          "if (num > 0) 'Positif' else if (num < 0) 'Negatif' else 'Nol'"
         ]);
   }
 
@@ -86,8 +86,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Lebih kecil', Got: '$res'"],
-        hints: ["💡 if (num1 > num2) ... else if (num1 < num2) ... else ..."]);
+        errors: ok ? [] : ["Expected 'Lebih kecil', Got: '$res'"],
+        hints: ["if (num1 > num2) ... else if (num1 < num2) ... else ..."]);
   }
 
   static TestResult test4() {
@@ -99,8 +99,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Baik', Got: '$res'"],
-        hints: ["💡 score >= 75 → 'Baik'"]);
+        errors: ok ? [] : ["Expected 'Baik', Got: '$res'"],
+        hints: ["score >= 75 → 'Baik'"]);
   }
 
   static TestResult test5() {
@@ -112,8 +112,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Sedang', Got: '$res'"],
-        hints: ["💡 50..74 → 'Sedang'"]);
+        errors: ok ? [] : ["Expected 'Sedang', Got: '$res'"],
+        hints: ["50..74 → 'Sedang'"]);
   }
 
   static TestResult test6() {
@@ -125,8 +125,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Buruk', Got: '$res'"],
-        hints: ["💡 score < 50 → 'Buruk'"]);
+        errors: ok ? [] : ["Expected 'Buruk', Got: '$res'"],
+        hints: ["score < 50 → 'Buruk'"]);
   }
 
   static TestResult test7() {
@@ -138,8 +138,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Bilangan Bulat', Got: '$res'"],
-        hints: ["💡 value is int"]);
+        errors: ok ? [] : ["Expected 'Bilangan Bulat', Got: '$res'"],
+        hints: ["value is int"]);
   }
 
   static TestResult test8() {
@@ -151,8 +151,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Bilangan Positif', Got: '$res'"],
-        hints: ["💡 if (number < 0) ..., else if (number > 0) ... else ..."]);
+        errors: ok ? [] : ["Expected 'Bilangan Positif', Got: '$res'"],
+        hints: ["if (number < 0) ..., else if (number > 0) ... else ..."]);
   }
 
   static TestResult test9() {
@@ -164,8 +164,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 number1 > number2"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["number1 > number2"]);
   }
 
   static TestResult test10() {
@@ -177,8 +177,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected false"],
-        hints: ["💡 number1 < number2"]);
+        errors: ok ? [] : ["Expected false"],
+        hints: ["number1 < number2"]);
   }
 
   static TestResult test11() {
@@ -191,8 +191,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Sunday"],
-        hints: ["💡 date.weekday == DateTime.sunday"]);
+        errors: ok ? [] : ["Expected true for Sunday"],
+        hints: ["date.weekday == DateTime.sunday"]);
   }
 
   static TestResult test12() {
@@ -206,10 +206,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 27"],
-        hints: [
-          "💡 today.year - birthday.year (+adjust if belum ulang tahun)"
-        ]);
+        errors: ok ? [] : ["Expected 27"],
+        hints: ["today.year - birthday.year (+adjust if belum ulang tahun)"]);
   }
 
   static TestResult test13() {
@@ -221,8 +219,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 Bandingkan year, month, day"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["Bandingkan year, month, day"]);
   }
 
   static TestResult test14() {
@@ -234,8 +232,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Sunday"],
-        hints: ["💡 date.weekday == DateTime.sunday"]);
+        errors: ok ? [] : ["Expected true for Sunday"],
+        hints: ["date.weekday == DateTime.sunday"]);
   }
 
   static TestResult test15() {
@@ -247,8 +245,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Saturday"],
-        hints: ["💡 date.weekday == DateTime.saturday"]);
+        errors: ok ? [] : ["Expected true for Saturday"],
+        hints: ["date.weekday == DateTime.saturday"]);
   }
 
   static TestResult test16() {
@@ -260,8 +258,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Friday"],
-        hints: ["💡 date.weekday == DateTime.friday"]);
+        errors: ok ? [] : ["Expected true for Friday"],
+        hints: ["date.weekday == DateTime.friday"]);
   }
 
   static TestResult test17() {
@@ -273,8 +271,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Thursday"],
-        hints: ["💡 date.weekday == DateTime.thursday"]);
+        errors: ok ? [] : ["Expected true for Thursday"],
+        hints: ["date.weekday == DateTime.thursday"]);
   }
 
   static TestResult test18() {
@@ -286,8 +284,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Wednesday"],
-        hints: ["💡 date.weekday == DateTime.wednesday"]);
+        errors: ok ? [] : ["Expected true for Wednesday"],
+        hints: ["date.weekday == DateTime.wednesday"]);
   }
 
   static TestResult test19() {
@@ -299,8 +297,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Tuesday"],
-        hints: ["💡 date.weekday == DateTime.tuesday"]);
+        errors: ok ? [] : ["Expected true for Tuesday"],
+        hints: ["date.weekday == DateTime.tuesday"]);
   }
 
   static TestResult test20() {
@@ -312,8 +310,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true for Monday"],
-        hints: ["💡 date.weekday == DateTime.monday"]);
+        errors: ok ? [] : ["Expected true for Monday"],
+        hints: ["date.weekday == DateTime.monday"]);
   }
 
   static TestResult test21() {
@@ -325,8 +323,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.contains(3)"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["numbers.contains(3)"]);
   }
 
   static TestResult test22() {
@@ -338,8 +336,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.every((n) => n % 2 == 0)"]);
+        errors: ok ? [] : [" Expected true"],
+        hints: ["numbers.every((n) => n % 2 == 0)"]);
   }
 
   static TestResult test23() {
@@ -351,8 +349,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.any((n) => n > 5)"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["numbers.any((n) => n > 5)"]);
   }
 
   static TestResult test24() {
@@ -364,8 +362,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.any((n) => n < 0)"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["numbers.any((n) => n < 0)"]);
   }
 
   static TestResult test25() {
@@ -377,8 +375,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 Hitung ganjil dan genap, bandingkan"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["Hitung ganjil dan genap, bandingkan"]);
   }
 
   static TestResult test26() {
@@ -390,8 +388,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.reduce(max) == 5"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["numbers.reduce(max) == 5"]);
   }
 
   static TestResult test27() {
@@ -403,8 +401,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.reduce(min) == 1"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["numbers.reduce(min) == 1"]);
   }
 
   static TestResult test28() {
@@ -416,8 +414,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 numbers.length == 5"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["numbers.length == 5"]);
   }
 
   static TestResult test29() {
@@ -429,8 +427,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 Gunakan Set untuk cek duplikat"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["Gunakan Set untuk cek duplikat"]);
   }
 
   static TestResult test30() {
@@ -442,7 +440,7 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected 'Positif'"]);
+        errors: ok ? [] : [" Expected 'Positif'"]);
   }
 
   static TestResult test31() {
@@ -454,8 +452,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 num1 > 0 && num2 > 5"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["num1 > 0 && num2 > 5"]);
   }
 
   static TestResult test32() {
@@ -467,8 +465,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 num1 > 0 || num2 > 15"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["num1 > 0 || num2 > 15"]);
   }
 
   static TestResult test33() {
@@ -480,8 +478,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 num1 > 0 || num2 < 5"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["num1 > 0 || num2 < 5"]);
   }
 
   static TestResult test34() {
@@ -493,8 +491,8 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected false"],
-        hints: ["💡 num1 > 0 && num2 < 5"]);
+        errors: ok ? [] : ["Expected false"],
+        hints: [" num1 > 0 && num2 < 5"]);
   }
 
   static TestResult test35() {
@@ -506,7 +504,7 @@ class Efd1500Tests {
         passed: ok ? 1 : 0,
         total: 1,
         isPerfect: ok,
-        errors: ok ? [] : ["❌ Expected true"],
-        hints: ["💡 num1 < 0 || num2 > 5"]);
+        errors: ok ? [] : ["Expected true"],
+        hints: ["num1 < 0 || num2 > 5"]);
   }
 }

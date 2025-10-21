@@ -139,6 +139,10 @@ class Efd1300OverallStats {
 
   double get testPercentage =>
       totalTests > 0 ? (passedTests / totalTests) * 100 : 0.0;
+
+  double get exercisePercentage =>
+      totalExercises > 0 ? (perfectExercises / totalExercises) * 100 : 0.0;
+
   String get overallGrade {
     final p = testPercentage;
     if (p == 100) return "A+ (Perfect!)";

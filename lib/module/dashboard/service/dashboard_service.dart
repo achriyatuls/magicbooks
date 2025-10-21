@@ -28,7 +28,8 @@ class DashboardService {
     },
     {
       "label": "EFD1700 - Regex",
-      "page": const Efd1700RegexView(),
+      //"page": const Efd1700RegexView(),
+      "page": const Efd1700RegexViewGeneric(),
     },
     {
       "label": "EFW100 - Common",

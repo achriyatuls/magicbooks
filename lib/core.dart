@@ -5,6 +5,12 @@ it means you have to rename it to something more unique.
 fileCount: 160
 */
 export 'package:magicbook/core_package.dart';
+
+// Generic EFD System Exports
+export 'package:magicbook/shared/widget/efd_layout/efd_generic_view.dart';
+export 'package:magicbook/shared/model/efd_config.dart';
+export 'package:magicbook/shared/util/efd_adapter.dart';
+export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1700.dart';
 export 'package:magicbook/module/splash_screen/controller/splash_screen_controller.dart';
 export 'package:magicbook/module/splash_screen/view/splash_screen_view.dart';
 export 'package:magicbook/module/dashboard/controller/dashboard_controller.dart';
@@ -14,46 +20,70 @@ export 'package:magicbook/module/efb100_null_safety/controller/efb100_null_safet
 export 'package:magicbook/module/efb100_null_safety/view/efb100_null_safety_view.dart';
 export 'package:magicbook/module/efb100_null_safety/exercises/efb100_exercises.dart';
 export 'package:magicbook/module/efb100_null_safety/validator/efb100_validator.dart';
-export 'package:magicbook/module/efd1100_variable/controller/efd1100_variable_controller.dart';
+
+//module efd1100
 export 'package:magicbook/module/efd1100_variable/view/efd1100_variable_view.dart';
 export 'package:magicbook/module/efd1100_variable/exercises/efd1100_exercises.dart';
 export 'package:magicbook/module/efd1100_variable/validator/efd1100_validator.dart';
-export 'package:magicbook/module/efd1200_datetime/controller/efd1200_datetime_controller.dart';
+
+//module efd1200
 export 'package:magicbook/module/efd1200_datetime/view/efd1200_datetime_view.dart';
 export 'package:magicbook/module/efd1200_datetime/exercises/efd1200_exercises.dart';
 export 'package:magicbook/module/efd1200_datetime/validator/efd1200_validator.dart';
-export 'package:magicbook/module/efd1300_string/controller/efd1300_string_controller.dart';
+
+//module efd1300
 export 'package:magicbook/module/efd1300_string/view/efd1300_string_view.dart';
 export 'package:magicbook/module/efd1300_string/exercises/efd1300_exercises.dart';
 export 'package:magicbook/module/efd1300_string/validator/efd1300_validator.dart';
+
+//module efd1400
 export 'package:magicbook/module/efd1400_number/exercises/efd1400_exercises.dart';
 export 'package:magicbook/module/efd1400_number/validator/efd1400_validator.dart';
-export 'package:magicbook/module/efd1400_number/controller/efd1400_number_controller.dart';
 export 'package:magicbook/module/efd1400_number/view/efd1400_number_view.dart';
-export 'package:magicbook/module/efd1500_if_statement/controller/efd1500_if_statement_controller.dart';
+
+//module efd1500
 export 'package:magicbook/module/efd1500_if_statement/view/efd1500_if_statement_view.dart';
 export 'package:magicbook/module/efd1500_if_statement/exercises/efd1500_exercises.dart';
 export 'package:magicbook/module/efd1500_if_statement/validator/efd1500_validator.dart';
-export 'package:magicbook/module/efd1600_list_and_map/controller/efd1600_list_and_map_controller.dart';
+
+//module efd1600
+
 export 'package:magicbook/module/efd1600_list_and_map/view/efd1600_list_and_map_view.dart';
-export 'package:magicbook/module/efd1700_regex/controller/efd1700_regex_controller.dart';
+export 'package:magicbook/module/efd1600_list_and_map/exercises/efd1600_exercises.dart';
+export 'package:magicbook/module/efd1600_list_and_map/validator/efd1600_validator.dart';
+
+//module efd1700
 export 'package:magicbook/module/efd1700_regex/view/efd1700_regex_view.dart';
 export 'package:magicbook/module/efd1700_regex/exercises/efd1700_exercises.dart';
 export 'package:magicbook/module/efd1700_regex/validator/efd1700_validator.dart';
+
+//modul efd1800
 export 'package:magicbook/module/efd1800_async_function/controller/efd1800_async_function_controller.dart';
 export 'package:magicbook/module/efd1800_async_function/view/efd1800_async_function_view.dart';
 export 'package:magicbook/module/efd1800_product_detail/controller/efd1800_product_detail_controller.dart';
 export 'package:magicbook/module/efd1800_product_detail/view/efd1800_product_detail_view.dart';
+
+//modul efw100
 export 'package:magicbook/module/efw100_common_widget/controller/efw100_common_widget_controller.dart';
 export 'package:magicbook/module/efw100_common_widget/view/efw100_common_widget_view.dart';
+
+//modul efw200
 export 'package:magicbook/module/efw200_layout/controller/efw200_layout_controller.dart';
 export 'package:magicbook/module/efw200_layout/view/efw200_layout_view.dart';
+
+//modul efw300
 export 'package:magicbook/module/efw300_list/controller/efw300_list_controller.dart';
 export 'package:magicbook/module/efw300_list/view/efw300_list_view.dart';
+
+//modul efw301
 export 'package:magicbook/module/efw301_list/controller/efw301_list_controller.dart';
 export 'package:magicbook/module/efw301_list/view/efw301_list_view.dart';
+
+//modul efw400
 export 'package:magicbook/module/efw400_grid/controller/efw400_grid_controller.dart';
 export 'package:magicbook/module/efw400_grid/view/efw400_grid_view.dart';
+
+//model UI Card
 export 'package:magicbook/module/ui/ecart1/controller/ecart1_controller.dart';
 export 'package:magicbook/module/ui/ecart1/view/ecart1_view.dart';
 export 'package:magicbook/module/ui/ecart2/controller/ecart2_controller.dart';
@@ -183,11 +213,8 @@ export 'package:magicbook/state_util.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1500.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1200.dart';
 export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1400.dart';
-export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1700.dart';
 // Removed to avoid symbol conflicts with module-specific TestResult/OverallStats
 // Use direct import with alias instead: import 'package:magicbook/shared/model/test_result.dart' as shared;
-export 'package:magicbook/shared/model/efd_config.dart';
 export 'package:magicbook/shared/widget/efd_layout/efd_widgets.dart';
 export 'package:magicbook/shared/widget/efd_layout/efd_dialogs.dart';
-export 'package:magicbook/shared/widget/efd_layout/efd_generic_view.dart';
-export 'package:magicbook/shared/util/efd_adapter.dart';
+export 'package:magicbook/shared/widget/row_label/row_label_validated.dart';

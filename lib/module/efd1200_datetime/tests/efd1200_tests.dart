@@ -49,8 +49,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '2023-08-01', Got: '$res'"],
-      hints: ["💡 DateFormat('yyyy-MM-dd').format(date)"],
+      errors: ok ? [] : ["Expected '2023-08-01', Got: '$res'"],
+      hints: ["DateFormat('yyyy-MM-dd').format(date)"],
     );
   }
 
@@ -64,8 +64,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '2023-08-01 20:21', Got: '$res'"],
-      hints: ["💡 DateFormat('yyyy-MM-dd kk:mm').format(date)"],
+      errors: ok ? [] : ["Expected '2023-08-01 20:21', Got: '$res'"],
+      hints: ["DateFormat('yyyy-MM-dd kk:mm').format(date)"],
     );
   }
 
@@ -79,8 +79,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 15, Got: $res"],
-      hints: ["💡 date.day"],
+      errors: ok ? [] : ["Expected 15, Got: $res"],
+      hints: ["date.day"],
     );
   }
 
@@ -94,8 +94,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 8, Got: $res"],
-      hints: ["💡 date.month"],
+      errors: ok ? [] : ["Expected 8, Got: $res"],
+      hints: ["date.month"],
     );
   }
 
@@ -109,8 +109,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 2023, Got: $res"],
-      hints: ["💡 date.year"],
+      errors: ok ? [] : ["Expected 2023, Got: $res"],
+      hints: ["date.year"],
     );
   }
 
@@ -124,8 +124,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '15:30', Got: '$res'"],
-      hints: ["💡 DateFormat('kk:mm').format(date)"],
+      errors: ok ? [] : ["Expected '15:30', Got: '$res'"],
+      hints: ["DateFormat('kk:mm').format(date)"],
     );
   }
 
@@ -140,8 +140,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '$expected', Got: '$res'"],
-      hints: ["💡 DateFormat('yyyy-MM-dd').format(date)"],
+      errors: ok ? [] : ["Expected '$expected', Got: '$res'"],
+      hints: ["DateFormat('yyyy-MM-dd').format(date)"],
     );
   }
 
@@ -156,8 +156,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected format 'kk:mm:ss', Got: '$res'"],
-      hints: ["💡 DateFormat('kk:mm:ss').format(date)"],
+      errors: ok ? [] : ["Expected format 'kk:mm:ss', Got: '$res'"],
+      hints: ["DateFormat('kk:mm:ss').format(date)"],
     );
   }
 
@@ -172,8 +172,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 31, Got: $res"],
-      hints: ["💡 endAt.difference(startAt).inDays"],
+      errors: ok ? [] : ["Expected 31, Got: $res"],
+      hints: ["endAt.difference(startAt).inDays"],
     );
   }
 
@@ -187,8 +187,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Tuesday, 1 Aug 2023', Got: '$res'"],
-      hints: ["💡 DateFormat('EEEE, d MMM y').format(date)"],
+      errors: ok ? [] : ["Expected 'Tuesday, 1 Aug 2023', Got: '$res'"],
+      hints: ["DateFormat('EEEE, d MMM y').format(date)"],
     );
   }
 
@@ -202,8 +202,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected day=6, month=8"],
-      hints: ["💡 date.add(Duration(days: days))"],
+      errors: ok ? [] : ["Expected day=6, month=8"],
+      hints: ["date.add(Duration(days: days))"],
     );
   }
 
@@ -217,8 +217,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected day=5, month=8"],
-      hints: ["💡 date.subtract(Duration(days: days))"],
+      errors: ok ? [] : ["Expected day=5, month=8"],
+      hints: ["date.subtract(Duration(days: days))"],
     );
   }
 
@@ -231,8 +231,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Failed to parse '2023-08-01'"],
-      hints: ["💡 DateTime.parse(dateStr)"],
+      errors: ok ? [] : ["Failed to parse '2023-08-01'"],
+      hints: ["DateTime.parse(dateStr)"],
     );
   }
 
@@ -246,8 +246,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Tuesday', Got: '$res'"],
-      hints: ["💡 DateFormat('EEEE').format(date)"],
+      errors: ok ? [] : ["Expected 'Tuesday', Got: '$res'"],
+      hints: ["DateFormat('EEEE').format(date)"],
     );
   }
 
@@ -261,8 +261,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'August', Got: '$res'"],
-      hints: ["💡 DateFormat('MMMM').format(date)"],
+      errors: ok ? [] : ["Expected 'August', Got: '$res'"],
+      hints: ["DateFormat('MMMM').format(date)"],
     );
   }
 
@@ -276,8 +276,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected '01/08/2023', Got: '$res'"],
-      hints: ["💡 DateFormat('dd/MM/yyyy').format(date)"],
+      errors: ok ? [] : [" Expected '01/08/2023', Got: '$res'"],
+      hints: ["DateFormat('dd/MM/yyyy').format(date)"],
     );
   }
 
@@ -291,8 +291,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 15, Got: $res"],
-      hints: ["💡 date.hour"],
+      errors: ok ? [] : ["Expected 15, Got: $res"],
+      hints: ["date.hour"],
     );
   }
 
@@ -306,8 +306,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 30, Got: $res"],
-      hints: ["💡 date.minute"],
+      errors: ok ? [] : ["Expected 30, Got: $res"],
+      hints: ["date.minute"],
     );
   }
 
@@ -321,8 +321,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 45, Got: $res"],
-      hints: ["💡 date.second"],
+      errors: ok ? [] : ["Expected 45, Got: $res"],
+      hints: ["date.second"],
     );
   }
 
@@ -336,8 +336,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true for today's date"],
-      hints: ["💡 Bandingkan year, month, day dengan DateTime.now()"],
+      errors: ok ? [] : ["Expected true for today's date"],
+      hints: ["Bandingkan year, month, day dengan DateTime.now()"],
     );
   }
 
@@ -351,8 +351,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true for past date"],
-      hints: ["💡 date.isBefore(DateTime.now())"],
+      errors: ok ? [] : ["Expected true for past date"],
+      hints: ["date.isBefore(DateTime.now())"],
     );
   }
 
@@ -366,8 +366,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true for future date"],
-      hints: ["💡 date.isAfter(DateTime.now())"],
+      errors: ok ? [] : ["Expected true for future date"],
+      hints: ["date.isAfter(DateTime.now())"],
     );
   }
 
@@ -382,8 +382,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 5, Got: $res"],
-      hints: ["💡 endAt.difference(startAt).inHours"],
+      errors: ok ? [] : ["Expected 5, Got: $res"],
+      hints: ["endAt.difference(startAt).inHours"],
     );
   }
 
@@ -398,8 +398,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 30, Got: $res"],
-      hints: ["💡 endAt.difference(startAt).inMinutes"],
+      errors: ok ? [] : ["Expected 30, Got: $res"],
+      hints: ["endAt.difference(startAt).inMinutes"],
     );
   }
 
@@ -413,8 +413,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 'Aug 1, 2023', Got: '$res'"],
-      hints: ["💡 DateFormat('MMM d, yyyy').format(date)"],
+      errors: ok ? [] : ["Expected 'Aug 1, 2023', Got: '$res'"],
+      hints: ["DateFormat('MMM d, yyyy').format(date)"],
     );
   }
 
@@ -428,8 +428,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected hour=13"],
-      hints: ["💡 date.add(Duration(hours: hours))"],
+      errors: ok ? [] : [" Expected hour=13"],
+      hints: ["date.add(Duration(hours: hours))"],
     );
   }
 
@@ -443,8 +443,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected hour=7"],
-      hints: ["💡 date.subtract(Duration(hours: hours))"],
+      errors: ok ? [] : ["Expected hour=7"],
+      hints: ["date.subtract(Duration(hours: hours))"],
     );
   }
 
@@ -458,8 +458,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Milliseconds mismatch"],
-      hints: ["💡 date.millisecondsSinceEpoch"],
+      errors: ok ? [] : ["Milliseconds mismatch"],
+      hints: ["date.millisecondsSinceEpoch"],
     );
   }
 
@@ -473,8 +473,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Failed to create date from milliseconds"],
-      hints: ["💡 DateTime.fromMillisecondsSinceEpoch(milliseconds)"],
+      errors: ok ? [] : ["Failed to create date from milliseconds"],
+      hints: ["DateTime.fromMillisecondsSinceEpoch(milliseconds)"],
     );
   }
 
@@ -488,8 +488,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected 2 (Tuesday), Got: $res"],
-      hints: ["💡 date.weekday"],
+      errors: ok ? [] : ["Expected 2 (Tuesday), Got: $res"],
+      hints: ["date.weekday"],
     );
   }
 
@@ -504,8 +504,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected true for same day"],
-      hints: ["💡 Bandingkan year, month, day"],
+      errors: ok ? [] : ["Expected true for same day"],
+      hints: ["Bandingkan year, month, day"],
     );
   }
 
@@ -519,8 +519,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected day=1, month=8"],
-      hints: ["💡 DateTime(date.year, date.month, 1)"],
+      errors: ok ? [] : ["Expected day=1, month=8"],
+      hints: ["DateTime(date.year, date.month, 1)"],
     );
   }
 
@@ -534,8 +534,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected day=31, month=8"],
-      hints: ["💡 DateTime(date.year, date.month + 1, 0)"],
+      errors: ok ? [] : ["Expected day=31, month=8"],
+      hints: ["DateTime(date.year, date.month + 1, 0)"],
     );
   }
 
@@ -550,8 +550,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ Expected non-empty relative time string"],
-      hints: ["💡 Hitung selisih dengan DateTime.now()"],
+      errors: ok ? [] : ["Expected non-empty relative time string"],
+      hints: ["Hitung selisih dengan DateTime.now()"],
     );
   }
 
@@ -565,8 +565,8 @@ class Efd1200Tests {
       passed: ok ? 1 : 0,
       total: 1,
       isPerfect: ok,
-      errors: ok ? [] : ["❌ 2020 is leap, 2021 is not"],
-      hints: ["💡 (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)"],
+      errors: ok ? [] : ["2020 is leap, 2021 is not"],
+      hints: ["(year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)"],
     );
   }
 }

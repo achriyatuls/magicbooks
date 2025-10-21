@@ -10,7 +10,7 @@ class DashboardView extends StatefulWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("🎮 MagicBook - Learning Hub"),
+        title: const Text(" MagicBook - Learning Hub"),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         actions: [
