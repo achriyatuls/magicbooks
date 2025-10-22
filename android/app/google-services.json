@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "616236847375",
+    "project_id": "magicbook-1db76",
+    "storage_bucket": "magicbook-1db76.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616236847375:android:db7d90a507ecce2e45ee7a",
+        "android_client_info": {
+          "package_name": "com.example.magicbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616236847375-b3bifghvbshm9opcbq05tem981h0g1to.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.magicbook",
+            "certificate_hash": "33fa44cc5280e4fbc583c12643737f79c95deaa6"
+          }
+        },
+        {
+          "client_id": "616236847375-6s1ba9u4v6hekj41906skr1opt1qaiqu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7JdZ8FG71M9Syzp1VEDp78WDUjQ4uwEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616236847375-6s1ba9u4v6hekj41906skr1opt1qaiqu.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "616236847375-447rclt9ifkgbueaavfqpj2o4imp9dja.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.magicBook"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

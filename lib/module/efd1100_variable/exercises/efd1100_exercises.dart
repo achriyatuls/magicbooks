@@ -58,6 +58,8 @@ class Efd1100Exercises {
     // TULIS KODE DI SINI:
     // Contoh: price = double.parse(text);
 
+    price = double.parse(text);
+
     return price; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -77,6 +79,8 @@ class Efd1100Exercises {
     double? price;
 
     // TULIS KODE DI SINI:
+    text = text.replaceAll(RegExp(r'[^\d.]'), '');
+    price = double.tryParse(text) ?? 0.0;
 
     return price; // ← JANGAN UBAH BARIS INI!
   }
