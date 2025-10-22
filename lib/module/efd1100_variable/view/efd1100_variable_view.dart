@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import 'package:magicbook/shared/widget/row_label/row_label_validated.dart';
 
 class Efd1100VariableView extends StatelessWidget {
   const Efd1100VariableView({Key? key}) : super(key: key);

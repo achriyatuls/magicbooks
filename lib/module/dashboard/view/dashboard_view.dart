@@ -18,7 +18,7 @@ class DashboardView extends StatefulWidget {
           GestureDetector(
             onTap: () => controller.showPhotoPickerDialog(),
             child: Container(
-              margin: const EdgeInsets.only(right: 16),
+              margin: const EdgeInsets.only(right: 20),
               child: Stack(
                 children: [
                   CircleAvatar(

@@ -92,6 +92,7 @@ class _EfdGenericViewState extends State<EfdGenericView> {
   }
 
   /// Floating Action Button untuk quick access ke statistics
+  /// di desain untuk button submit ke firebase
   Widget _buildFAB(EfdModuleConfig config) {
     return FloatingActionButton.extended(
       onPressed: () => EfdDialogs.showOverallStats(context, config),

@@ -217,4 +217,9 @@ export 'package:magicbook/shared/widget/row_label/row_label_validated_efd1400.da
 // Use direct import with alias instead: import 'package:magicbook/shared/model/test_result.dart' as shared;
 export 'package:magicbook/shared/widget/efd_layout/efd_widgets.dart';
 export 'package:magicbook/shared/widget/efd_layout/efd_dialogs.dart';
-export 'package:magicbook/shared/widget/row_label/row_label_validated.dart';
+// Exercise Submission System Exports
+export 'package:magicbook/shared/model/exercise_submission.dart';
+export 'package:magicbook/shared/service/exercise_submission_service.dart';
+export 'package:magicbook/shared/util/exercise_data_collector.dart';
+export 'package:magicbook/shared/widget/dialog/submit_exercise_dialog.dart';
+export 'package:magicbook/shared/widget/fab/submit_exercise_fab.dart';
