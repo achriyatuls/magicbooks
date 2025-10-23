@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
 
@@ -27,12 +26,16 @@ class DashboardView extends StatefulWidget {
                     child: CircleAvatar(
                       radius: 18,
                       backgroundColor: Colors.purple.shade300,
-                      backgroundImage: controller.profilePhoto != null
-                          ? FileImage(controller.profilePhoto!)
+                      backgroundImage: controller.userData?.photoURL != null
+                          ? NetworkImage(controller.userData!.photoURL!)
+                              as ImageProvider
                           : null,
-                      child: controller.profilePhoto == null
+                      child: controller.userData?.photoURL == null
                           ? Text(
-                              '${controller.userLevel}',
+                              controller.userData?.nama
+                                      .substring(0, 1)
+                                      .toUpperCase() ??
+                                  'U',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

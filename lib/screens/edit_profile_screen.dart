@@ -3,6 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../shared/service/auth_service.dart';
 import '../shared/model/user_model.dart';
 import '../shared/widget/reusable_widgets.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:path/path.dart' as path;
+import 'package:firebase_storage/firebase_storage.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -22,6 +27,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   bool _isLoading = false;
   UserModel? _userData;
+  File? _selectedImage; // menyimpan file gambar dari galeri
+  final ImagePicker _picker = ImagePicker(); // inisialisasi image picker
+  String? _uploadedImageUrl; // menyimpan URL foto yang sudah diupload
 
   @override
   void initState() {
@@ -54,6 +62,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             _jurusanController.text = userData.jurusan;
             _kelasController.text = userData.kelas;
             _absenController.text = userData.absen;
+            _uploadedImageUrl = userData.photoURL;
           });
         }
       }
@@ -63,6 +72,51 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  Future<void> pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+
+      // Upload foto ke Firebase Storage
+      final imageUrl = await uploadImageToFirebase(pickedFile);
+      if (imageUrl != null) {
+        setState(() {
+          _uploadedImageUrl = imageUrl;
+        });
+
+        // Simpan URL ke Firestore dengan user ID yang benar
+        final user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .update({'photoURL': imageUrl});
+        }
+      }
+    }
+  }
+
+  Future<String?> uploadImageToFirebase(XFile imageFile) async {
+    try {
+      // 1️ Buat nama file unik
+      final fileName = path.basename(imageFile.path);
+      final destination = 'user_photos/$fileName';
+
+      // 2️ Upload ke Firebase Storage
+      final ref = FirebaseStorage.instance.ref(destination);
+      await ref.putFile(File(imageFile.path));
+
+      // 3️ Ambil URL download
+      final downloadUrl = await ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print('Upload gagal: $e');
+      return null;
     }
   }
 
@@ -107,20 +161,52 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           backgroundColor: Colors.white,
                           child: Column(
                             children: [
-                              CircleAvatar(
-                                radius: 60,
-                                backgroundColor: const Color(0xFFAD88C6),
-                                child: Text(
-                                  _userData?.nama
-                                          .substring(0, 1)
-                                          .toUpperCase() ??
-                                      'U',
-                                  style: const TextStyle(
-                                    fontSize: 40,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                              Stack(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 60,
+                                    backgroundColor: const Color(0xFFAD88C6),
+                                    backgroundImage: _selectedImage != null
+                                        ? FileImage(_selectedImage!)
+                                        : _uploadedImageUrl != null
+                                            ? NetworkImage(_uploadedImageUrl!)
+                                                as ImageProvider
+                                            : null,
+                                    child: _selectedImage == null &&
+                                            _uploadedImageUrl == null
+                                        ? Text(
+                                            _userData?.nama
+                                                    .substring(0, 1)
+                                                    .toUpperCase() ??
+                                                'U',
+                                            style: const TextStyle(
+                                              fontSize: 40,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : null,
                                   ),
-                                ),
+                                  Positioned(
+                                    bottom: 0,
+                                    right: 0,
+                                    child: InkWell(
+                                      onTap: pickImage,
+                                      child: Container(
+                                        decoration: const BoxDecoration(
+                                          color: Color(0xFFAD88C6),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        padding: const EdgeInsets.all(8),
+                                        child: const Icon(
+                                          Icons.camera_alt,
+                                          color: Colors.white,
+                                          size: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                               const SizedBox(height: 16),
                               Text(
@@ -326,6 +412,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           jurusan: _jurusanController.text.trim(),
           kelas: _kelasController.text.trim(),
           absen: _absenController.text.trim(),
+          photoURL: _uploadedImageUrl,
         );
 
         final success = await _authService.updateUserData(updatedUser);

@@ -7,10 +7,8 @@ import '../shared/service/module_exercise_service.dart';
 import '../shared/service/module_service.dart';
 import '../shared/model/user_model.dart';
 import '../shared/model/exercise_progress_model.dart';
-import '../shared/model/achievement_model.dart';
 import '../shared/widget/reusable_widgets.dart';
 import 'login_screen.dart';
-import 'exercise_detail_screen.dart';
 import 'module_exercises_screen.dart';
 import 'edit_profile_screen.dart';
 import 'achievement_screen.dart';
@@ -25,7 +23,6 @@ class MainNavigationScreen extends StatefulWidget {
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final AuthService _authService = AuthService();
   final ExerciseProgressService _progressService = ExerciseProgressService();
-  final ModuleService _moduleService = ModuleService();
 
   int _currentIndex = 0;
   UserModel? _userData;
@@ -790,14 +787,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                       CircleAvatar(
                         radius: 50,
                         backgroundColor: const Color(0xFFAD88C6),
-                        child: Text(
-                          _userData?.nama.substring(0, 1).toUpperCase() ?? 'U',
-                          style: const TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                        backgroundImage: _userData?.photoURL != null
+                            ? NetworkImage(_userData!.photoURL!)
+                                as ImageProvider
+                            : null,
+                        child: _userData?.photoURL == null
+                            ? Text(
+                                _userData?.nama.substring(0, 1).toUpperCase() ??
+                                    'U',
+                                style: const TextStyle(
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : null,
                       ),
                       const SizedBox(height: 16),
                       Text(
@@ -979,8 +983,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   Map<String, dynamic> _prepareUserProgressData() {
-    final totalExercises =
-        _allModules.fold(0, (sum, module) => sum + module.totalExercises);
     final completedExercises = _moduleProgressList.fold(
         0, (sum, progress) => sum + progress.completedExercises);
 

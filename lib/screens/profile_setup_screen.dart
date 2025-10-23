@@ -22,6 +22,7 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
   final _absenController = TextEditingController();
 
   bool _isLoading = false;
+  UserModel? _userData;
 
   @override
   void initState() {
@@ -43,6 +44,9 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
     if (user != null) {
       final userData = await _authService.getUserData(user.uid);
       if (userData != null) {
+        setState(() {
+          _userData = userData;
+        });
         _namaController.text = userData.nama;
         _jurusanController.text = userData.jurusan;
         _kelasController.text = userData.kelas;
@@ -103,6 +107,53 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                   ),
 
                   const SizedBox(height: 40),
+
+                  // Profile Picture Section
+                  ReusableCard(
+                    backgroundColor: Colors.white,
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundColor: const Color(0xFFAD88C6),
+                          backgroundImage: _userData?.photoURL != null
+                              ? NetworkImage(_userData!.photoURL!)
+                                  as ImageProvider
+                              : null,
+                          child: _userData?.photoURL == null
+                              ? Text(
+                                  _userData?.nama
+                                          .substring(0, 1)
+                                          .toUpperCase() ??
+                                      'U',
+                                  style: const TextStyle(
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : null,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          _userData?.nama ?? 'User',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          _userData?.email ?? '',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
 
                   // Form Fields
                   ReusableCard(

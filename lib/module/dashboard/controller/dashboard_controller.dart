@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:magicbook/state_util.dart';
 import '../service/dashboard_service.dart';
 import '../view/dashboard_view.dart';
+import '../../../shared/service/auth_service.dart';
+import '../../../shared/model/user_model.dart';
 
 class DashboardController extends State<DashboardView>
     implements MvcController {
@@ -22,6 +25,13 @@ class DashboardController extends State<DashboardView>
   // Profile Photo
   File? profilePhoto;
   final ImagePicker _picker = ImagePicker();
+
+  // User Data untuk foto dari Google account
+  UserModel? _userData;
+  final AuthService _authService = AuthService();
+
+  // Getter untuk mengakses user data dari view
+  UserModel? get userData => _userData;
 
   List<Map<String, dynamic>> achievements = [
     {
@@ -60,6 +70,7 @@ class DashboardController extends State<DashboardView>
   void initState() {
     instance = this;
     _loadUserProgress();
+    _loadUserData();
     super.initState();
   }
 
@@ -95,6 +106,23 @@ class DashboardController extends State<DashboardView>
 
     // Update achievements berdasarkan progress
     _updateAchievements();
+  }
+
+  // Method untuk load user data dari Google account
+  Future<void> _loadUserData() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final userData = await _authService.getUserData(user.uid);
+        if (userData != null) {
+          setState(() {
+            _userData = userData;
+          });
+        }
+      }
+    } catch (e) {
+      print('Error loading user data: $e');
+    }
   }
 
   void _updateAchievements() {
