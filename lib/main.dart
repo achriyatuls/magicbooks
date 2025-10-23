@@ -77,10 +77,10 @@ class _AuthWrapperState extends State<AuthWrapper> {
             ),
           );
         }
-        
+
         if (snapshot.hasData) {
           final userId = snapshot.data!.uid;
-          
+
           // Only check profile if user changed or we haven't checked yet
           if (_currentUserId != userId && !_isCheckingProfile) {
             _currentUserId = userId;
@@ -88,7 +88,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
               _checkProfileAndNavigate(userId);
             });
           }
-          
+
           return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
@@ -104,14 +104,14 @@ class _AuthWrapperState extends State<AuthWrapper> {
 
   Future<void> _checkProfileAndNavigate(String uid) async {
     if (_isCheckingProfile) return;
-    
+
     setState(() {
       _isCheckingProfile = true;
     });
 
     try {
       final isProfileComplete = await _authService.isUserProfileComplete(uid);
-      
+
       if (mounted) {
         if (isProfileComplete) {
           Navigator.of(context).pushReplacement(

@@ -14,12 +14,12 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
-  
+
   final _namaController = TextEditingController();
   final _jurusanController = TextEditingController();
   final _kelasController = TextEditingController();
   final _absenController = TextEditingController();
-  
+
   bool _isLoading = false;
   UserModel? _userData;
 
@@ -111,7 +111,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 radius: 60,
                                 backgroundColor: const Color(0xFFAD88C6),
                                 child: Text(
-                                  _userData?.nama.substring(0, 1).toUpperCase() ?? 'U',
+                                  _userData?.nama
+                                          .substring(0, 1)
+                                          .toUpperCase() ??
+                                      'U',
                                   style: const TextStyle(
                                     fontSize: 40,
                                     fontWeight: FontWeight.bold,
@@ -122,24 +125,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               const SizedBox(height: 16),
                               Text(
                                 'Foto Profil',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 'Foto profil menggunakan avatar berdasarkan nama',
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.grey[600],
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                      color: Colors.grey[600],
+                                    ),
                                 textAlign: TextAlign.center,
                               ),
                             ],
                           ),
                         ),
-                        
+
                         const SizedBox(height: 24),
-                        
+
                         // Form Fields
                         ReusableCard(
                           backgroundColor: Colors.white,
@@ -148,12 +157,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             children: [
                               Text(
                                 'Informasi Profil',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
                               const SizedBox(height: 16),
-                              
                               ReusableTextField(
                                 label: 'Nama Lengkap',
                                 controller: _namaController,
@@ -165,9 +176,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 },
                                 prefixIcon: const Icon(Icons.person),
                               ),
-                              
                               const SizedBox(height: 16),
-                              
                               ReusableTextField(
                                 label: 'Jurusan',
                                 controller: _jurusanController,
@@ -179,9 +188,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 },
                                 prefixIcon: const Icon(Icons.school),
                               ),
-                              
                               const SizedBox(height: 16),
-                              
                               ReusableTextField(
                                 label: 'Kelas',
                                 controller: _kelasController,
@@ -193,9 +200,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 },
                                 prefixIcon: const Icon(Icons.class_),
                               ),
-                              
                               const SizedBox(height: 16),
-                              
                               ReusableTextField(
                                 label: 'Nomor Absen',
                                 controller: _absenController,
@@ -211,9 +216,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ],
                           ),
                         ),
-                        
+
                         const SizedBox(height: 24),
-                        
+
                         // Account Information
                         ReusableCard(
                           backgroundColor: Colors.white,
@@ -222,21 +227,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             children: [
                               Text(
                                 'Informasi Akun',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                               ),
                               const SizedBox(height: 16),
-                              
                               _buildInfoRow('Email', _userData?.email ?? '-'),
-                              _buildInfoRow('Bergabung', _formatDate(_userData?.createdAt)),
-                              _buildInfoRow('Terakhir Update', _formatDate(_userData?.updatedAt)),
+                              _buildInfoRow('Bergabung',
+                                  _formatDate(_userData?.createdAt)),
+                              _buildInfoRow('Terakhir Update',
+                                  _formatDate(_userData?.updatedAt)),
                             ],
                           ),
                         ),
-                        
+
                         const SizedBox(height: 32),
-                        
+
                         // Action Buttons
                         Row(
                           children: [
@@ -251,7 +260,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: ReusableButton(
-                                text: 'Simpan Perubahan',
+                                text: 'Simpan \nPerubahan',
                                 isLoading: _isLoading,
                                 onPressed: _saveProfile,
                                 icon: Icons.save,
@@ -279,9 +288,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
-              ),
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey[600],
+                  ),
             ),
           ),
           Expanded(
@@ -320,7 +329,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         );
 
         final success = await _authService.updateUserData(updatedUser);
-        
+
         if (success && mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(

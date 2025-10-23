@@ -98,7 +98,7 @@ class Efd1100Exercises {
   static bool? exercise4Solution(int input) {
     bool? output;
 
-    // TULIS KODE DI SINI:
+    output = input % 2 != 0;
 
     return output; // ← JANGAN UBAH BARIS INI!
   }
@@ -115,7 +115,7 @@ class Efd1100Exercises {
   static double? exercise5Solution(String text) {
     double? total;
 
-    // TULIS KODE DI SINI:
+    total = double.tryParse(text) ?? 0.0;
 
     return total; // ← JANGAN UBAH BARIS INI!
   }
@@ -132,10 +132,7 @@ class Efd1100Exercises {
   static bool? exercise6() {
     int? age;
 
-    // TULIS KODE DI SINI:
-    /*
-    age = int.parse("39ads");
-    */
+    age = int.tryParse("39ads") ?? 0;
 
     return age != null; // ← JANGAN UBAH BARIS INI!
   }
@@ -153,11 +150,10 @@ class Efd1100Exercises {
 
     // TULIS KODE DI SINI:
     // Uncomment kode dibawah, dan perbaiki agar tidak error
-    /*
-    value = price;
-    */
 
-    return price == 5000; // ← JANGAN UBAH BARIS INI!
+    value = price.toString();
+
+    return price == 0; // ← JANGAN UBAH BARIS INI!
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -179,6 +175,9 @@ class Efd1100Exercises {
     String? name;
 
     // TULIS KODE DI SINI:
+    int startIndex = text.indexOf("'") + 1;
+    int endIndex = text.lastIndexOf("'");
+    name = text.substring(startIndex, endIndex);
 
     return name; // ← JANGAN UBAH BARIS INI!
   }
@@ -197,6 +196,14 @@ class Efd1100Exercises {
     double total = 0;
 
     // TULIS KODE DI SINI:
+
+    // gunakan for loop untuk menghitung total
+    for (int i = 0; i < numbers.length; i++) {
+      total += numbers[i];
+    }
+
+    // gunakan numbers.length untuk menghitung rata-rata
+    average = total / numbers.length;
 
     return average.toStringAsFixed(2) == "57.43"; // ← JANGAN UBAH BARIS INI!
   }

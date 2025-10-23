@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../shared/widget/reusable_widgets.dart';
-import '../shared/service/module_service.dart';
 import '../shared/service/module_exercise_service.dart';
 import '../shared/service/exercise_progress_service.dart';
 import 'exercise_detail_screen.dart';
@@ -26,6 +25,7 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
   List<ExerciseInfo> _exercises = [];
   Map<String, bool> _exerciseStatus = {};
   bool _isLoading = true;
+  bool _isSaving = false; // Flag untuk mencegah multiple saves
 
   @override
   void initState() {
@@ -297,11 +297,12 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                         color: Colors.transparent,
                       ),
                       child: ReusableButton(
-                        text: '💾 Simpan Progress',
-                        onPressed: _saveAllProgress,
-                        backgroundColor: Colors.green,
+                        text: _isSaving ? ' Menyimpan...' : 'Simpan Progress',
+                        onPressed: _isSaving ? null : _saveAllProgress,
+                        backgroundColor: _isSaving ? Colors.grey : Colors.green,
                         textColor: Colors.white,
-                        icon: Icons.save_alt,
+                        icon:
+                            _isSaving ? Icons.hourglass_empty : Icons.save_alt,
                       ),
                     ),
                   ],
@@ -501,6 +502,19 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
 
   // Save all progress to Firestore
   void _saveAllProgress() async {
+    if (_isSaving) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('⏳ Sedang menyimpan, tunggu sebentar...'),
+          backgroundColor: Colors.orange,
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    _isSaving = true;
+
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (user == null) {
@@ -513,6 +527,22 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
         return;
       }
 
+      // Show loading dialog
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Menyimpan progress...'),
+            ],
+          ),
+        ),
+      );
+
       // Refresh status for all exercises
       final updatedStatus =
           ModuleExerciseService.getExerciseStatus(widget.moduleId);
@@ -521,30 +551,25 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
         _exerciseStatus = updatedStatus;
       });
 
-      int savedCount = 0;
-      int totalCount = _exercises.length;
+      // Get completed exercises
+      final completedExercises = _exercises
+          .where((exercise) => updatedStatus[exercise.id] == true)
+          .map((exercise) => exercise.id)
+          .toList();
 
-      // Save all completed exercises
-      for (var exercise in _exercises) {
-        final isCompleted = updatedStatus[exercise.id] == true;
-        if (isCompleted) {
-          try {
-            await ExerciseProgressService.markExerciseCompleted(user.uid,
-                exercise.id, 100 // Perfect score for completed exercise
-                );
-            savedCount++;
-          } catch (e) {
-            print('Error saving exercise ${exercise.id}: $e');
-          }
-        }
+      if (completedExercises.isNotEmpty) {
+        // Use batch write method
+        await ExerciseProgressService.markMultipleExercisesCompleted(
+            user.uid, completedExercises, 100);
       }
+
+      Navigator.pop(context); // Close loading dialog
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-              '💾 Progress tersimpan! $savedCount/$totalCount exercises disimpan ke Firestore'),
-          backgroundColor: savedCount > 0 ? Colors.green : Colors.orange,
-          duration: const Duration(seconds: 3),
+          content: Text('✅ ${completedExercises.length} exercises tersimpan!'),
+          backgroundColor: Colors.green,
+          duration: Duration(seconds: 3),
         ),
       );
 
@@ -553,13 +578,16 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
         widget.onProgressUpdated!();
       }
     } catch (e) {
+      Navigator.pop(context); // Close loading dialog if still open
       print('Error saving all progress: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error saving progress: $e'),
+          content: Text('❌ Error saving progress: $e'),
           backgroundColor: Colors.red,
         ),
       );
+    } finally {
+      _isSaving = false;
     }
   }
 

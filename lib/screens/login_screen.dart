@@ -25,8 +25,11 @@ class _LoginScreenState extends State<LoginScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFFE1AFD1),
-              Color(0xFFAD88C6),
+              // Color(0xFFE1AFD1),
+              // Color(0xFFAD88C6),
+
+              Color(0xFFE1AFD1), // Ungu gelap
+              Color(0xFF9D4EDD), // Ungu terang
             ],
           ),
         ),
@@ -122,13 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
     try {
       final userCredential = await _authService.signInWithGoogle();
-      
+
       if (userCredential != null && mounted) {
         // Check if user profile is complete (nama, jurusan, kelas, absen)
         final isProfileComplete = await _authService.isUserProfileComplete(
           userCredential.user!.uid,
         );
-        
+
         if (isProfileComplete) {
           // Profile complete - go to dashboard
           Navigator.of(context).pushReplacement(
