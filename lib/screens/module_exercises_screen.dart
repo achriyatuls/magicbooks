@@ -451,8 +451,8 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(isCompleted
-            ? '✅ ${exercise.title} berhasil dikerjakan!'
-            : '❌ ${exercise.title} belum selesai. Silakan periksa kode Anda.'),
+            ? '${exercise.title} berhasil dikerjakan!'
+            : '${exercise.title} belum selesai. Silakan periksa kode Anda.'),
         backgroundColor: isCompleted ? Colors.green : Colors.orange,
         duration: const Duration(seconds: 2),
       ),
@@ -582,7 +582,7 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
       print('Error saving all progress: $e');
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('❌ Error saving progress: $e'),
+          content: Text('Error saving progress: $e'),
           backgroundColor: Colors.red,
         ),
       );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../shared/widget/reusable_widgets.dart';
+import '../module/efw100_common_widget/validator/efw100_validator.dart';
 
 class ExerciseDetailScreen extends StatefulWidget {
   final String exerciseId;
@@ -60,6 +61,52 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Debug Info Card (only for EFW100)
+                if (widget.moduleId == 'EFW100') ...[
+                  ReusableCard(
+                    backgroundColor: Colors.yellow[100],
+                    margin: const EdgeInsets.all(
+                        8.0), // ✅ Tambahkan margin eksplisit
+                    child: Column(
+                      children: [
+                        Text(
+                          'Debug Info',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.orange[800],
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Builder(
+                          builder: (context) {
+                            // Get exercise number from exerciseId
+                            int exerciseNumber = _getExerciseNumber();
+                            Widget? testWidget = _getTestWidget(exerciseNumber);
+                            bool isValid = Efw100Validator.validateExercise(
+                                exerciseNumber, testWidget);
+
+                            return Column(
+                              children: [
+                                Text(
+                                    'Exercise $exerciseNumber Widget: ${testWidget?.runtimeType}'),
+                                Text('Is Valid: $isValid'),
+                                Text('Has Widget: ${testWidget != null}'),
+                                const SizedBox(height: 12),
+                                ElevatedButton(
+                                  onPressed: () => _showTestPreview(),
+                                  child: Text('Test Preview System'),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+
                 // Exercise Header
                 ReusableCard(
                   backgroundColor: Colors.white,
@@ -148,8 +195,8 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                         '3. Klik tombol "Save Progress" di sebelah exercise\n'
                         '4. Atau klik tombol "Save All Progress" di AppBar',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.blue.shade800,
-                        ),
+                              color: Colors.blue.shade800,
+                            ),
                       ),
                     ],
                   ),
@@ -465,29 +512,201 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
   void _showExerciseInfo() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Exercise Information'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('ID: ${widget.exerciseId}'),
-            Text('Module: ${widget.moduleId}'),
-            Text('File: ${widget.filePath}'),
-            Text('Function: ${widget.functionName}'),
-            Text(
-                'Type: ${widget.isUIExercise ? "UI Exercise" : "Data Exercise"}'),
-            const SizedBox(height: 8),
-            const Text('Status: Belum Selesai'),
-          ],
+      builder: (context) => Dialog(
+        child: Container(
+          width: MediaQuery.of(context).size.width * 0.9,
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Header
+              Row(
+                children: [
+                  Icon(
+                    Icons.info_outline,
+                    color: const Color(0xFFAD88C6),
+                    size: 24,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Exercise Information',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFFAD88C6),
+                        ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Content
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildInfoRow('ID', widget.exerciseId),
+                  _buildInfoRow('Module', widget.moduleId),
+                  _buildInfoRow('File', widget.filePath),
+                  _buildInfoRow('Function', widget.functionName),
+                  _buildInfoRow('Type',
+                      widget.isUIExercise ? "UI Exercise" : "Data Exercise"),
+                  const SizedBox(height: 8),
+                  _buildInfoRow('Status', 'Belum Selesai'),
+                ],
+              ),
+
+              const SizedBox(height: 24),
+
+              // Action Button
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text(
+                      'OK',
+                      style: TextStyle(
+                        color: const Color(0xFFAD88C6),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+      ),
+    );
+  }
+
+  // Helper method untuk membuat row info
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 80,
+            child: Text(
+              '$label:',
+              style: const TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ),
         ],
       ),
     );
+  }
+
+  // Helper methods for EFW100 Debug and Preview
+  int _getExerciseNumber() {
+    // Extract exercise number from exerciseId (e.g., "EFW100_ex1" -> 1)
+    if (widget.exerciseId.contains('_ex')) {
+      String numberPart = widget.exerciseId.split('_ex')[1];
+      return int.tryParse(numberPart) ?? 1;
+    }
+    return 1;
+  }
+
+  Widget? _getTestWidget(int exerciseNumber) {
+    // Create test widgets based on exercise number
+    switch (exerciseNumber) {
+      case 1:
+        return Container(
+          width: 100,
+          height: 100,
+          color: Colors.red,
+        );
+      case 2:
+        return Text(
+          "Hello Flutter",
+          style: TextStyle(fontSize: 24),
+        );
+      case 3:
+        return Icon(
+          Icons.home,
+          color: Colors.blue,
+          size: 32,
+        );
+      case 4:
+        return Image.asset(
+          'assets/images/flutter_logo.png',
+          width: 100,
+          height: 100,
+          fit: BoxFit.cover,
+        );
+      case 5:
+        return CircleAvatar(
+          radius: 25,
+          backgroundColor: Colors.green,
+        );
+      default:
+        return Container(
+          width: 50,
+          height: 50,
+          color: Colors.grey,
+        );
+    }
+  }
+
+  void _showTestPreview() {
+    int exerciseNumber = _getExerciseNumber();
+    Widget? testWidget = _getTestWidget(exerciseNumber);
+    bool isValid = Efw100Validator.validateExercise(exerciseNumber, testWidget);
+
+    if (testWidget != null) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Row(
+            children: [
+              Text('Preview: Exercise $exerciseNumber'),
+              const SizedBox(width: 8),
+              Icon(
+                isValid ? Icons.check_circle : Icons.error,
+                color: isValid ? Colors.green : Colors.red,
+              ),
+            ],
+          ),
+          content: Container(
+            width: 180,
+            height: 180,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isValid ? Colors.green : Colors.red,
+                width: 2,
+              ),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Center(child: testWidget),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No widget available for preview'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 }

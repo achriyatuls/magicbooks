@@ -64,8 +64,11 @@ export 'package:magicbook/module/efd1800_product_detail/controller/efd1800_produ
 export 'package:magicbook/module/efd1800_product_detail/view/efd1800_product_detail_view.dart';
 
 //modul efw100
-export 'package:magicbook/module/efw100_common_widget/controller/efw100_common_widget_controller.dart';
+//export 'package:magicbook/module/efw100_common_widget/controller/efw100_common_widget_controller.dart';
 export 'package:magicbook/module/efw100_common_widget/view/efw100_common_widget_view.dart';
+export 'package:magicbook/module/efw100_common_widget/validator/efw100_validator.dart';
+//export 'package:magicbook/module/efw100_common_widget/screen/widget_preview_screen.dart';
+export 'package:magicbook/shared/widget/row_label/row_label_efw100.dart';
 
 //modul efw200
 export 'package:magicbook/module/efw200_layout/controller/efw200_layout_controller.dart';
@@ -223,3 +226,4 @@ export 'package:magicbook/shared/service/exercise_submission_service.dart';
 export 'package:magicbook/shared/util/exercise_data_collector.dart';
 export 'package:magicbook/shared/widget/dialog/submit_exercise_dialog.dart';
 export 'package:magicbook/shared/widget/fab/submit_exercise_fab.dart';
+export 'package:magicbook/shared/service/efw100_progress_service.dart';

@@ -221,6 +221,9 @@ class Efd1100Exercises {
     int maxValue = 0;
 
     // TULIS KODE DI SINI:
+    numbers.sort();
+    minValue = numbers.first;
+    maxValue = numbers.last;
 
     return minValue == 23 && maxValue == 109; // ← JANGAN UBAH BARIS INI!
   }

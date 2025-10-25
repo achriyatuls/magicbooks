@@ -1,6 +1,6 @@
-import 'package:flutter/services.dart';
 import 'dart:io';
 import '../../module/efd1100_variable/validator/efd1100_validator.dart';
+import 'efw100_progress_service.dart';
 
 class ExerciseInfo {
   final String id;
@@ -25,8 +25,6 @@ class ExerciseInfo {
 }
 
 class ModuleExerciseService {
-  static Map<String, List<ExerciseInfo>> _moduleExercises = {};
-  
   static Future<List<ExerciseInfo>> getModuleExercises(String moduleId) async {
     // For now, always use sample exercises to ensure functionality
     // TODO: Implement proper file loading later
@@ -42,38 +40,62 @@ class ModuleExerciseService {
       print('Error getting total exercises for $moduleId: $e');
       // Return default count based on module
       switch (moduleId) {
-        case 'EFD1100': return 35; // Variable
-        case 'EFD1200': return 35; // DateTime
-        case 'EFD1300': return 35; // String
-        case 'EFD1400': return 35; // Number
-        case 'EFD1500': return 35; // If Statement
-        case 'EFB100': return 28; // Null Safety
-        case 'EFD1600': return 25; // List & Map
-        case 'EFD1700': return 18; // Regex
-        case 'EFD1800': return 22; // Async
-        case 'EFW100': return 20; // Common Widget
-        case 'EFW200': return 18; // Layout
-        case 'EFW300': return 15; // ListView
-        case 'EFW301': return 12; // ListView Advanced
-        case 'EFW400': return 16; // GridView
-        default: return 10;
+        case 'EFD1100':
+          return 35; // Variable
+        case 'EFD1200':
+          return 35; // DateTime
+        case 'EFD1300':
+          return 35; // String
+        case 'EFD1400':
+          return 35; // Number
+        case 'EFD1500':
+          return 35; // If Statement
+        case 'EFB100':
+          return 28; // Null Safety
+        case 'EFD1600':
+          return 25; // List & Map
+        case 'EFD1700':
+          return 18; // Regex
+        case 'EFD1800':
+          return 22; // Async
+        case 'EFW100':
+          return 20; // Common Widget
+        case 'EFW200':
+          return 18; // Layout
+        case 'EFW300':
+          return 15; // ListView
+        case 'EFW301':
+          return 12; // ListView Advanced
+        case 'EFW400':
+          return 16; // GridView
+        default:
+          return 10;
       }
     }
   }
+
   static Map<String, bool> getExerciseStatus(String moduleId) {
     if (moduleId == 'EFD1100') {
       try {
         final allResults = Efd1100Validator.runAllTests();
         Map<String, bool> status = {};
-        
+
         for (var entry in allResults.entries) {
           final exerciseId = '${moduleId}_ex${entry.key}';
           status[exerciseId] = entry.value.isPerfect;
         }
-        
+
         return status;
       } catch (e) {
         print('Error getting exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFW100') {
+      try {
+        // Gunakan Efw100ProgressService untuk mendapatkan status
+        return Efw100ProgressService.instance.getExerciseStatus();
+      } catch (e) {
+        print('Error getting EFW100 exercise status: $e');
         return {};
       }
     }
@@ -91,7 +113,7 @@ class ModuleExerciseService {
       // Map module ID to file path
       String filePath = _getExerciseFilePath(moduleId);
       print('Attempting to load file: $filePath');
-      
+
       // Load file content using dart:io
       final file = File(filePath);
       if (await file.exists()) {
@@ -130,113 +152,23 @@ class ModuleExerciseService {
         return 'lib/module/efd1700_regex/exercises/efd1700_exercises.dart';
       case 'EFD1800':
         return 'lib/module/efd1800_async_function/exercises/efd1800_exercises.dart';
+      case 'EFW100':
+        return 'lib/module/efw100_common_widget/view/efw100_common_widget_view.dart';
       default:
         throw Exception('Unknown module ID: $moduleId');
     }
   }
 
-  static List<ExerciseInfo> _parseExerciseFile(String content, String moduleId) {
-    List<ExerciseInfo> exercises = [];
-    
-    // Split content by exercise sections
-    final exerciseSections = content.split('// ═══════════════════════════════════════════════════════════════════════════');
-    
-    for (int i = 1; i < exerciseSections.length; i++) {
-      final section = exerciseSections[i];
-      if (section.trim().isEmpty) continue;
-      
-      try {
-        final exercise = _parseExerciseSection(section, moduleId, i);
-        if (exercise != null) {
-          exercises.add(exercise);
-        }
-      } catch (e) {
-        print('Error parsing exercise section $i: $e');
-      }
-    }
-    
-    return exercises;
-  }
-
-  static ExerciseInfo? _parseExerciseSection(String section, String moduleId, int index) {
-    final lines = section.split('\n');
-    
-    // Extract exercise number and title
-    String? exerciseNumber;
-    String? title;
-    String? instructions;
-    String difficulty = 'Medium';
-    bool isValidated = false;
-    String? hint;
-    String? example;
-    
-    for (int i = 0; i < lines.length; i++) {
-      final line = lines[i].trim();
-      
-      // Extract exercise number and title
-      if (line.startsWith('// EXERCISE')) {
-        final match = RegExp(r'EXERCISE (\d+): (.+)').firstMatch(line);
-        if (match != null) {
-          exerciseNumber = match.group(1);
-          title = match.group(2);
-          
-          // Check if it's validated
-          if (line.contains('(VALIDATED)')) {
-            isValidated = true;
-            difficulty = 'Easy';
-          } else if (line.contains('(BASIC)')) {
-            isValidated = false;
-            difficulty = 'Medium';
-          }
-        }
-      }
-      
-      // Extract description
-      if (line.startsWith('// INSTRUKSI:')) {
-        instructions = line.replaceFirst('// INSTRUKSI:', '').trim();
-        
-        // Get additional lines for instructions
-        for (int j = i + 1; j < lines.length; j++) {
-          final nextLine = lines[j].trim();
-          if (nextLine.startsWith('//') && !nextLine.startsWith('// ═')) {
-            instructions = instructions! + '\n' + nextLine.replaceFirst('//', '').trim();
-          } else {
-            break;
-          }
-        }
-      }
-      
-      // Extract hint
-      if (line.startsWith('// HINT:')) {
-        hint = line.replaceFirst('// HINT:', '').trim();
-      }
-      
-      // Extract example
-      if (line.startsWith('// CONTOH:')) {
-        example = line.replaceFirst('// CONTOH:', '').trim();
-      }
-    }
-    
-    if (exerciseNumber != null && title != null) {
-      return ExerciseInfo(
-        id: '${moduleId}_ex$exerciseNumber',
-        title: 'Exercise $exerciseNumber: $title',
-        description: instructions ?? 'Complete the exercise as instructed',
-        instructions: instructions ?? '',
-        difficulty: difficulty,
-        isValidated: isValidated,
-        hint: hint,
-        example: example,
-      );
-    }
-    
-    return null;
-  }
-
-  static Future<String> getExerciseCode(String moduleId, String exerciseId) async {
+  static Future<String> getExerciseCode(
+      String moduleId, String exerciseId) async {
     try {
-      final exerciseFile = await _loadExerciseFile(moduleId);
-      return _extractExerciseCode(exerciseFile, exerciseId);
+      if (moduleId == 'EFW100') {
+        // Untuk EFW100, kembalikan template exercise
+        return _getEfw100ExerciseCode(exerciseId);
+      } else {
+        final exerciseFile = await _loadExerciseFile(moduleId);
+        return _extractExerciseCode(exerciseFile, exerciseId);
+      }
     } catch (e) {
       print('Error getting exercise code: $e');
       return _getDefaultExerciseCode(exerciseId);
@@ -246,10 +178,11 @@ class ModuleExerciseService {
   static String _extractExerciseCode(String content, String exerciseId) {
     // Extract exercise number from ID
     final exerciseNumber = exerciseId.split('_ex')[1];
-    
+
     // Find the exercise section
-    final exerciseSections = content.split('// ═══════════════════════════════════════════════════════════════════════════');
-    
+    final exerciseSections = content.split(
+        '// ═══════════════════════════════════════════════════════════════════════════');
+
     for (int i = 1; i < exerciseSections.length; i++) {
       final section = exerciseSections[i];
       if (section.contains('EXERCISE $exerciseNumber:')) {
@@ -257,26 +190,26 @@ class ModuleExerciseService {
         final lines = section.split('\n');
         String code = '';
         bool inFunction = false;
-        
+
         for (final line in lines) {
           if (line.trim().startsWith('static')) {
             inFunction = true;
           }
-          
+
           if (inFunction) {
             code += line + '\n';
-            
+
             // Stop at the end of function
             if (line.trim() == '}' && code.contains('return')) {
               break;
             }
           }
         }
-        
+
         return code.trim();
       }
     }
-    
+
     return _getDefaultExerciseCode(exerciseId);
   }
 
@@ -291,14 +224,73 @@ void main() {
 ''';
   }
 
+  static String _getEfw100ExerciseCode(String exerciseId) {
+    // Extract exercise number from ID
+    final exerciseNumber = exerciseId.split('_ex')[1];
+
+    switch (exerciseNumber) {
+      case '1':
+        return '''
+// Exercise 1: Container
+Widget? exercise1() {
+  // Buat sebuah Container dengan lebar 100, tinggi 100, dan warna merah
+  return Container(
+    width: 100,
+    height: 100,
+    color: Colors.red,
+  );
+}
+''';
+      case '2':
+        return '''
+// Exercise 2: Text
+Widget? exercise2() {
+  // Buat sebuah Text dengan isi "Hello Flutter" dan ukuran font 24
+  return Text(
+    "Hello Flutter",
+    style: TextStyle(fontSize: 24),
+  );
+}
+''';
+      case '3':
+        return '''
+// Exercise 3: Icon
+Widget? exercise3() {
+  // Buat sebuah Icon dengan Icons.home dan warna biru
+  return Icon(
+    Icons.home,
+    color: Colors.blue,
+  );
+}
+''';
+      default:
+        return '''
+// Exercise $exerciseNumber: Widget Exercise
+Widget? exercise$exerciseNumber() {
+  // Complete the exercise as instructed
+  return Container(
+    child: Text('Exercise $exerciseNumber'),
+  );
+}
+''';
+    }
+  }
+
   static Future<List<ExerciseInfo>> getAllExercises() async {
     List<ExerciseInfo> allExercises = [];
-    
+
     final moduleIds = [
-      'EFD1100', 'EFD1200', 'EFD1300', 'EFD1400', 'EFD1500',
-      'EFB100', 'EFD1600', 'EFD1700', 'EFD1800'
+      'EFD1100',
+      'EFD1200',
+      'EFD1300',
+      'EFD1400',
+      'EFD1500',
+      'EFB100',
+      'EFD1600',
+      'EFD1700',
+      'EFD1800'
     ];
-    
+
     for (final moduleId in moduleIds) {
       try {
         final exercises = await getModuleExercises(moduleId);
@@ -307,7 +299,7 @@ void main() {
         print('Error loading exercises for $moduleId: $e');
       }
     }
-    
+
     return allExercises;
   }
 
@@ -320,7 +312,8 @@ void main() {
             id: '${moduleId}_ex1',
             title: 'Exercise 1: Type Check',
             description: 'Buat variabel price bertipe String dan isi nilainya',
-            instructions: 'Buat variabel price bertipe String dan isi nilainya. Pastikan TIDAK menggunakan tipe int tanpa quotes (contoh: 100). Contoh benar: "100" (String)',
+            instructions:
+                'Buat variabel price bertipe String dan isi nilainya. Pastikan TIDAK menggunakan tipe int tanpa quotes (contoh: 100). Contoh benar: "100" (String)',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan String? price = "100";',
@@ -328,8 +321,10 @@ void main() {
           ExerciseInfo(
             id: '${moduleId}_ex2',
             title: 'Exercise 2: Konversi String ke Double',
-            description: 'Ubah parameter text (String) menjadi double, dan return hasilnya',
-            instructions: 'Ubah parameter text (String) menjadi double, dan return hasilnya. Gunakan double.parse()',
+            description:
+                'Ubah parameter text (String) menjadi double, dan return hasilnya',
+            instructions:
+                'Ubah parameter text (String) menjadi double, dan return hasilnya. Gunakan double.parse()',
             difficulty: 'Easy',
             isValidated: true,
             hint: 'Gunakan double.parse(text)',
@@ -338,26 +333,32 @@ void main() {
           ExerciseInfo(
             id: '${moduleId}_ex3',
             title: 'Exercise 3: Konversi dengan Validasi',
-            description: 'String input mungkin mengandung karakter non-numeric, hilangkan karakter yang bukan angka dan titik',
-            instructions: 'String input mungkin mengandung karakter non-numeric (contoh: "300.24a"). Hilangkan karakter yang bukan angka dan titik, lalu konversi ke double',
+            description:
+                'String input mungkin mengandung karakter non-numeric, hilangkan karakter yang bukan angka dan titik',
+            instructions:
+                'String input mungkin mengandung karakter non-numeric (contoh: "300.24a"). Hilangkan karakter yang bukan angka dan titik, lalu konversi ke double',
             difficulty: 'Medium',
             isValidated: true,
-            hint: 'Gunakan .replaceAll(RegExp(r\'[^\\d.]\'), \'\') untuk hilangkan non-numeric',
+            hint:
+                'Gunakan .replaceAll(RegExp(r\'[^\\d.]\'), \'\') untuk hilangkan non-numeric',
           ),
           ExerciseInfo(
             id: '${moduleId}_ex4',
             title: 'Exercise 4: Cek Bilangan Ganjil',
             description: 'Periksa apakah input adalah bilangan ganjil',
-            instructions: 'Periksa apakah input adalah bilangan ganjil. Return true jika ganjil, false jika genap',
+            instructions:
+                'Periksa apakah input adalah bilangan ganjil. Return true jika ganjil, false jika genap',
             difficulty: 'Easy',
             isValidated: true,
-            hint: 'Gunakan modulo operator (%) untuk cek sisa bagi. Bilangan ganjil: input % 2 != 0',
+            hint:
+                'Gunakan modulo operator (%) untuk cek sisa bagi. Bilangan ganjil: input % 2 != 0',
           ),
           ExerciseInfo(
             id: '${moduleId}_ex5',
             title: 'Exercise 5: Parse dengan Try-Catch Safety',
             description: 'Parse string "300aa" menjadi double dengan aman',
-            instructions: 'Parse string "300aa" menjadi double dengan aman. Jika gagal, gunakan default value 0.0',
+            instructions:
+                'Parse string "300aa" menjadi double dengan aman. Jika gagal, gunakan default value 0.0',
             difficulty: 'Easy',
             isValidated: true,
             hint: 'Gunakan double.tryParse() ?? 0.0',
@@ -366,7 +367,8 @@ void main() {
             id: '${moduleId}_ex6',
             title: 'Exercise 6: Safe Int Parse',
             description: 'Perbaiki kode yang error dengan menggunakan tryParse',
-            instructions: 'Uncomment kode dibawah ini! Kode dibawah akan error jika di jalankan. Perbaiki dengan menggunakan .tryParse("39ads")??0',
+            instructions:
+                'Uncomment kode dibawah ini! Kode dibawah akan error jika di jalankan. Perbaiki dengan menggunakan .tryParse("39ads")??0',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan int.tryParse("39ads") ?? 0',
@@ -375,7 +377,8 @@ void main() {
             id: '${moduleId}_ex7',
             title: 'Exercise 7: Type Conversion Int',
             description: 'Konversi price (int) ke value (String) dengan benar',
-            instructions: 'Uncomment kode dibawah, dan perbaiki agar tidak error. Konversi price (int) ke value (String) dengan benar',
+            instructions:
+                'Uncomment kode dibawah, dan perbaiki agar tidak error. Konversi price (int) ke value (String) dengan benar',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan value = price.toString();',
@@ -384,7 +387,8 @@ void main() {
             id: '${moduleId}_ex8',
             title: 'Exercise 8: Extract Text Between Quotes',
             description: 'Ambil text yang berada di antara tanda petik tunggal',
-            instructions: 'Ambil text yang berada di antara tanda petik tunggal (\' \'). Contoh: Input: "hello \'Deny\', apa kabar?" Output: "Deny"',
+            instructions:
+                'Ambil text yang berada di antara tanda petik tunggal (\' \'). Contoh: Input: "hello \'Deny\', apa kabar?" Output: "Deny"',
             difficulty: 'Medium',
             isValidated: true,
             hint: 'Gunakan indexOf dan substring',
@@ -393,16 +397,19 @@ void main() {
             id: '${moduleId}_ex9',
             title: 'Exercise 9: Calculate Average',
             description: 'Hitunglah nilai rata-rata dari List',
-            instructions: 'Hitunglah nilai rata-rata dari List di bawah. TIPS: Gunakan for untuk mendapatkan total. Gunakan numbers.length untuk mendapatkan panjang List',
+            instructions:
+                'Hitunglah nilai rata-rata dari List di bawah. TIPS: Gunakan for untuk mendapatkan total. Gunakan numbers.length untuk mendapatkan panjang List',
             difficulty: 'Medium',
             isValidated: false,
-            hint: 'Gunakan loop untuk menghitung total, lalu bagi dengan length',
+            hint:
+                'Gunakan loop untuk menghitung total, lalu bagi dengan length',
           ),
           ExerciseInfo(
             id: '${moduleId}_ex10',
             title: 'Exercise 10: Find Min and Max',
             description: 'Hitunglah minValue dan maxValue dari List numbers',
-            instructions: 'Hitunglah minValue dan maxValue dari List numbers di bawah. TIPS: Gunakan .sort, ambil minValue dari .first dan ambil maxValue dari .last',
+            instructions:
+                'Hitunglah minValue dan maxValue dari List numbers di bawah. TIPS: Gunakan .sort, ambil minValue dari .first dan ambil maxValue dari .last',
             difficulty: 'Medium',
             isValidated: false,
             hint: 'Gunakan numbers.sort() lalu ambil first dan last',
@@ -474,7 +481,8 @@ void main() {
             id: '${moduleId}_ex18',
             title: 'Exercise 18: String Concatenation',
             description: 'Tambahkan " World!" pada input',
-            instructions: 'Tambahkan " World!" pada input. Contoh: Input: "Hello" Output: "Hello World!"',
+            instructions:
+                'Tambahkan " World!" pada input. Contoh: Input: "Hello" Output: "Hello World!"',
             difficulty: 'Easy',
             isValidated: true,
             hint: 'Gunakan input + " World!"',
@@ -483,7 +491,8 @@ void main() {
             id: '${moduleId}_ex19',
             title: 'Exercise 19: Get First Word',
             description: 'Ambil kata pertama dari input',
-            instructions: 'Ambil kata pertama dari input. HINT: Gunakan .split() dan ambil index pertama',
+            instructions:
+                'Ambil kata pertama dari input. HINT: Gunakan .split() dan ambil index pertama',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.split(" ")[0]',
@@ -492,7 +501,8 @@ void main() {
             id: '${moduleId}_ex20',
             title: 'Exercise 20: Get Second Word',
             description: 'Ambil kata kedua dari input',
-            instructions: 'Ambil kata kedua dari input. HINT: Gunakan .split() dan ambil index kedua',
+            instructions:
+                'Ambil kata kedua dari input. HINT: Gunakan .split() dan ambil index kedua',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.split(" ")[1]',
@@ -501,7 +511,8 @@ void main() {
             id: '${moduleId}_ex21',
             title: 'Exercise 21: Check Even Number',
             description: 'Periksa apakah input adalah bilangan genap',
-            instructions: 'Periksa apakah input adalah bilangan genap. HINT: Gunakan modulo (%) untuk cek sisa bagi 2',
+            instructions:
+                'Periksa apakah input adalah bilangan genap. HINT: Gunakan modulo (%) untuk cek sisa bagi 2',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input % 2 == 0',
@@ -510,7 +521,8 @@ void main() {
             id: '${moduleId}_ex22',
             title: 'Exercise 22: Check Odd Number',
             description: 'Periksa apakah input adalah bilangan ganjil',
-            instructions: 'Periksa apakah input adalah bilangan ganjil. HINT: Gunakan modulo (%) untuk cek sisa bagi 2',
+            instructions:
+                'Periksa apakah input adalah bilangan ganjil. HINT: Gunakan modulo (%) untuk cek sisa bagi 2',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input % 2 != 0',
@@ -518,8 +530,10 @@ void main() {
           ExerciseInfo(
             id: '${moduleId}_ex23',
             title: 'Exercise 23: String Length Greater Than 3',
-            description: 'Periksa apakah input memiliki panjang lebih dari 3 karakter',
-            instructions: 'Periksa apakah input memiliki panjang lebih dari 3 karakter. HINT: Gunakan .length',
+            description:
+                'Periksa apakah input memiliki panjang lebih dari 3 karakter',
+            instructions:
+                'Periksa apakah input memiliki panjang lebih dari 3 karakter. HINT: Gunakan .length',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.length > 3',
@@ -527,8 +541,10 @@ void main() {
           ExerciseInfo(
             id: '${moduleId}_ex24',
             title: 'Exercise 24: String Length Equal 3',
-            description: 'Periksa apakah input memiliki panjang sama dengan 3 karakter',
-            instructions: 'Periksa apakah input memiliki panjang sama dengan 3 karakter. HINT: Gunakan .length',
+            description:
+                'Periksa apakah input memiliki panjang sama dengan 3 karakter',
+            instructions:
+                'Periksa apakah input memiliki panjang sama dengan 3 karakter. HINT: Gunakan .length',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.length == 3',
@@ -537,7 +553,8 @@ void main() {
             id: '${moduleId}_ex25',
             title: 'Exercise 25: String Starts With',
             description: 'Periksa apakah input dimulai dengan huruf \'D\'',
-            instructions: 'Periksa apakah input dimulai dengan huruf \'D\'. HINT: Gunakan .startsWith()',
+            instructions:
+                'Periksa apakah input dimulai dengan huruf \'D\'. HINT: Gunakan .startsWith()',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.startsWith("D")',
@@ -546,7 +563,8 @@ void main() {
             id: '${moduleId}_ex26',
             title: 'Exercise 26: String Ends With',
             description: 'Periksa apakah input diakhiri dengan huruf \'t\'',
-            instructions: 'Periksa apakah input diakhiri dengan huruf \'t\'. HINT: Gunakan .endsWith()',
+            instructions:
+                'Periksa apakah input diakhiri dengan huruf \'t\'. HINT: Gunakan .endsWith()',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.endsWith("t")',
@@ -555,7 +573,8 @@ void main() {
             id: '${moduleId}_ex27',
             title: 'Exercise 27: Check 5 Digits',
             description: 'Periksa apakah input memiliki 5 digit',
-            instructions: 'Periksa apakah input memiliki 5 digit. HINT: Konversi ke String dulu, lalu gunakan .length',
+            instructions:
+                'Periksa apakah input memiliki 5 digit. HINT: Konversi ke String dulu, lalu gunakan .length',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.toString().length == 5',
@@ -564,7 +583,8 @@ void main() {
             id: '${moduleId}_ex28',
             title: 'Exercise 28: Check 4 Digits',
             description: 'Periksa apakah input memiliki 4 digit',
-            instructions: 'Periksa apakah input memiliki 4 digit. HINT: Konversi ke String dulu, lalu gunakan .length',
+            instructions:
+                'Periksa apakah input memiliki 4 digit. HINT: Konversi ke String dulu, lalu gunakan .length',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.toString().length == 4',
@@ -573,7 +593,8 @@ void main() {
             id: '${moduleId}_ex29',
             title: 'Exercise 29: Check 2 Decimals',
             description: 'Periksa apakah input memiliki 2 digit setelah koma',
-            instructions: 'Periksa apakah input memiliki 2 digit setelah koma. HINT: Gunakan .split(\'.\') untuk memisahkan bagian desimal',
+            instructions:
+                'Periksa apakah input memiliki 2 digit setelah koma. HINT: Gunakan .split(\'.\') untuk memisahkan bagian desimal',
             difficulty: 'Medium',
             isValidated: false,
             hint: 'Gunakan input.toString().split(".")[1].length == 2',
@@ -582,7 +603,8 @@ void main() {
             id: '${moduleId}_ex30',
             title: 'Exercise 30: Check 3 Decimals',
             description: 'Periksa apakah input memiliki 3 digit setelah koma',
-            instructions: 'Periksa apakah input memiliki 3 digit setelah koma. HINT: Gunakan .split(\'.\') untuk memisahkan bagian desimal',
+            instructions:
+                'Periksa apakah input memiliki 3 digit setelah koma. HINT: Gunakan .split(\'.\') untuk memisahkan bagian desimal',
             difficulty: 'Medium',
             isValidated: false,
             hint: 'Gunakan input.toString().split(".")[1].length == 3',
@@ -591,7 +613,8 @@ void main() {
             id: '${moduleId}_ex31',
             title: 'Exercise 31: Check Palindrome',
             description: 'Periksa apakah input adalah palindrome',
-            instructions: 'Periksa apakah input adalah palindrome (dibaca sama dari depan/belakang). HINT: Gunakan .split(\'\').reversed.join(\'\') untuk balik String',
+            instructions:
+                'Periksa apakah input adalah palindrome (dibaca sama dari depan/belakang). HINT: Gunakan .split(\'\').reversed.join(\'\') untuk balik String',
             difficulty: 'Hard',
             isValidated: false,
             hint: 'Gunakan input == input.split("").reversed.join("")',
@@ -599,8 +622,10 @@ void main() {
           ExerciseInfo(
             id: '${moduleId}_ex32',
             title: 'Exercise 32: Convert to Snake Case',
-            description: 'Ubah input menjadi huruf kecil semua dan ganti spasi dengan underscore',
-            instructions: 'Ubah input menjadi huruf kecil semua. Ganti spasi dengan underscore (_). HINT: Gunakan .toLowerCase() dan .replaceAll(\' \', \'_\')',
+            description:
+                'Ubah input menjadi huruf kecil semua dan ganti spasi dengan underscore',
+            instructions:
+                'Ubah input menjadi huruf kecil semua. Ganti spasi dengan underscore (_). HINT: Gunakan .toLowerCase() dan .replaceAll(\' \', \'_\')',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.toLowerCase().replaceAll(" ", "_")',
@@ -609,7 +634,8 @@ void main() {
             id: '${moduleId}_ex33',
             title: 'Exercise 33: Check if String is Number',
             description: 'Periksa apakah input adalah angka valid',
-            instructions: 'Periksa apakah input adalah angka valid. HINT: Gunakan int.tryParse(), cek apakah hasilnya != null',
+            instructions:
+                'Periksa apakah input adalah angka valid. HINT: Gunakan int.tryParse(), cek apakah hasilnya != null',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan int.tryParse(input) != null',
@@ -617,8 +643,10 @@ void main() {
           ExerciseInfo(
             id: '${moduleId}_ex34',
             title: 'Exercise 34: Limit String Length',
-            description: 'Batasi jumlah karakter pada input menjadi 50 karakter',
-            instructions: 'Batasi jumlah karakter pada input menjadi 50 karakter. HINT: Gunakan .substring(0, 50)',
+            description:
+                'Batasi jumlah karakter pada input menjadi 50 karakter',
+            instructions:
+                'Batasi jumlah karakter pada input menjadi 50 karakter. HINT: Gunakan .substring(0, 50)',
             difficulty: 'Easy',
             isValidated: false,
             hint: 'Gunakan input.substring(0, 50)',
@@ -627,7 +655,8 @@ void main() {
             id: '${moduleId}_ex35',
             title: 'Exercise 35: Check if String Contains Word',
             description: 'Periksa apakah kata "Dart" muncul dalam input',
-            instructions: 'Periksa apakah kata "Dart" muncul dalam input. HINT: Gunakan .contains()',
+            instructions:
+                'Periksa apakah kata "Dart" muncul dalam input. HINT: Gunakan .contains()',
             difficulty: 'Easy',
             isValidated: true,
             hint: 'Gunakan input.contains("Dart")',
