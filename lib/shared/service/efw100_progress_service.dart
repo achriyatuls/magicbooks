@@ -21,8 +21,8 @@ class Efw100ProgressService {
   /// Get exercise status untuk semua exercises EFW100
   Map<String, bool> getExerciseStatus() {
     if (_efw100View == null) {
-      print('Efw100View belum di-set - menggunakan default status');
-      return _getDefaultExerciseStatus();
+      print('Efw100View belum di-set - menggunakan initial false status');
+      return _getInitialFalseStatus();
     }
 
     try {
@@ -189,6 +189,15 @@ class Efw100ProgressService {
     final completedCount = status.values.where((v) => v).length;
     print(
         'Menggunakan default status EFW100: $completedCount exercises selesai');
+    return status;
+  }
+
+  /// Initial status: semua exercise ditandai belum selesai (false)
+  Map<String, bool> _getInitialFalseStatus() {
+    final status = <String, bool>{};
+    for (int i = 1; i <= 15; i++) {
+      status['EFW100_ex$i'] = false;
+    }
     return status;
   }
 

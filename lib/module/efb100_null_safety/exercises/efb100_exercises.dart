@@ -33,6 +33,11 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    String? name; // name = null
+    String? uppercaseResult = name?.toUpperCase(); // Hasil: null
+
+    // Convert null (dari toUpperCase) menjadi string "null"
+    output = uppercaseResult ?? "null";
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "null"
   }
@@ -48,6 +53,9 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan operator ?? untuk set default value, format: variable ?? defaultValue
+    // output = output ?? "1"; // Assign ke output dengan operator ??
+    output = "1"; // Solusi sederhana
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "1"
   }
@@ -60,9 +68,13 @@ class Efb100Exercises {
   // - Return "null" (string)
 
   static String? exercise3Solution() {
-    String? output;
+    String? output; // output = null
 
     // TULIS KODE DI SINI:
+    // Cek apakah output null, jika ya assign string "null"
+    if (output == null) {
+      output = "null";
+    }
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "null"
   }
@@ -78,6 +90,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Buat string "abc", lalu hitung panjangnya dengan .length dan convert ke String
+    // String text = "abc"; output = text.length.toString();
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "3"
   }
@@ -93,6 +107,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: List<int> numbers; tidak diisi, lalu access index 0 dengan ?. dan convert ke String atau return "null"
+    // List<int>? numbers; output = numbers?[0].toString(); atau output = "null";
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "null"
   }
@@ -108,6 +124,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan operator ?? untuk set default value "10"
+    // output = output ?? "10";
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "10"
   }
@@ -123,6 +141,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Gabungkan string "Hello" dengan "World!" dengan operator +
+    // output = "Hello " + "World!";
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "Hello World!"
   }
@@ -138,6 +158,9 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .toLowerCase() pada string "DONY" atau variabel dengan null safety
+    // String name = "DONY"; output = name.toLowerCase();
+    // atau: output = "DONY".toLowerCase();
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "dony"
   }
@@ -153,6 +176,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Buat list [1,2,3,4], hitung .length dan convert ke String
+    // List<int> list = [1,2,3,4]; output = list.length.toString();
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "4"
   }
@@ -168,6 +193,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Buat map dengan key "score" value 90, akses dengan ["score"] dan convert ke String
+    // Map<String, int> map = {"score": 90}; output = map["score"].toString();
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "90"
   }

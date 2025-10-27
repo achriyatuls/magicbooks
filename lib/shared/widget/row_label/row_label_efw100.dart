@@ -135,17 +135,9 @@ void _showWidgetPreview(
             width: 2,
           ),
           borderRadius: BorderRadius.circular(8),
-          color: Colors.grey[50], // Background untuk widget
+          color: Colors.grey[50],
         ),
-        child: Center(
-          child: Container(
-            constraints: BoxConstraints(
-              maxWidth: 280,
-              maxHeight: 280,
-            ),
-            child: widget,
-          ),
-        ),
+        child: _buildPreviewSurface(widget),
       ),
       actions: [
         TextButton(
@@ -153,6 +145,54 @@ void _showWidgetPreview(
           child: Text('Close'),
         ),
       ],
+    ),
+  );
+}
+
+Widget _buildPreviewSurface(Widget widget) {
+  // Khusus untuk beberapa jenis widget, butuh pembungkus Material/Scaffold
+  if (widget is Scaffold) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: widget,
+    );
+  }
+
+  if (widget is AppBar) {
+    return Material(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(6),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 56,
+              child: widget,
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.white,
+                child: const Center(child: Text('AppBar Preview')),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  if (widget is FloatingActionButton) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: Center(child: widget),
+      ),
+    );
+  }
+
+  return Material(
+    child: Container(
+      color: Colors.white,
+      child: Center(child: widget),
     ),
   );
 }

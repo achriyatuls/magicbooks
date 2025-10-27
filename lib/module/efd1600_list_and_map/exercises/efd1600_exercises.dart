@@ -32,7 +32,7 @@ class Efd1600Exercises {
     double? total;
 
     // TULIS KODE DI SINI:
-
+    total = sales.reduce((a, b) => a + b);
     return total == 62.5; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -48,7 +48,10 @@ class Efd1600Exercises {
     double? average = 0;
 
     // TULIS KODE DI SINI:
-
+    // HINT: Jumlahkan semua nilai, lalu bagi dengan panjang list
+    // double sum = 0.0; for (double s in sales) sum += s; average = sum / sales.length;
+    // atau: average = sales.reduce((a, b) => a + b) / sales.length;
+    average = sales.reduce((a, b) => a + b) / sales.length;
     return average == 12.5; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -64,7 +67,10 @@ class Efd1600Exercises {
     int? highest = 0;
 
     // TULIS KODE DI SINI:
-
+    // HINT: Gunakan .reduce() untuk mencari nilai tertinggi
+    // highest = numbers.reduce((a, b) => a > b ? a : b);
+    // atau: for (int n in numbers) if (n > highest!) highest = n;
+    highest = numbers.reduce((a, b) => a > b ? a : b);
     return highest == 5; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -80,6 +86,9 @@ class Efd1600Exercises {
     int? lowest = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .reduce() untuk mencari nilai terendah
+    // lowest = numbers.reduce((a, b) => a < b ? a : b);
+    // atau: lowest = numbers[0]; for (int n in numbers) if (n < lowest!) lowest = n;
 
     return lowest == 1; // ← JANGAN UBAH BARIS INI!
   }
@@ -96,6 +105,9 @@ class Efd1600Exercises {
     int? even = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Loop setiap angka, cek jika genap dengan % 2 == 0, lalu tambahkan
+    // for (int n in numbers) { if (n % 2 == 0) even = even! + n; }
+    // atau: even = numbers.where((n) => n % 2 == 0).reduce((a, b) => a + b);
 
     return even == 30; // ← JANGAN UBAH BARIS INI!
   }
@@ -112,6 +124,9 @@ class Efd1600Exercises {
     int? odd = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Loop setiap angka, cek jika ganjil dengan % 2 != 0, lalu tambahkan
+    // for (int n in numbers) { if (n % 2 != 0) odd = odd! + n; }
+    // atau: odd = numbers.where((n) => n % 2 != 0).reduce((a, b) => a + b);
 
     return odd == 25; // ← JANGAN UBAH BARIS INI!
   }
@@ -128,6 +143,8 @@ class Efd1600Exercises {
     int? largest = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .reduce() untuk mencari nilai terbesar
+    // largest = numbers.reduce((a, b) => a > b ? a : b);
 
     return largest == 10; // ← JANGAN UBAH BARIS INI!
   }
@@ -144,6 +161,8 @@ class Efd1600Exercises {
     int? smallest = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .reduce() untuk mencari nilai terkecil
+    // smallest = numbers.reduce((a, b) => a < b ? a : b);
 
     return smallest == 1; // ← JANGAN UBAH BARIS INI!
   }
@@ -160,6 +179,9 @@ class Efd1600Exercises {
     int? above = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .where() untuk filter angka > 5, lalu .length
+    // above = numbers.where((n) => n > 5).length;
+    // atau: for (int n in numbers) if (n > 5) above++; kemudian ubah menjadi int
 
     return above == 5; // ← JANGAN UBAH BARIS INI!
   }
@@ -176,6 +198,8 @@ class Efd1600Exercises {
     int? below = 0;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .where() untuk filter angka < 5, lalu .length
+    // below = numbers.where((n) => n < 5).length;
 
     return below == 4; // ← JANGAN UBAH BARIS INI!
   }
@@ -192,6 +216,8 @@ class Efd1600Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .any() untuk cek apakah ada string yang dimulai dengan 'e'
+    // result = fruits.any((f) => f.startsWith('e'));
 
     return result == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -208,6 +234,8 @@ class Efd1600Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .every() untuk cek apakah SEMUA angka habis dibagi 10
+    // result = numbers.every((n) => n % 10 == 0);
 
     return result == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -224,6 +252,8 @@ class Efd1600Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .any() untuk cek apakah ada mobil dengan panjang nama == 5
+    // result = cars.any((c) => c.length == 5);
 
     return result == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -240,6 +270,8 @@ class Efd1600Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .contains() untuk cek apakah list mengandung nilai 40.0
+    // result = temperatures.contains(40.0);
 
     return result == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -256,6 +288,8 @@ class Efd1600Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan .any() untuk cek apakah ada hewan dengan panjang nama == 5
+    // result = animals.any((a) => a.length == 5);
 
     return result == true; // ← JANGAN UBAH BARIS INI!
   }

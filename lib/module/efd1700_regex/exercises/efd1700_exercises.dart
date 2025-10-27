@@ -34,6 +34,7 @@ class Efd1700Exercises {
     // TULIS KODE DI SINI:
     // RegExp exp = RegExp(pattern);
     // isMatch = exp.hasMatch(text);
+    isMatch = RegExp(pattern).hasMatch(text);
 
     return isMatch; // ← JANGAN UBAH BARIS INI!
   }
@@ -51,6 +52,7 @@ class Efd1700Exercises {
     bool? isMatch;
 
     // TULIS KODE DI SINI:
+    isMatch = RegExp(pattern).hasMatch(text);
 
     return isMatch; // ← JANGAN UBAH BARIS INI!
   }
@@ -68,7 +70,7 @@ class Efd1700Exercises {
     bool? isMatch;
 
     // TULIS KODE DI SINI:
-
+    isMatch = RegExp(pattern).hasMatch(text);
     return isMatch; // ← JANGAN UBAH BARIS INI!
   }
 

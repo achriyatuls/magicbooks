@@ -37,6 +37,7 @@ class Efd1200Exercises {
     String? datef;
 
     // TULIS KODE DI SINI:
+    datef = DateFormat("yyyy-MM-dd").format(date);
 
     return datef; // ← JANGAN UBAH BARIS INI!
   }
@@ -57,6 +58,7 @@ class Efd1200Exercises {
     String? datef;
 
     // TULIS KODE DI SINI:
+    datef = DateFormat("yyyy-MM-dd kk:mm").format(date);
 
     return datef; // ← JANGAN UBAH BARIS INI!
   }
@@ -77,7 +79,7 @@ class Efd1200Exercises {
     int? day;
 
     // TULIS KODE DI SINI:
-
+    day = date.day;
     return day; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -97,7 +99,7 @@ class Efd1200Exercises {
     int? month;
 
     // TULIS KODE DI SINI:
-
+    month = date.month;
     return month; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -117,7 +119,7 @@ class Efd1200Exercises {
     int? year;
 
     // TULIS KODE DI SINI:
-
+    year = date.year;
     return year; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -137,7 +139,7 @@ class Efd1200Exercises {
     String? time;
 
     // TULIS KODE DI SINI:
-
+    time = DateFormat("kk:mm").format(date);
     return time; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -153,6 +155,7 @@ class Efd1200Exercises {
     String? datef;
 
     // TULIS KODE DI SINI:
+    datef = DateFormat("yyyy-MM-dd").format(date);
 
     return datef; // ← JANGAN UBAH BARIS INI!
   }
@@ -173,7 +176,7 @@ class Efd1200Exercises {
     String? time;
 
     // TULIS KODE DI SINI:
-
+    time = DateFormat("kk:mm:ss").format(date);
     return time; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -193,7 +196,7 @@ class Efd1200Exercises {
     int? diff;
 
     // TULIS KODE DI SINI:
-
+    diff = endAt.difference(startAt).inDays;
     return diff; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -213,7 +216,7 @@ class Efd1200Exercises {
     String? datef;
 
     // TULIS KODE DI SINI:
-
+    datef = DateFormat("EEEE, d MMM y").format(date);
     return datef; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -233,7 +236,7 @@ class Efd1200Exercises {
     DateTime? newDate;
 
     // TULIS KODE DI SINI:
-
+    newDate = date.add(Duration(days: days));
     return newDate; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -253,7 +256,7 @@ class Efd1200Exercises {
     DateTime? newDate;
 
     // TULIS KODE DI SINI:
-
+    newDate = date.subtract(Duration(days: days));
     return newDate; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -273,7 +276,7 @@ class Efd1200Exercises {
     DateTime? date;
 
     // TULIS KODE DI SINI:
-
+    date = DateTime.parse(dateStr);
     return date; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -293,7 +296,7 @@ class Efd1200Exercises {
     String? weekday;
 
     // TULIS KODE DI SINI:
-
+    weekday = DateFormat("EEEE").format(date);
     return weekday; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -313,7 +316,7 @@ class Efd1200Exercises {
     String? month;
 
     // TULIS KODE DI SINI:
-
+    month = DateFormat("MMMM").format(date);
     return month; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -333,7 +336,7 @@ class Efd1200Exercises {
     String? datef;
 
     // TULIS KODE DI SINI:
-
+    datef = DateFormat("dd/MM/yyyy").format(date);
     return datef; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -353,7 +356,7 @@ class Efd1200Exercises {
     int? hour;
 
     // TULIS KODE DI SINI:
-
+    hour = date.hour;
     return hour; // ← JANGAN UBAH BARIS INI!
   }
 

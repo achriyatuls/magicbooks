@@ -604,17 +604,17 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
       case 'EFD1400':
         return 'lib/module/efd1400_number/exercises/efd1400_exercises.dart';
       case 'EFD1500':
-        return 'lib/module/efd1500_if/exercises/efd1500_exercises.dart';
+        return 'lib/module/efd1500_if_statement/exercises/efd1500_exercises.dart';
       case 'EFB100':
-        return 'lib/module/efb100_null/exercises/efb100_exercises.dart';
+        return 'lib/module/efb100_null_safety/exercises/efb100_exercises.dart';
       case 'EFD1600':
-        return 'lib/module/efd1600_list/exercises/efd1600_exercises.dart';
+        return 'lib/module/efd1600_list_and_map/exercises/efd1600_exercises.dart';
       case 'EFD1700':
         return 'lib/module/efd1700_regex/exercises/efd1700_exercises.dart';
       case 'EFD1800':
-        return 'lib/module/efd1800_async/exercises/efd1800_exercises.dart';
+        return 'lib/module/efd1800_async_function/exercises/efd1800_exercises.dart';
       case 'EFW100':
-        return 'lib/module/efw100_widget/exercises/efw100_exercises.dart';
+        return 'lib/module/efw100_common_widget/view/efw100_common_widget_view.dart';
       case 'EFW200':
         return 'lib/module/efw200_layout/exercises/efw200_exercises.dart';
       case 'EFW300':

@@ -32,6 +32,7 @@ class Efd1300Exercises {
     bool? isValid;
 
     // TULIS KODE DI SINI:
+    isValid = productName.contains(query);
 
     return isValid; // ← JANGAN UBAH BARIS INI!
   }
@@ -49,7 +50,7 @@ class Efd1300Exercises {
     bool? isEmpty;
 
     // TULIS KODE DI SINI:
-
+    isEmpty = productName.isEmpty;
     return isEmpty; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -66,7 +67,7 @@ class Efd1300Exercises {
     bool? isValid;
 
     // TULIS KODE DI SINI:
-
+    isValid = productName.length >= 2;
     return isValid; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -86,7 +87,7 @@ class Efd1300Exercises {
     String? code;
 
     // TULIS KODE DI SINI:
-
+    code = number.toString().padLeft(4, '0');
     return code; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -126,6 +127,11 @@ class Efd1300Exercises {
     bool? isValid;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan RegExp(...).hasMatch(email)
+    final emailRegex = RegExp(
+      r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]+$",
+    );
+    isValid = emailRegex.hasMatch(email);
 
     return isValid; // ← JANGAN UBAH BARIS INI!
   }

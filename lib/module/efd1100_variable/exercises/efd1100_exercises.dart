@@ -33,6 +33,8 @@ class Efd1100Exercises {
     String? price;
 
     // TULIS KODE DI SINI:
+    // HINT: Isi variabel price dengan String, bukan angka tanpa quotes
+    // Contoh: price = "100";
     // Contoh benar:
     price = "100";
 
@@ -132,6 +134,7 @@ class Efd1100Exercises {
   static bool? exercise6() {
     int? age;
 
+    // HINT: Gunakan int.tryParse("39ads") ?? 0 agar aman saat parse gagal
     age = int.tryParse("39ads") ?? 0;
 
     return age != null; // ← JANGAN UBAH BARIS INI!
@@ -150,7 +153,7 @@ class Efd1100Exercises {
 
     // TULIS KODE DI SINI:
     // Uncomment kode dibawah, dan perbaiki agar tidak error
-
+    // HINT: Konversi int ke String dengan .toString()
     value = price.toString();
 
     return price == 0; // ← JANGAN UBAH BARIS INI!
@@ -238,7 +241,7 @@ class Efd1100Exercises {
     int? output;
 
     // TULIS KODE DI SINI:
-
+    output = input + 5;
     return output; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -253,6 +256,8 @@ class Efd1100Exercises {
     int? output;
 
     // TULIS KODE DI SINI:
+
+    output = input - 5;
 
     return output == 5; // ← JANGAN UBAH BARIS INI!
   }
@@ -269,7 +274,7 @@ class Efd1100Exercises {
     int? output;
 
     // TULIS KODE DI SINI:
-
+    output = input1 + input2;
     return output == 30; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -285,6 +290,7 @@ class Efd1100Exercises {
     int? output;
 
     // TULIS KODE DI SINI:
+    output = input2 - input1;
 
     return output == 10; // ← JANGAN UBAH BARIS INI!
   }
@@ -301,6 +307,7 @@ class Efd1100Exercises {
     double? output;
 
     // TULIS KODE DI SINI:
+    output = input2 / input1;
 
     return output == 2.0; // ← JANGAN UBAH BARIS INI!
   }
@@ -317,6 +324,7 @@ class Efd1100Exercises {
     int? output;
 
     // TULIS KODE DI SINI:
+    output = input1 * input2;
 
     return output == 200; // ← JANGAN UBAH BARIS INI!
   }
@@ -333,6 +341,7 @@ class Efd1100Exercises {
     int? output;
 
     // TULIS KODE DI SINI:
+    output = input2 % input1;
 
     return output == 0; // ← JANGAN UBAH BARIS INI!
   }
@@ -351,6 +360,8 @@ class Efd1100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Tambahkan " World!" ke akhir input
+    // output = input + " World!";
 
     return output; // ← JANGAN UBAH BARIS INI!
   }
@@ -367,6 +378,8 @@ class Efd1100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Split string dengan spasi dan ambil index 0
+    // output = input.split(" ")[0];
 
     return output == "Hello"; // ← JANGAN UBAH BARIS INI!
   }
@@ -383,6 +396,8 @@ class Efd1100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Split string dengan spasi dan ambil index 1
+    // output = input.split(" ")[1];
 
     return output == "World!"; // ← JANGAN UBAH BARIS INI!
   }
@@ -399,6 +414,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Bilangan genap jika input % 2 == 0
+    // output = input % 2 == 0;
 
     return output == false; // ← JANGAN UBAH BARIS INI!
   }
@@ -415,6 +432,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Bilangan ganjil jika input % 2 != 0
+    // output = input % 2 != 0;
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -431,6 +450,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Cek panjang string > 3
+    // output = input.length > 3;
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -447,6 +468,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Cek panjang string == 3
+    // output = input.length == 3;
 
     return output == false; // ← JANGAN UBAH BARIS INI!
   }
@@ -463,6 +486,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Cek apakah dimulai dengan huruf 'D'
+    // output = input.startsWith('D');
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -479,6 +504,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Cek apakah diakhiri dengan huruf 't'
+    // output = input.endsWith('t');
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -495,6 +522,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Konversi ke String lalu cek panjangnya == 5
+    // output = input.toString().length == 5;
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -511,6 +540,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Konversi ke String lalu cek panjangnya == 4
+    // output = input.toString().length == 4;
 
     return output == false; // ← JANGAN UBAH BARIS INI!
   }
@@ -527,6 +558,9 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Pisahkan bagian desimal dan cek jumlah digit == 2
+    // final parts = input.toString().split('.');
+    // output = parts.length == 2 && parts[1].length == 2;
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -543,6 +577,9 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Pisahkan bagian desimal dan cek jumlah digit == 3
+    // final parts = input.toString().split('.');
+    // output = parts.length == 2 && parts[1].length == 3;
 
     return output == false; // ← JANGAN UBAH BARIS INI!
   }
@@ -559,6 +596,12 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Bandingkan input dengan versi terbalik: input.split('').reversed.join('')
+    if (input.split('').reversed.join('') == input) {
+      output = true;
+    } else {
+      output = false;
+    }
 
     return output == false; // ← JANGAN UBAH BARIS INI!
   }
@@ -576,6 +619,8 @@ class Efd1100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Ubah ke huruf kecil dan ganti spasi dengan underscore
+    // output = input.toLowerCase().replaceAll(' ', '_');
 
     return output == "dart_is_awesome"; // ← JANGAN UBAH BARIS INI!
   }
@@ -592,6 +637,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Cek apakah int.tryParse(input) menghasilkan nilai bukan null
+    // output = int.tryParse(input) != null;
 
     return output == true; // ← JANGAN UBAH BARIS INI!
   }
@@ -609,6 +656,8 @@ class Efd1100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Ambil 50 karakter pertama dengan substring(0, 50)
+    // output = input.substring(0, 50);
 
     return output?.length == 50; // ← JANGAN UBAH BARIS INI!
   }
@@ -624,6 +673,8 @@ class Efd1100Exercises {
     bool? output;
 
     // TULIS KODE DI SINI:
+    // HINT: Gunakan input.contains("Dart") untuk mengecek keberadaan kata "Dart"
+    // output = input.contains("Dart");
 
     return output; // ← JANGAN UBAH BARIS INI!
   }

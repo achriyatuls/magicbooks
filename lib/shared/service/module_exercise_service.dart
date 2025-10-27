@@ -1,5 +1,12 @@
 import 'dart:io';
 import '../../module/efd1100_variable/validator/efd1100_validator.dart';
+import '../../module/efb100_null_safety/validator/efb100_validator.dart';
+import '../../module/efd1200_datetime/validator/efd1200_validator.dart';
+import '../../module/efd1300_string/validator/efd1300_validator.dart';
+import '../../module/efd1400_number/validator/efd1400_validator.dart';
+import '../../module/efd1500_if_statement/validator/efd1500_validator.dart';
+import '../../module/efd1600_list_and_map/validator/efd1600_validator.dart';
+import '../../module/efd1700_regex/validator/efd1700_validator.dart';
 import 'efw100_progress_service.dart';
 
 class ExerciseInfo {
@@ -53,9 +60,9 @@ class ModuleExerciseService {
         case 'EFB100':
           return 28; // Null Safety
         case 'EFD1600':
-          return 25; // List & Map
+          return 35; // List & Map
         case 'EFD1700':
-          return 18; // Regex
+          return 34; // Regex
         case 'EFD1800':
           return 22; // Async
         case 'EFW100':
@@ -90,12 +97,116 @@ class ModuleExerciseService {
         print('Error getting exercise status: $e');
         return {};
       }
+    } else if (moduleId == 'EFD1200') {
+      try {
+        final allResults = Efd1200Validator.runAllTests();
+        Map<String, bool> status = {};
+
+        for (var entry in allResults.entries) {
+          final exerciseId = '${moduleId}_ex${entry.key}';
+          status[exerciseId] = entry.value.isPerfect;
+        }
+
+        return status;
+      } catch (e) {
+        print('Error getting EFD1200 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFD1300') {
+      try {
+        final allResults = Efd1300Validator.runAllTests();
+        Map<String, bool> status = {};
+
+        for (var entry in allResults.entries) {
+          final exerciseId = '${moduleId}_ex${entry.key}';
+          status[exerciseId] = entry.value.isPerfect;
+        }
+
+        return status;
+      } catch (e) {
+        print('Error getting EFD1300 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFD1400') {
+      try {
+        final allResults = Efd1400Validator.runAllTests();
+        Map<String, bool> status = {};
+
+        for (var entry in allResults.entries) {
+          final exerciseId = '${moduleId}_ex${entry.key}';
+          status[exerciseId] = entry.value.isPerfect;
+        }
+
+        return status;
+      } catch (e) {
+        print('Error getting EFD1400 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFD1500') {
+      try {
+        final allResults = Efd1500Validator.runAllTests();
+        Map<String, bool> status = {};
+
+        for (var entry in allResults.entries) {
+          final exerciseId = '${moduleId}_ex${entry.key}';
+          status[exerciseId] = entry.value.isPerfect;
+        }
+
+        return status;
+      } catch (e) {
+        print('Error getting EFD1500 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFB100') {
+      try {
+        final allResults = Efb100Validator.runAllTests();
+        Map<String, bool> status = {};
+
+        for (var entry in allResults.entries) {
+          final exerciseId = '${moduleId}_ex${entry.key}';
+          status[exerciseId] = entry.value.isPerfect;
+        }
+
+        return status;
+      } catch (e) {
+        print('Error getting EFB100 exercise status: $e');
+        return {};
+      }
     } else if (moduleId == 'EFW100') {
       try {
         // Gunakan Efw100ProgressService untuk mendapatkan status
         return Efw100ProgressService.instance.getExerciseStatus();
       } catch (e) {
         print('Error getting EFW100 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFD1600') {
+      try {
+        final allResults = Efd1600Validator.runAllTests();
+        Map<String, bool> status = {};
+
+        for (var entry in allResults.entries) {
+          final exerciseId = '${moduleId}_ex${entry.key}';
+          status[exerciseId] = entry.value.isPerfect;
+        }
+
+        return status;
+      } catch (e) {
+        print('Error getting EFD1600 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFD1700') {
+      try {
+        // EFD1700 validator expose runTest synchronously; build status map for 34 exercises
+        Map<String, bool> status = {};
+        for (int i = 1; i <= 34; i++) {
+          final result = Efd1700Validator.runTest(i);
+          final exerciseId = '${moduleId}_ex$i';
+          status[exerciseId] = result.isPerfect;
+        }
+        return status;
+      } catch (e) {
+        print('Error getting EFD1700 exercise status: $e');
         return {};
       }
     }
@@ -733,8 +844,8 @@ Widget? exercise$exerciseNumber() {
           );
         });
       case 'EFD1600':
-        // Generate 25 exercises for List & Map
-        return List.generate(25, (index) {
+        // Generate 35 exercises for List & Map
+        return List.generate(35, (index) {
           final exerciseNum = index + 1;
           return ExerciseInfo(
             id: '${moduleId}_ex$exerciseNum',
@@ -747,8 +858,8 @@ Widget? exercise$exerciseNumber() {
           );
         });
       case 'EFD1700':
-        // Generate 18 exercises for Regex
-        return List.generate(18, (index) {
+        // Generate 34 exercises for Regex
+        return List.generate(34, (index) {
           final exerciseNum = index + 1;
           return ExerciseInfo(
             id: '${moduleId}_ex$exerciseNum',
