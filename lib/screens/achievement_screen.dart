@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../shared/model/achievement_model.dart';
+import '../shared/model/exercise_progress_model.dart';
 import '../shared/widget/reusable_widgets.dart';
+import '../shared/util/grade_converter.dart';
 
 class AchievementScreen extends StatefulWidget {
   final Map<String, dynamic> userProgress;
@@ -281,6 +283,24 @@ class _AchievementScreenState extends State<AchievementScreen> {
                 ),
               ),
 
+              // Grade Display Card
+              Container(
+                margin: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: _buildGradeCard(),
+              ),
+
               // Achievements List
               Expanded(
                 child: ListView(
@@ -440,5 +460,138 @@ class _AchievementScreenState extends State<AchievementScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildGradeCard() {
+    // Extract moduleProgress from userProgress
+    final moduleProgressMap =
+        widget.userProgress['moduleProgress'] as Map<String, dynamic>?;
+
+    if (moduleProgressMap == null || moduleProgressMap.isEmpty) {
+      return Text(
+        'Belum ada data progress',
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: Colors.grey[600],
+            ),
+      );
+    }
+
+    // Convert to List<ModuleProgress>
+    final moduleProgressList = moduleProgressMap.entries.map((entry) {
+      final data = entry.value as Map<String, dynamic>;
+      return ModuleProgress(
+        moduleId: entry.key,
+        userId: data['userId'] as String? ?? '',
+        totalExercises: data['totalExercises'] as int? ?? 0,
+        completedExercises: data['completedExercises'] as int? ?? 0,
+        completionPercentage: data['completionPercentage'] as double? ?? 0.0,
+        totalScore: data['totalScore'] as int? ?? 0,
+        lastAccessed: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
+    }).toList();
+
+    // Get grade report
+    final gradeReport =
+        GradeConverter.getDetailedGradeReport(moduleProgressList);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '📊 Nilai Keseluruhan',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Column(
+              children: [
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    color: _getGradeColor(gradeReport['letterGrade'] as String),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      gradeReport['letterGrade'] as String,
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  gradeReport['description'] as String,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: _getGradeColor(gradeReport['letterGrade'] as String),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildGradeInfo('Nilai', '${gradeReport['numericGrade']}%'),
+                const SizedBox(height: 8),
+                _buildGradeInfo('Weighted',
+                    '${(gradeReport['weightedProgress'] as double).toStringAsFixed(1)}%'),
+                const SizedBox(height: 8),
+                _buildGradeInfo('Modul Selesai',
+                    '${gradeReport['completedModules']}/${gradeReport['totalModules']}'),
+              ],
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGradeInfo(String label, String value) {
+    return Row(
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          value,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Color _getGradeColor(String grade) {
+    switch (grade) {
+      case 'A':
+        return Colors.green;
+      case 'B':
+        return Colors.lightGreen;
+      case 'C':
+        return Colors.orange;
+      case 'D':
+        return Colors.deepOrange;
+      case 'E':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
   }
 }

@@ -225,6 +225,7 @@ export 'package:magicbook/shared/service/exercise_submission_service.dart';
 export 'package:magicbook/shared/util/exercise_data_collector.dart';
 export 'package:magicbook/shared/widget/dialog/submit_exercise_dialog.dart';
 export 'package:magicbook/shared/widget/fab/submit_exercise_fab.dart';
+export 'package:magicbook/shared/util/grade_converter.dart';
 export 'package:magicbook/shared/service/efw100_progress_service.dart';
 export 'package:magicbook/screens/efw100_preview_screen.dart';
 export 'package:magicbook/screens/efw200_preview_screen.dart';
