@@ -376,6 +376,8 @@ class Efd1200Exercises {
     int? minute;
 
     // TULIS KODE DI SINI:
+    date = DateTime.parse('2024-03-15 14:30:00');
+    minute = date.minute;
 
     return minute; // ← JANGAN UBAH BARIS INI!
   }
@@ -396,6 +398,8 @@ class Efd1200Exercises {
     int? second;
 
     // TULIS KODE DI SINI:
+    date = DateTime.parse('2024-03-15 14:30:45');
+    second = date.second;
 
     return second; // ← JANGAN UBAH BARIS INI!
   }

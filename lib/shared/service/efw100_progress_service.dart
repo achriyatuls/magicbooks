@@ -18,14 +18,23 @@ class Efw100ProgressService {
     print('Efw100View berhasil di-set');
   }
 
+  /// Get instance dari Efw100CommonWidgetView
+  dynamic get efw100View => _efw100View;
+
   /// Get exercise status untuk semua exercises EFW100
-  Map<String, bool> getExerciseStatus() {
+  Map<String, bool> getExerciseStatus({bool useDefault = true}) {
+    print('getExerciseStatus dipanggil - _efw100View: ${_efw100View != null}');
     if (_efw100View == null) {
-      print('Efw100View belum di-set - menggunakan initial false status');
+      print(
+          'Efw100View belum di-set - menggunakan default status yang sudah benar');
+      if (useDefault) {
+        return _getDefaultExerciseStatus();
+      }
       return _getInitialFalseStatus();
     }
 
     try {
+      print('Efw100View tersedia - menggunakan instance untuk validasi');
       Map<String, bool> status = {};
 
       // Test exercises 1-15 untuk EFW100

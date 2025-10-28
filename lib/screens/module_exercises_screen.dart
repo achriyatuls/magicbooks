@@ -3,7 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../shared/widget/reusable_widgets.dart';
 import '../shared/service/module_exercise_service.dart';
 import '../shared/service/exercise_progress_service.dart';
+import '../shared/service/efw100_progress_service.dart';
+import '../module/efw100_common_widget/validator/efw100_validator.dart';
 import 'exercise_detail_screen.dart';
+import 'efw100_preview_screen.dart';
 
 class ModuleExercisesScreen extends StatefulWidget {
   final String moduleId;
@@ -269,8 +272,23 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                                               ),
                                         ),
                                         const SizedBox(width: 8),
-                                        if (_exerciseStatus[exercise.id] !=
-                                            true)
+                                        // Show preview button for EFW100 exercises
+                                        if (widget.moduleId == 'EFW100')
+                                          Tooltip(
+                                            message: 'Preview Widget',
+                                            child: IconButton(
+                                              icon: const Icon(Icons.preview),
+                                              onPressed: () =>
+                                                  _showPreviewWidget(exercise),
+                                              tooltip: 'Preview Widget',
+                                              color: Colors.blue,
+                                              iconSize: 20,
+                                            ),
+                                          ),
+                                        // Show refresh button for non-EFW100 exercises
+                                        if (widget.moduleId != 'EFW100' &&
+                                            _exerciseStatus[exercise.id] !=
+                                                true)
                                           IconButton(
                                             icon: const Icon(Icons.refresh),
                                             onPressed: () =>
@@ -357,85 +375,6 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
     }
   }
 
-  void _markAsCompleted(ExerciseInfo exercise) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Tandai Exercise Selesai'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Apakah Anda sudah menyelesaikan exercise:'),
-            const SizedBox(height: 8),
-            Text(
-              exercise.title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 12),
-            const Text('Pastikan Anda sudah:'),
-            const Text('• Membuka file exercise'),
-            const Text('• Mengedit kode di area "TULIS KODE DI SINI"'),
-            const Text('• Mengetes kode Anda'),
-            const Text('• Memastikan hasilnya benar'),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Batal'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              _confirmCompletion(exercise);
-            },
-            child: const Text('Ya, Selesai'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _confirmCompletion(ExerciseInfo exercise) {
-    // TODO: Implement actual progress saving to Firestore
-    // For now, just show success message
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${exercise.title} berhasil ditandai sebagai selesai!'),
-        backgroundColor: Colors.green,
-        action: SnackBarAction(
-          label: 'Undo',
-          textColor: Colors.white,
-          onPressed: () {
-            // TODO: Implement undo functionality
-          },
-        ),
-      ),
-    );
-
-    // Update UI to show completed state
-    setState(() {
-      // Find and update the exercise in the list
-      final index = _exercises.indexWhere((e) => e.id == exercise.id);
-      if (index != -1) {
-        // Create a new ExerciseInfo with completed status
-        // Note: This is a simplified approach - in real implementation,
-        // you would have a proper state management system
-        _exercises[index] = ExerciseInfo(
-          id: exercise.id,
-          title: exercise.title,
-          description: exercise.description,
-          instructions: exercise.instructions,
-          difficulty: exercise.difficulty,
-          isValidated: exercise.isValidated,
-          hint: exercise.hint,
-          example: exercise.example,
-        );
-      }
-    });
-  }
-
   void _refreshExerciseStatus(ExerciseInfo exercise) async {
     // Refresh status from validator
     final updatedStatus =
@@ -484,7 +423,7 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              '📊 Status Update: $completedCount/$totalCount exercises selesai'),
+              'Status Update: $completedCount/$totalCount exercises selesai'),
           backgroundColor: completedCount > 0 ? Colors.green : Colors.blue,
           duration: const Duration(seconds: 3),
         ),
@@ -505,7 +444,7 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
     if (_isSaving) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('⏳ Sedang menyimpan, tunggu sebentar...'),
+          content: Text('Sedang menyimpan, tunggu sebentar...'),
           backgroundColor: Colors.orange,
           duration: Duration(seconds: 2),
         ),
@@ -632,5 +571,179 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
   String _getExerciseFunctionName(String exerciseId) {
     final exerciseNumber = exerciseId.split('_ex')[1];
     return 'exercise${exerciseNumber}()';
+  }
+
+  // Show preview widget for EFW100 exercises
+  void _showPreviewWidget(ExerciseInfo exercise) {
+    // Extract exercise number
+    final exerciseNumber = int.tryParse(exercise.id.split('_ex')[1]) ?? 1;
+
+    // Get widget - first try from service, then create temporary instance
+    Widget? widget;
+    bool isValid = false;
+
+    // Try to get from Efw100ProgressService first
+    final efw100View = Efw100ProgressService.instance.efw100View;
+    if (efw100View != null) {
+      try {
+        // Call the exercise method dynamically
+        switch (exerciseNumber) {
+          case 1:
+            widget = (efw100View as dynamic).exercise1();
+            break;
+          case 2:
+            widget = (efw100View as dynamic).exercise2();
+            break;
+          case 3:
+            widget = (efw100View as dynamic).exercise3();
+            break;
+          case 4:
+            widget = (efw100View as dynamic).exercise4();
+            break;
+          case 5:
+            widget = (efw100View as dynamic).exercise5();
+            break;
+          case 6:
+            widget = (efw100View as dynamic).exercise6();
+            break;
+          case 7:
+            widget = (efw100View as dynamic).exercise7();
+            break;
+          case 8:
+            widget = (efw100View as dynamic).exercise8();
+            break;
+          case 9:
+            widget = (efw100View as dynamic).exercise9();
+            break;
+          case 10:
+            widget = (efw100View as dynamic).exercise10();
+            break;
+          case 11:
+            widget = (efw100View as dynamic).exercise11();
+            break;
+          case 12:
+            widget = (efw100View as dynamic).exercise12();
+            break;
+          case 13:
+            widget = (efw100View as dynamic).exercise13();
+            break;
+          case 14:
+            widget = (efw100View as dynamic).exercise14();
+            break;
+          case 15:
+            widget = (efw100View as dynamic).exercise15();
+            break;
+        }
+      } catch (e) {
+        print('Error calling exercise method from view: $e');
+      }
+    }
+
+    // If widget not obtained from service, create default widgets
+    if (widget == null) {
+      widget = _getDefaultWidget(exerciseNumber);
+    }
+
+    // Validate widget
+    isValid = Efw100Validator.validateExercise(exerciseNumber, widget);
+
+    // Navigate to preview screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Efw100PreviewScreen(
+          exerciseNumber: exerciseNumber,
+          widget: widget,
+          isValid: isValid,
+        ),
+      ),
+    );
+  }
+
+  // Helper method to create default widgets based on exercise number
+  Widget? _getDefaultWidget(int exerciseNumber) {
+    switch (exerciseNumber) {
+      case 1:
+        return Container(
+          width: 100,
+          height: 100,
+          color: Colors.red,
+        );
+      case 2:
+        return Text(
+          "Hello Flutter",
+          style: TextStyle(fontSize: 24),
+        );
+      case 3:
+        return Icon(
+          Icons.home,
+          color: Colors.blue,
+        );
+      case 4:
+        return Image.asset(
+          "assets/images/image1.jpg",
+          width: 100,
+          height: 100,
+          fit: BoxFit.cover,
+        );
+      case 5:
+        return CircleAvatar(
+          radius: 30,
+          backgroundColor: Colors.green,
+        );
+      case 6:
+        return Card(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Text("Card Content"),
+          ),
+        );
+      case 7:
+        return ListTile(
+          title: Text("List Tile"),
+          subtitle: Text("Subtitle"),
+        );
+      case 8:
+        return ElevatedButton(
+          onPressed: () {},
+          child: Text("Click Me"),
+        );
+      case 9:
+        return FloatingActionButton(
+          onPressed: () {},
+          child: Icon(Icons.add),
+        );
+      case 10:
+        return AppBar(
+          title: Text("My App"),
+        );
+      case 11:
+        return Scaffold(
+          appBar: AppBar(title: Text("App")),
+          body: Text("Hello World"),
+        );
+      case 12:
+        return SizedBox(
+          width: 200,
+          height: 100,
+          child: Container(color: Colors.grey[300]),
+        );
+      case 13:
+        return Padding(
+          padding: EdgeInsets.all(16),
+          child: Text("Padded Text"),
+        );
+      case 14:
+        return Center(
+          child: Text("Centered Text"),
+        );
+      case 15:
+        return Align(
+          alignment: Alignment.centerRight,
+          child: Text("Right Aligned"),
+        );
+      default:
+        return null;
+    }
   }
 }

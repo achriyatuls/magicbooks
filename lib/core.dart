@@ -227,3 +227,4 @@ export 'package:magicbook/shared/util/exercise_data_collector.dart';
 export 'package:magicbook/shared/widget/dialog/submit_exercise_dialog.dart';
 export 'package:magicbook/shared/widget/fab/submit_exercise_fab.dart';
 export 'package:magicbook/shared/service/efw100_progress_service.dart';
+export 'package:magicbook/screens/efw100_preview_screen.dart';

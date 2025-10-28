@@ -66,7 +66,7 @@ class ModuleExerciseService {
         case 'EFD1800':
           return 22; // Async
         case 'EFW100':
-          return 20; // Common Widget
+          return 15; // Common Widget
         case 'EFW200':
           return 18; // Layout
         case 'EFW300':
@@ -886,8 +886,8 @@ Widget? exercise$exerciseNumber() {
           );
         });
       case 'EFW100':
-        // Generate 20 exercises for Common Widget
-        return List.generate(20, (index) {
+        // Generate 15 exercises for Common Widget (exercise1-15 in efw100_common_widget_view.dart)
+        return List.generate(15, (index) {
           final exerciseNum = index + 1;
           return ExerciseInfo(
             id: '${moduleId}_ex$exerciseNum',

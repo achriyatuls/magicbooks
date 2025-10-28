@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,11 +30,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   List<ModuleProgress> _moduleProgressList = [];
   List<ModuleData> _allModules = [];
   bool _isLoading = true;
+  StreamSubscription<QuerySnapshot>? _progressStream;
 
   @override
   void initState() {
     super.initState();
     _loadUserData();
+    _setupProgressListener();
+  }
+
+  @override
+  void dispose() {
+    _progressStream?.cancel();
+    super.dispose();
   }
 
   Future<void> _loadUserData() async {
@@ -139,6 +148,79 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   // Method to refresh progress data
   Future<void> _refreshProgress() async {
     await _loadUserData();
+  }
+
+  // Setup listener for exercise progress changes
+  void _setupProgressListener() {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    _progressStream = FirebaseFirestore.instance
+        .collection('exercise_progress')
+        .where('userId', isEqualTo: user.uid)
+        .snapshots()
+        .listen((snapshot) {
+      // Update progress when there are changes
+      if (snapshot.docs.isNotEmpty) {
+        _updateModuleProgress();
+      }
+    });
+  }
+
+  // Update module progress based on latest Firestore data
+  Future<void> _updateModuleProgress() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    try {
+      // Get all completed exercises from Firestore
+      final snapshot = await FirebaseFirestore.instance
+          .collection('exercise_progress')
+          .where('userId', isEqualTo: user.uid)
+          .where('isCompleted', isEqualTo: true)
+          .get();
+
+      // Group by moduleId
+      final Map<String, int> moduleCompletedCount = {};
+      final Map<String, int> moduleTotalScore = {};
+
+      for (var doc in snapshot.docs) {
+        final data = doc.data();
+        final moduleId = data['moduleId'] as String?;
+        if (moduleId != null) {
+          moduleCompletedCount[moduleId] =
+              (moduleCompletedCount[moduleId] ?? 0) + 1;
+          moduleTotalScore[moduleId] =
+              (moduleTotalScore[moduleId] ?? 0) + (data['score'] as int? ?? 0);
+        }
+      }
+
+      // Update progress list
+      final updatedProgress = <ModuleProgress>[];
+      for (var progress in _moduleProgressList) {
+        final completedCount = moduleCompletedCount[progress.moduleId] ?? 0;
+        final totalScore = moduleTotalScore[progress.moduleId] ?? 0;
+
+        updatedProgress.add(ModuleProgress(
+          moduleId: progress.moduleId,
+          userId: progress.userId,
+          totalExercises: progress.totalExercises,
+          completedExercises: completedCount,
+          completionPercentage: progress.totalExercises > 0
+              ? (completedCount / progress.totalExercises) * 100
+              : 0.0,
+          totalScore: totalScore,
+          lastAccessed: progress.lastAccessed,
+          updatedAt: DateTime.now(),
+        ));
+      }
+
+      setState(() {
+        _moduleProgressList = updatedProgress;
+      });
+    } catch (e) {
+      print('Error updating module progress: $e');
+    }
   }
 
   @override
@@ -376,6 +458,21 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                           ),
                         ),
                       )),
+
+                  const SizedBox(height: 24),
+
+                  // Recent Activities
+                  Text(
+                    'Aktivitas Terbaru',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  _buildRecentActivities(),
                 ],
               ),
             ),
@@ -383,6 +480,142 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildRecentActivities() {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: _getRecentActivities(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const ReusableCard(
+            backgroundColor: Colors.white,
+            child: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (snapshot.hasError || !snapshot.hasData || snapshot.data!.isEmpty) {
+          return ReusableCard(
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Icon(Icons.history, size: 48, color: Colors.grey[400]),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Belum ada aktivitas',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey[600],
+                        ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return Column(
+          children: snapshot.data!.take(5).map((activity) {
+            return ReusableCard(
+              backgroundColor: Colors.white,
+              margin: const EdgeInsets.only(bottom: 8),
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: _getActivityColor(activity['type']),
+                  child: Icon(
+                    _getActivityIcon(activity['type']),
+                    color: Colors.white,
+                  ),
+                ),
+                title: Text(
+                  activity['title'],
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  _formatTimestamp(activity['timestamp']),
+                  style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                ),
+                trailing: activity['score'] != null
+                    ? Chip(
+                        label: Text('+${activity['score']} XP'),
+                        backgroundColor: Colors.amber.shade100,
+                        labelStyle: const TextStyle(fontSize: 12),
+                      )
+                    : null,
+              ),
+            );
+          }).toList(),
+        );
+      },
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> _getRecentActivities() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return [];
+
+    try {
+      final snapshot = await FirebaseFirestore.instance
+          .collection('exercise_progress')
+          .where('userId', isEqualTo: user.uid)
+          .where('isCompleted', isEqualTo: true)
+          .orderBy('updatedAt', descending: true)
+          .limit(10)
+          .get();
+
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        return {
+          'type': 'exercise_completed',
+          'title': 'Menyelesaikan ${data['exerciseId'] ?? ''}',
+          'moduleId': data['moduleId'] ?? '',
+          'timestamp': (data['updatedAt'] as Timestamp?)?.toDate(),
+          'score': data['score'] as int?,
+        };
+      }).toList();
+    } catch (e) {
+      print('Error getting recent activities: $e');
+      return [];
+    }
+  }
+
+  Color _getActivityColor(String type) {
+    switch (type) {
+      case 'exercise_completed':
+        return Colors.green;
+      case 'module_completed':
+        return Colors.blue;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  IconData _getActivityIcon(String type) {
+    switch (type) {
+      case 'exercise_completed':
+        return Icons.check_circle;
+      case 'module_completed':
+        return Icons.book;
+      default:
+        return Icons.notifications;
+    }
+  }
+
+  String _formatTimestamp(DateTime? timestamp) {
+    if (timestamp == null) return '';
+
+    final now = DateTime.now();
+    final difference = now.difference(timestamp);
+
+    if (difference.inMinutes < 1) {
+      return 'Baru saja';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes} menit yang lalu';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours} jam yang lalu';
+    } else {
+      return '${difference.inDays} hari yang lalu';
+    }
   }
 
   Widget _buildModulesScreen() {
@@ -999,7 +1232,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     final totalXP = _moduleProgressList.fold(
         0, (sum, progress) => sum + progress.totalScore);
 
-    // Prepare module progress map
+    // Prepare module progress map for ALL modules (EFD, EFB, EFW)
     Map<String, dynamic> moduleProgress = {};
     for (var progress in _moduleProgressList) {
       // Perfect exercises = all exercises completed (100% completion)
@@ -1013,6 +1246,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         'completedExercises': progress.completedExercises,
       };
     }
+
+    // Log untuk debugging
+    print('📊 Achievement Progress Summary:');
+    print('Total Completed Exercises: $completedExercises');
+    print('Perfect Exercises: $perfectExercises');
+    print('Total XP: $totalXP');
+    print('Module Progress Keys: ${moduleProgress.keys.toList()}');
 
     return {
       'totalCompletedExercises': completedExercises,

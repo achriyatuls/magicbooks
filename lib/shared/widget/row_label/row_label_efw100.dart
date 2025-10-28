@@ -115,36 +115,69 @@ void _showWidgetPreview(
 
   showDialog(
     context: context,
-    builder: (context) => AlertDialog(
-      title: Row(
-        children: [
-          Expanded(child: Text('Preview: $title')),
-          const SizedBox(width: 8),
-          Icon(
-            isValid ? Icons.check_circle : Icons.error,
-            color: isValid ? Colors.green : Colors.red,
-          ),
-        ],
-      ),
-      content: Container(
-        width: 300,
-        height: 300,
+    builder: (context) => Dialog(
+      child: Container(
+        width: 350,
+        height: 400,
         decoration: BoxDecoration(
           border: Border.all(
             color: isValid ? Colors.green : Colors.red,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(8),
-          color: Colors.grey[50],
         ),
-        child: _buildPreviewSurface(widget),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Header dengan judul Scaffold-style
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.purple,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8),
+                  topRight: Radius.circular(8),
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.visibility,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'EFW100 - Common Widget',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    isValid ? Icons.check_circle : Icons.error,
+                    color: isValid ? Colors.green : Colors.red,
+                  ),
+                ],
+              ),
+            ),
+            // Preview content
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(8),
+                    bottomRight: Radius.circular(8),
+                  ),
+                ),
+                child: _buildPreviewSurface(widget),
+              ),
+            ),
+          ],
+        ),
       ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: Text('Close'),
-        ),
-      ],
     ),
   );
 }
@@ -185,6 +218,93 @@ Widget _buildPreviewSurface(Widget widget) {
       child: Container(
         color: Colors.white,
         child: Center(child: widget),
+      ),
+    );
+  }
+
+  if (widget is Image) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(6),
+      child: Material(
+        child: Container(
+          color: Colors.grey[200],
+          child: Center(
+            child: widget,
+          ),
+        ),
+      ),
+    );
+  }
+
+  if (widget is CircleAvatar) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: Center(child: widget),
+      ),
+    );
+  }
+
+  if (widget is Card) {
+    return Material(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: widget,
+      ),
+    );
+  }
+
+  if (widget is ListTile) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        width: double.infinity,
+        child: widget,
+      ),
+    );
+  }
+
+  if (widget is ElevatedButton) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: Center(child: widget),
+      ),
+    );
+  }
+
+  if (widget is SizedBox) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: Center(child: widget),
+      ),
+    );
+  }
+
+  if (widget is Padding) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: Center(child: widget),
+      ),
+    );
+  }
+
+  if (widget is Center) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: widget,
+      ),
+    );
+  }
+
+  if (widget is Align) {
+    return Material(
+      child: Container(
+        color: Colors.white,
+        child: widget,
       ),
     );
   }

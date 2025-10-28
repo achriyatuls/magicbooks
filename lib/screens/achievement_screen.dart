@@ -25,13 +25,22 @@ class _AchievementScreenState extends State<AchievementScreen> {
   }
 
   void _loadAchievements() {
-    unlockedAchievements = AchievementService.getUnlockedAchievements(widget.userProgress);
-    lockedAchievements = AchievementService.getLockedAchievements(widget.userProgress);
+    unlockedAchievements =
+        AchievementService.getUnlockedAchievements(widget.userProgress);
+    lockedAchievements =
+        AchievementService.getLockedAchievements(widget.userProgress);
+
+    // Log untuk debugging
+    print('🏆 Achievement System:');
+    print('Unlocked: ${unlockedAchievements.length}');
+    print('Locked: ${lockedAchievements.length}');
+    print('User Progress: ${widget.userProgress}');
   }
 
   void _showAchievementDetails(Achievement achievement) {
     final isUnlocked = achievement.isUnlocked(widget.userProgress);
-    final progressPercentage = achievement.getProgressPercentage(widget.userProgress);
+    final progressPercentage =
+        achievement.getProgressPercentage(widget.userProgress);
     final progressText = achievement.getProgressText(widget.userProgress);
 
     showDialog(
@@ -65,12 +74,16 @@ class _AchievementScreenState extends State<AchievementScreen> {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 16),
-              
+
               // Rarity Badge
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Color(int.parse(AchievementService.getRarityColor(achievement.rarity).substring(1), radix: 16) + 0xFF000000),
+                  color: Color(int.parse(
+                          AchievementService.getRarityColor(achievement.rarity)
+                              .substring(1),
+                          radix: 16) +
+                      0xFF000000),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -82,9 +95,9 @@ class _AchievementScreenState extends State<AchievementScreen> {
                   ),
                 ),
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // XP Reward
               Row(
                 children: [
@@ -99,63 +112,71 @@ class _AchievementScreenState extends State<AchievementScreen> {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 16),
-              
+
               // Requirements
               Text(
                 'Requirements:',
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const SizedBox(height: 8),
               ...achievement.requirements.map((req) => Padding(
-                padding: const EdgeInsets.only(left: 8, bottom: 4),
-                child: Row(
-                  children: [
-                    Icon(
-                      isUnlocked ? Icons.check_circle : Icons.radio_button_unchecked,
-                      color: isUnlocked ? Colors.green : Colors.grey,
-                      size: 16,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        req,
-                        style: TextStyle(
-                          color: isUnlocked ? Colors.green : Colors.grey[600],
+                    padding: const EdgeInsets.only(left: 8, bottom: 4),
+                    child: Row(
+                      children: [
+                        Icon(
+                          isUnlocked
+                              ? Icons.check_circle
+                              : Icons.radio_button_unchecked,
+                          color: isUnlocked ? Colors.green : Colors.grey,
+                          size: 16,
                         ),
-                      ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            req,
+                            style: TextStyle(
+                              color:
+                                  isUnlocked ? Colors.green : Colors.grey[600],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )),
-              
+                  )),
+
               const SizedBox(height: 16),
-              
+
               // Progress
               if (!isUnlocked) ...[
                 Text(
                   'Progress:',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                        fontWeight: FontWeight.bold,
+                      ),
                 ),
                 const SizedBox(height: 8),
                 LinearProgressIndicator(
                   value: progressPercentage / 100,
                   backgroundColor: Colors.grey[300],
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    Color(int.parse(AchievementService.getRarityColor(achievement.rarity).substring(1), radix: 16) + 0xFF000000),
+                    Color(int.parse(
+                            AchievementService.getRarityColor(
+                                    achievement.rarity)
+                                .substring(1),
+                            radix: 16) +
+                        0xFF000000),
                   ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   progressText,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.grey[600],
-                  ),
+                        color: Colors.grey[600],
+                      ),
                 ),
               ],
             ],
@@ -215,10 +236,13 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       children: [
                         Text(
                           '${unlockedAchievements.length}',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                              ),
                         ),
                         const Text('Unlocked'),
                       ],
@@ -227,10 +251,13 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       children: [
                         Text(
                           '${lockedAchievements.length}',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey[600],
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey[600],
+                              ),
                         ),
                         const Text('Locked'),
                       ],
@@ -239,10 +266,13 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       children: [
                         Text(
                           '${AchievementService.getTotalXPFromAchievements(widget.userProgress)}',
-                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.amber,
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.amber,
+                              ),
                         ),
                         const Text('XP Earned'),
                       ],
@@ -261,12 +291,13 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       Text(
                         'Unlocked Achievements',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                       ),
                       const SizedBox(height: 8),
-                      ...unlockedAchievements.map((achievement) => _buildAchievementCard(achievement, true)),
+                      ...unlockedAchievements.map((achievement) =>
+                          _buildAchievementCard(achievement, true)),
                       const SizedBox(height: 24),
                     ],
 
@@ -275,12 +306,13 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       Text(
                         'Locked Achievements',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                       ),
                       const SizedBox(height: 8),
-                      ...lockedAchievements.map((achievement) => _buildAchievementCard(achievement, false)),
+                      ...lockedAchievements.map((achievement) =>
+                          _buildAchievementCard(achievement, false)),
                     ],
                   ],
                 ),
@@ -293,8 +325,11 @@ class _AchievementScreenState extends State<AchievementScreen> {
   }
 
   Widget _buildAchievementCard(Achievement achievement, bool isUnlocked) {
-    final rarityColor = Color(int.parse(AchievementService.getRarityColor(achievement.rarity).substring(1), radix: 16) + 0xFF000000);
-    
+    final rarityColor = Color(int.parse(
+            AchievementService.getRarityColor(achievement.rarity).substring(1),
+            radix: 16) +
+        0xFF000000);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       child: ReusableCard(
@@ -307,7 +342,9 @@ class _AchievementScreenState extends State<AchievementScreen> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: isUnlocked ? rarityColor.withOpacity(0.1) : Colors.grey[300],
+                color: isUnlocked
+                    ? rarityColor.withOpacity(0.1)
+                    : Colors.grey[300],
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(
                   color: isUnlocked ? rarityColor : Colors.grey[400]!,
@@ -324,9 +361,9 @@ class _AchievementScreenState extends State<AchievementScreen> {
                 ),
               ),
             ),
-            
+
             const SizedBox(width: 16),
-            
+
             // Content
             Expanded(
               child: Column(
@@ -337,14 +374,18 @@ class _AchievementScreenState extends State<AchievementScreen> {
                       Expanded(
                         child: Text(
                           achievement.title,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: isUnlocked ? Colors.black : Colors.grey[600],
-                          ),
+                          style:
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: isUnlocked
+                                        ? Colors.black
+                                        : Colors.grey[600],
+                                  ),
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 2),
                         decoration: BoxDecoration(
                           color: isUnlocked ? rarityColor : Colors.grey[400],
                           borderRadius: BorderRadius.circular(8),
@@ -364,8 +405,8 @@ class _AchievementScreenState extends State<AchievementScreen> {
                   Text(
                     achievement.description,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: isUnlocked ? Colors.black87 : Colors.grey[600],
-                    ),
+                          color: isUnlocked ? Colors.black87 : Colors.grey[600],
+                        ),
                   ),
                   const SizedBox(height: 8),
                   Row(

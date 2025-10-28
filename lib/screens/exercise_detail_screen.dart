@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../shared/widget/reusable_widgets.dart';
-import '../module/efw100_common_widget/validator/efw100_validator.dart';
 
 class ExerciseDetailScreen extends StatefulWidget {
   final String exerciseId;
@@ -78,28 +77,10 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Builder(
-                          builder: (context) {
-                            // Get exercise number from exerciseId
-                            int exerciseNumber = _getExerciseNumber();
-                            Widget? testWidget = _getTestWidget(exerciseNumber);
-                            bool isValid = Efw100Validator.validateExercise(
-                                exerciseNumber, testWidget);
-
-                            return Column(
-                              children: [
-                                Text(
-                                    'Exercise $exerciseNumber Widget: ${testWidget?.runtimeType}'),
-                                Text('Is Valid: $isValid'),
-                                Text('Has Widget: ${testWidget != null}'),
-                                const SizedBox(height: 12),
-                                ElevatedButton(
-                                  onPressed: () => _showTestPreview(),
-                                  child: Text('Test Preview System'),
-                                ),
-                              ],
-                            );
-                          },
+                        Text(
+                          'Gunakan tombol preview di card list untuk melihat hasil jawaban siswa.',
+                          style: TextStyle(
+                              color: Colors.orange[900], fontSize: 12),
                         ),
                       ],
                     ),
@@ -608,105 +589,5 @@ class _ExerciseDetailScreenState extends State<ExerciseDetailScreen> {
         ],
       ),
     );
-  }
-
-  // Helper methods for EFW100 Debug and Preview
-  int _getExerciseNumber() {
-    // Extract exercise number from exerciseId (e.g., "EFW100_ex1" -> 1)
-    if (widget.exerciseId.contains('_ex')) {
-      String numberPart = widget.exerciseId.split('_ex')[1];
-      return int.tryParse(numberPart) ?? 1;
-    }
-    return 1;
-  }
-
-  Widget? _getTestWidget(int exerciseNumber) {
-    // Create test widgets based on exercise number
-    switch (exerciseNumber) {
-      case 1:
-        return Container(
-          width: 100,
-          height: 100,
-          color: Colors.red,
-        );
-      case 2:
-        return Text(
-          "Hello Flutter",
-          style: TextStyle(fontSize: 24),
-        );
-      case 3:
-        return Icon(
-          Icons.home,
-          color: Colors.blue,
-          size: 32,
-        );
-      case 4:
-        return Image.asset(
-          'assets/images/flutter_logo.png',
-          width: 100,
-          height: 100,
-          fit: BoxFit.cover,
-        );
-      case 5:
-        return CircleAvatar(
-          radius: 25,
-          backgroundColor: Colors.green,
-        );
-      default:
-        return Container(
-          width: 50,
-          height: 50,
-          color: Colors.grey,
-        );
-    }
-  }
-
-  void _showTestPreview() {
-    int exerciseNumber = _getExerciseNumber();
-    Widget? testWidget = _getTestWidget(exerciseNumber);
-    bool isValid = Efw100Validator.validateExercise(exerciseNumber, testWidget);
-
-    if (testWidget != null) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Row(
-            children: [
-              Text('Preview: Exercise $exerciseNumber'),
-              const SizedBox(width: 8),
-              Icon(
-                isValid ? Icons.check_circle : Icons.error,
-                color: isValid ? Colors.green : Colors.red,
-              ),
-            ],
-          ),
-          content: Container(
-            width: 180,
-            height: 180,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: isValid ? Colors.green : Colors.red,
-                width: 2,
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(child: testWidget),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('Close'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('No widget available for preview'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
   }
 }
