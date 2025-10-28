@@ -8,6 +8,7 @@ import '../../module/efd1500_if_statement/validator/efd1500_validator.dart';
 import '../../module/efd1600_list_and_map/validator/efd1600_validator.dart';
 import '../../module/efd1700_regex/validator/efd1700_validator.dart';
 import 'efw100_progress_service.dart';
+import 'efw200_progress_service.dart';
 
 class ExerciseInfo {
   final String id;
@@ -95,6 +96,13 @@ class ModuleExerciseService {
         return status;
       } catch (e) {
         print('Error getting exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFW200') {
+      try {
+        return Efw200ProgressService.instance.getExerciseStatus();
+      } catch (e) {
+        print('Error getting EFW200 exercise status: $e');
         return {};
       }
     } else if (moduleId == 'EFD1200') {

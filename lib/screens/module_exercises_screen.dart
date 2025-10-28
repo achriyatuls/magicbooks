@@ -4,9 +4,12 @@ import '../shared/widget/reusable_widgets.dart';
 import '../shared/service/module_exercise_service.dart';
 import '../shared/service/exercise_progress_service.dart';
 import '../shared/service/efw100_progress_service.dart';
+import '../shared/service/efw200_progress_service.dart';
 import '../module/efw100_common_widget/validator/efw100_validator.dart';
+import '../module/efw200_layout/validator/efw200_validator.dart';
 import 'exercise_detail_screen.dart';
 import 'efw100_preview_screen.dart';
+import 'efw200_preview_screen.dart';
 
 class ModuleExercisesScreen extends StatefulWidget {
   final String moduleId;
@@ -34,6 +37,18 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
   void initState() {
     super.initState();
     _loadExercises();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Auto-refresh status when screen becomes visible
+    // This helps update status after user opens EFW view page
+    if (_exercises.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _checkAllExerciseStatus();
+      });
+    }
   }
 
   Future<void> _loadExercises() async {
@@ -272,8 +287,9 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                                               ),
                                         ),
                                         const SizedBox(width: 8),
-                                        // Show preview button for EFW100 exercises
-                                        if (widget.moduleId == 'EFW100')
+                                        // Show preview button for EFW100 and EFW200 exercises
+                                        if (widget.moduleId == 'EFW100' ||
+                                            widget.moduleId == 'EFW200')
                                           Tooltip(
                                             message: 'Preview Widget',
                                             child: IconButton(
@@ -285,8 +301,9 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                                               iconSize: 20,
                                             ),
                                           ),
-                                        // Show refresh button for non-EFW100 exercises
+                                        // Show refresh button for non-EFW exercises
                                         if (widget.moduleId != 'EFW100' &&
+                                            widget.moduleId != 'EFW200' &&
                                             _exerciseStatus[exercise.id] !=
                                                 true)
                                           IconButton(
@@ -486,6 +503,14 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
       final updatedStatus =
           ModuleExerciseService.getExerciseStatus(widget.moduleId);
 
+      print('📊 EFW200 Status check for ${widget.moduleId}:');
+      print('   Exercise IDs: ${_exercises.map((e) => e.id).join(", ")}');
+      print('   Updated status: $updatedStatus');
+      if (widget.moduleId == 'EFW200') {
+        final efw200View = Efw200ProgressService.instance.efw200View;
+        print('   Efw200View registered: ${efw200View != null}');
+      }
+
       setState(() {
         _exerciseStatus = updatedStatus;
       });
@@ -495,6 +520,8 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
           .where((exercise) => updatedStatus[exercise.id] == true)
           .map((exercise) => exercise.id)
           .toList();
+
+      print('   Completed exercises: ${completedExercises.join(", ")}');
 
       if (completedExercises.isNotEmpty) {
         // Use batch write method
@@ -573,95 +600,189 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
     return 'exercise${exerciseNumber}()';
   }
 
-  // Show preview widget for EFW100 exercises
+  // Show preview widget for EFW100 and EFW200 exercises
   void _showPreviewWidget(ExerciseInfo exercise) {
     // Extract exercise number
     final exerciseNumber = int.tryParse(exercise.id.split('_ex')[1]) ?? 1;
 
     // Get widget - first try from service, then create temporary instance
-    Widget? widget;
+    Widget? previewWidget;
     bool isValid = false;
 
-    // Try to get from Efw100ProgressService first
-    final efw100View = Efw100ProgressService.instance.efw100View;
-    if (efw100View != null) {
-      try {
-        // Call the exercise method dynamically
-        switch (exerciseNumber) {
-          case 1:
-            widget = (efw100View as dynamic).exercise1();
-            break;
-          case 2:
-            widget = (efw100View as dynamic).exercise2();
-            break;
-          case 3:
-            widget = (efw100View as dynamic).exercise3();
-            break;
-          case 4:
-            widget = (efw100View as dynamic).exercise4();
-            break;
-          case 5:
-            widget = (efw100View as dynamic).exercise5();
-            break;
-          case 6:
-            widget = (efw100View as dynamic).exercise6();
-            break;
-          case 7:
-            widget = (efw100View as dynamic).exercise7();
-            break;
-          case 8:
-            widget = (efw100View as dynamic).exercise8();
-            break;
-          case 9:
-            widget = (efw100View as dynamic).exercise9();
-            break;
-          case 10:
-            widget = (efw100View as dynamic).exercise10();
-            break;
-          case 11:
-            widget = (efw100View as dynamic).exercise11();
-            break;
-          case 12:
-            widget = (efw100View as dynamic).exercise12();
-            break;
-          case 13:
-            widget = (efw100View as dynamic).exercise13();
-            break;
-          case 14:
-            widget = (efw100View as dynamic).exercise14();
-            break;
-          case 15:
-            widget = (efw100View as dynamic).exercise15();
-            break;
+    // EFW100 Logic
+    if (widget.moduleId == 'EFW100') {
+      final efw100View = Efw100ProgressService.instance.efw100View;
+      if (efw100View != null) {
+        try {
+          // Call the exercise method dynamically
+          switch (exerciseNumber) {
+            case 1:
+              previewWidget = (efw100View as dynamic).exercise1();
+              break;
+            case 2:
+              previewWidget = (efw100View as dynamic).exercise2();
+              break;
+            case 3:
+              previewWidget = (efw100View as dynamic).exercise3();
+              break;
+            case 4:
+              previewWidget = (efw100View as dynamic).exercise4();
+              break;
+            case 5:
+              previewWidget = (efw100View as dynamic).exercise5();
+              break;
+            case 6:
+              previewWidget = (efw100View as dynamic).exercise6();
+              break;
+            case 7:
+              previewWidget = (efw100View as dynamic).exercise7();
+              break;
+            case 8:
+              previewWidget = (efw100View as dynamic).exercise8();
+              break;
+            case 9:
+              previewWidget = (efw100View as dynamic).exercise9();
+              break;
+            case 10:
+              previewWidget = (efw100View as dynamic).exercise10();
+              break;
+            case 11:
+              previewWidget = (efw100View as dynamic).exercise11();
+              break;
+            case 12:
+              previewWidget = (efw100View as dynamic).exercise12();
+              break;
+            case 13:
+              previewWidget = (efw100View as dynamic).exercise13();
+              break;
+            case 14:
+              previewWidget = (efw100View as dynamic).exercise14();
+              break;
+            case 15:
+              previewWidget = (efw100View as dynamic).exercise15();
+              break;
+          }
+        } catch (e) {
+          print('Error calling EFW100 exercise method: $e');
         }
-      } catch (e) {
-        print('Error calling exercise method from view: $e');
+      }
+    }
+
+    // EFW200 Logic
+    if (widget.moduleId == 'EFW200') {
+      final efw200View = Efw200ProgressService.instance.efw200View;
+      if (efw200View != null) {
+        try {
+          // Call the exercise method dynamically
+          switch (exerciseNumber) {
+            case 1:
+              previewWidget = (efw200View as dynamic).exercise1();
+              break;
+            case 2:
+              previewWidget = (efw200View as dynamic).exercise2();
+              break;
+            case 3:
+              previewWidget = (efw200View as dynamic).exercise3();
+              break;
+            case 4:
+              previewWidget = (efw200View as dynamic).exercise4();
+              break;
+            case 5:
+              previewWidget = (efw200View as dynamic).exercise5();
+              break;
+            case 6:
+              previewWidget = (efw200View as dynamic).exercise6();
+              break;
+            case 7:
+              previewWidget = (efw200View as dynamic).exercise7();
+              break;
+            case 8:
+              previewWidget = (efw200View as dynamic).exercise8();
+              break;
+            case 9:
+              previewWidget = (efw200View as dynamic).exercise9();
+              break;
+            case 10:
+              previewWidget = (efw200View as dynamic).exercise10();
+              break;
+            case 11:
+              previewWidget = (efw200View as dynamic).exercise11();
+              break;
+            case 12:
+              previewWidget = (efw200View as dynamic).exercise12();
+              break;
+            case 13:
+              previewWidget = (efw200View as dynamic).exercise13();
+              break;
+            case 14:
+              previewWidget = (efw200View as dynamic).exercise14();
+              break;
+            case 15:
+              previewWidget = (efw200View as dynamic).exercise15();
+              break;
+            case 16:
+              previewWidget = (efw200View as dynamic).exercise16();
+              break;
+            case 17:
+              previewWidget = (efw200View as dynamic).exercise17();
+              break;
+            case 18:
+              previewWidget = (efw200View as dynamic).exercise18();
+              break;
+          }
+        } catch (e) {
+          print('Error calling EFW200 exercise method: $e');
+        }
       }
     }
 
     // If widget not obtained from service, create default widgets
-    if (widget == null) {
-      widget = _getDefaultWidget(exerciseNumber);
+    if (previewWidget == null) {
+      previewWidget = _getDefaultWidget(exerciseNumber);
     }
 
-    // Validate widget
-    isValid = Efw100Validator.validateExercise(exerciseNumber, widget);
+    // Validate widget based on module
+    if (widget.moduleId == 'EFW100') {
+      isValid = Efw100Validator.validateExercise(exerciseNumber, previewWidget);
+    } else if (widget.moduleId == 'EFW200') {
+      isValid = Efw200Validator.validateExercise(exerciseNumber, previewWidget);
+    }
 
-    // Navigate to preview screen
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Efw100PreviewScreen(
-          exerciseNumber: exerciseNumber,
-          widget: widget,
-          isValid: isValid,
+    // Navigate to preview screen based on module
+    if (widget.moduleId == 'EFW200') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Efw200PreviewScreen(
+            exerciseNumber: exerciseNumber,
+            widget: previewWidget!,
+            isValid: isValid,
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      // Default to EFW100 for other EFW modules
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Efw100PreviewScreen(
+            exerciseNumber: exerciseNumber,
+            widget: previewWidget!,
+            isValid: isValid,
+          ),
+        ),
+      );
+    }
   }
 
   // Helper method to create default widgets based on exercise number
   Widget? _getDefaultWidget(int exerciseNumber) {
+    // Check if this is for EFW200 module
+    if (widget.moduleId == 'EFW200') {
+      return _getDefaultEfw200Widget(exerciseNumber);
+    }
+
+    // Default widgets for EFW100
     switch (exerciseNumber) {
       case 1:
         return Container(
@@ -744,6 +865,152 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
         );
       default:
         return null;
+    }
+  }
+
+  // Helper method to create default EFW200 widgets based on exercise number
+  Widget? _getDefaultEfw200Widget(int exerciseNumber) {
+    switch (exerciseNumber) {
+      case 1:
+        // Row with 3 containers
+        return Row(
+          children: [
+            Container(width: 50, height: 50, color: Colors.red),
+            Container(width: 50, height: 50, color: Colors.green),
+            Container(width: 50, height: 50, color: Colors.blue),
+          ],
+        );
+      case 2:
+        // Column with 3 texts
+        return Column(
+          children: [
+            Text("Text 1"),
+            Text("Text 2"),
+            Text("Text 3"),
+          ],
+        );
+      case 3:
+        // Stack
+        return Stack(
+          children: [
+            Container(width: 100, height: 100, color: Colors.red),
+            Container(width: 50, height: 50, color: Colors.green),
+          ],
+        );
+      case 4:
+        // Stack with Positioned
+        return Stack(
+          children: [
+            Container(width: 100, height: 100, color: Colors.red),
+            Positioned(
+              top: 20,
+              left: 20,
+              child: Container(width: 50, height: 50, color: Colors.green),
+            ),
+          ],
+        );
+      case 5:
+        // Wrap
+        return Wrap(
+          children: [
+            Container(width: 50, height: 50, color: Colors.red),
+            Container(width: 50, height: 50, color: Colors.green),
+            Container(width: 50, height: 50, color: Colors.blue),
+          ],
+        );
+      case 6:
+        // Row with Expanded
+        return Row(
+          children: [
+            Expanded(child: Container(height: 50, color: Colors.red)),
+            Expanded(child: Container(height: 50, color: Colors.green)),
+          ],
+        );
+      case 7:
+        // Column with Flexible
+        return Column(
+          children: [
+            Flexible(
+                child: Container(width: 50, height: 50, color: Colors.red)),
+            Flexible(
+                child: Container(width: 50, height: 50, color: Colors.green)),
+          ],
+        );
+      case 8:
+        // SizedBox
+        return SizedBox(width: 100, height: 100);
+      case 9:
+        // Container with margin and padding
+        return Container(
+          width: 100,
+          height: 100,
+          margin: EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
+        );
+      case 10:
+        // Padding
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          child: Container(width: 50, height: 50),
+        );
+      case 11:
+        // Center
+        return Center(
+          child: Container(width: 50, height: 50, color: Colors.red),
+        );
+      case 12:
+        // Align
+        return Align(
+          alignment: Alignment.topLeft,
+          child: Container(width: 50, height: 50, color: Colors.red),
+        );
+      case 13:
+        // AspectRatio
+        return AspectRatio(
+          aspectRatio: 16 / 9,
+          child: Container(color: Colors.red),
+        );
+      case 14:
+        // FractionallySizedBox
+        return FractionallySizedBox(
+          widthFactor: 0.5,
+          child: Container(height: 50, color: Colors.red),
+        );
+      case 15:
+        // LayoutBuilder
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              width: constraints.maxWidth,
+              height: constraints.maxHeight,
+              color: Colors.red,
+            );
+          },
+        );
+      case 16:
+        // Transform.rotate
+        return Transform.rotate(
+          angle: 0.5,
+          child: Container(width: 50, height: 50, color: Colors.blue),
+        );
+      case 17:
+        // Transform.scale
+        return Transform.scale(
+          scale: 1.5,
+          child: Container(width: 50, height: 50, color: Colors.green),
+        );
+      case 18:
+        // Transform.translate
+        return Transform.translate(
+          offset: Offset(10, 10),
+          child: Container(width: 50, height: 50, color: Colors.purple),
+        );
+      default:
+        return Container(
+          width: 100,
+          height: 100,
+          color: Colors.grey,
+        );
     }
   }
 }

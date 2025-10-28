@@ -71,7 +71,6 @@ export 'package:magicbook/module/efw100_common_widget/validator/efw100_validator
 export 'package:magicbook/shared/widget/row_label/row_label_efw100.dart';
 
 //modul efw200
-export 'package:magicbook/module/efw200_layout/controller/efw200_layout_controller.dart';
 export 'package:magicbook/module/efw200_layout/view/efw200_layout_view.dart';
 
 //modul efw300
@@ -228,3 +227,7 @@ export 'package:magicbook/shared/widget/dialog/submit_exercise_dialog.dart';
 export 'package:magicbook/shared/widget/fab/submit_exercise_fab.dart';
 export 'package:magicbook/shared/service/efw100_progress_service.dart';
 export 'package:magicbook/screens/efw100_preview_screen.dart';
+export 'package:magicbook/screens/efw200_preview_screen.dart';
+export 'package:magicbook/shared/service/efw200_progress_service.dart';
+export 'package:magicbook/shared/widget/row_label/row_label_efw200.dart';
+export 'package:magicbook/module/efw200_layout/validator/efw200_validator.dart';

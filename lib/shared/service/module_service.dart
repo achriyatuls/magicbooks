@@ -1,5 +1,3 @@
-import '../model/exercise_progress_model.dart';
-
 import '../service/module_exercise_service.dart';
 
 class ModuleData {
@@ -49,56 +47,56 @@ class ModuleService {
         icon: '📊',
         topics: ['String', 'int', 'double', 'bool', 'var', 'dynamic'],
       ),
-          ModuleData(
-            id: 'EFD1200',
-            title: 'DateTime',
-            description: 'Manipulasi tanggal dan waktu',
-            category: 'Data Types',
-            totalExercises: 35,
-            difficulty: 'Beginner',
-            icon: '📅',
-            topics: ['DateTime', 'Duration', 'Format', 'Parse'],
-          ),
-          ModuleData(
-            id: 'EFD1300',
-            title: 'String',
-            description: 'Operasi string dan manipulasi teks',
-            category: 'Data Types',
-            totalExercises: 35,
-            difficulty: 'Beginner',
-            icon: '📝',
-            topics: ['Concatenation', 'Interpolation', 'Methods', 'Regex'],
-          ),
-          ModuleData(
-            id: 'EFD1400',
-            title: 'Number',
-            description: 'Operasi matematika dan angka',
-            category: 'Data Types',
-            totalExercises: 35,
-            difficulty: 'Beginner',
-            icon: '🔢',
-            topics: ['int', 'double', 'Math', 'Operators'],
-          ),
-          ModuleData(
-            id: 'EFD1500',
-            title: 'If Statement',
-            description: 'Kondisional dan logika pemrograman',
-            category: 'Control Flow',
-            totalExercises: 35,
-            difficulty: 'Beginner',
-            icon: '🔀',
-            topics: ['if', 'else', 'else if', 'ternary'],
-          ),
-          ModuleData(
-            id: 'EFB100',
-            title: 'Null Safety',
-            description: 'Penanganan null dan null safety',
-            category: 'Advanced',
-            totalExercises: 28,
-            difficulty: 'Intermediate',
-            icon: '🛡️',
-            topics: ['null', '?', '!', '??', 'late'],
-          ),
+      ModuleData(
+        id: 'EFD1200',
+        title: 'DateTime',
+        description: 'Manipulasi tanggal dan waktu',
+        category: 'Data Types',
+        totalExercises: 35,
+        difficulty: 'Beginner',
+        icon: '📅',
+        topics: ['DateTime', 'Duration', 'Format', 'Parse'],
+      ),
+      ModuleData(
+        id: 'EFD1300',
+        title: 'String',
+        description: 'Operasi string dan manipulasi teks',
+        category: 'Data Types',
+        totalExercises: 35,
+        difficulty: 'Beginner',
+        icon: '📝',
+        topics: ['Concatenation', 'Interpolation', 'Methods', 'Regex'],
+      ),
+      ModuleData(
+        id: 'EFD1400',
+        title: 'Number',
+        description: 'Operasi matematika dan angka',
+        category: 'Data Types',
+        totalExercises: 35,
+        difficulty: 'Beginner',
+        icon: '🔢',
+        topics: ['int', 'double', 'Math', 'Operators'],
+      ),
+      ModuleData(
+        id: 'EFD1500',
+        title: 'If Statement',
+        description: 'Kondisional dan logika pemrograman',
+        category: 'Control Flow',
+        totalExercises: 35,
+        difficulty: 'Beginner',
+        icon: '🔀',
+        topics: ['if', 'else', 'else if', 'ternary'],
+      ),
+      ModuleData(
+        id: 'EFB100',
+        title: 'Null Safety',
+        description: 'Penanganan null dan null safety',
+        category: 'Advanced',
+        totalExercises: 28,
+        difficulty: 'Intermediate',
+        icon: '🛡️',
+        topics: ['null', '?', '!', '??', 'late'],
+      ),
       ModuleData(
         id: 'EFD1600',
         title: 'List & Map',
@@ -129,14 +127,14 @@ class ModuleService {
         icon: '⚡',
         topics: ['Future', 'async', 'await', 'Stream'],
       ),
-      
+
       // UI Modules
       ModuleData(
         id: 'EFW100',
         title: 'Common Widget',
         description: 'Widget dasar Flutter',
         category: 'UI Components',
-        totalExercises: 20,
+        totalExercises: 15,
         difficulty: 'Beginner',
         icon: '🧩',
         topics: ['Text', 'Container', 'Button', 'Image'],
@@ -198,7 +196,9 @@ class ModuleService {
   }
 
   static List<ModuleData> getModulesByCategory(String category) {
-    return getAllModules().where((module) => module.category == category).toList();
+    return getAllModules()
+        .where((module) => module.category == category)
+        .toList();
   }
 
   static List<String> getAllCategories() {
