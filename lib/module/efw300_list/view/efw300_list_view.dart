@@ -5,65 +5,262 @@ import '../controller/efw300_list_controller.dart';
 class Efw300ListView extends StatefulWidget {
   const Efw300ListView({Key? key}) : super(key: key);
 
-  // Exercise methods - siswa akan mengisi ini
-  bool? exercise1() {
+  // Exercise methods - siswa akan mengisi ini (mengembalikan Widget?)
+  Widget? exercise1() {
     // Buat ListView dengan 5 ListTile
-    return false;
+    List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+    );
   }
 
-  bool? exercise2() {
+  Widget? exercise2() {
     // Buat ListView.builder dengan 10 item
-    return false;
+    List<String> items = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+      "Item 10"
+    ];
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+    );
   }
 
-  bool? exercise3() {
+  Widget? exercise3() {
     // Buat ListView.separated dengan separator Divider
-    return false;
+    List<String> items = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+      "Item 10"
+    ];
+    return ListView.separated(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+      separatorBuilder: (context, index) {
+        return Divider();
+      },
+    );
   }
 
-  bool? exercise4() {
+  Widget? exercise4() {
     // Buat ListView dengan scrollDirection horizontal
-    return false;
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: List.generate(
+        5,
+        (i) => Container(
+          width: 80,
+          margin: const EdgeInsets.all(8),
+          color: Colors.purpleAccent.withOpacity(0.2),
+          child: Center(child: Text('Item ${i + 1}')),
+        ),
+      ),
+    );
   }
 
-  bool? exercise5() {
+  Widget? exercise5() {
     // Buat ListView dengan physics BouncingScrollPhysics
-    return false;
+    return ListView(
+      physics: const BouncingScrollPhysics(),
+      children: List.generate(
+        5,
+        (i) => ListTile(title: Text('Item ${i + 1}')),
+      ),
+    );
   }
 
-  bool? exercise6() {
+  Widget? exercise6() {
     // Buat ListView dengan controller ScrollController
-    return false;
+    return ListView(
+      controller: ScrollController(),
+      children: List.generate(
+        5,
+        (i) => ListTile(title: Text('Item ${i + 1}')),
+      ),
+    );
   }
 
-  bool? exercise7() {
+  Widget? exercise7() {
     // Buat ListView dengan shrinkWrap true
-    return false;
+    List<String> items = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+      "Item 10"
+    ];
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+    );
   }
 
-  bool? exercise8() {
+  Widget? exercise8() {
     // Buat ListView dengan padding EdgeInsets.all(16)
-    return false;
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: List.generate(
+        5,
+        (i) => ListTile(title: Text('Item ${i + 1}')),
+      ),
+    );
   }
 
-  bool? exercise9() {
+  Widget? exercise9() {
     // Buat ListView dengan itemExtent 100
-    return false;
+    return ListView(
+      itemExtent: 100,
+      children: List.generate(
+        5,
+        (i) => ListTile(title: Text('Item ${i + 1}')),
+      ),
+    );
   }
 
-  bool? exercise10() {
+  Widget? exercise10() {
     // Buat ListView dengan cacheExtent 200
-    return false;
+    List<String> items = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+      "Item 10"
+    ];
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+    );
   }
 
-  bool? exercise11() {
+  Widget? exercise11() {
     // Buat ListView dengan addAutomaticKeepAlives true
-    return false;
+    List<String> items = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+      "Item 10"
+    ];
+    return ListView.builder(
+      addAutomaticKeepAlives: true,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+    );
   }
 
-  bool? exercise12() {
+  Widget? exercise12() {
     // Buat ListView dengan addRepaintBoundaries true
-    return false;
+    List<String> items = [
+      "Item 1",
+      "Item 2",
+      "Item 3",
+      "Item 4",
+      "Item 5",
+      "Item 6",
+      "Item 7",
+      "Item 8",
+      "Item 9",
+      "Item 10",
+    ];
+    return ListView.builder(
+      addRepaintBoundaries: true,
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(items[index]),
+        );
+      },
+    );
+  }
+
+  Widget? exercise13() {
+    // Buat ListView dengan reverse: true
+    return ListView(
+      reverse: true,
+      children: List.generate(
+        5,
+        (i) => ListTile(title: Text('Item ${i + 1}')),
+      ),
+    );
+  }
+
+  Widget? exercise14() {
+    // Buat ListView dengan primary: false dan shrinkWrap: true
+    return ListView(
+      primary: false,
+      shrinkWrap: true,
+      children: List.generate(
+        5,
+        (i) => ListTile(title: Text('Item ${i + 1}')),
+      ),
+    );
+  }
+
+  Widget? exercise15() {
+    // Buat ListView.custom dengan SliverChildListDelegate
+    return ListView.custom(
+      childrenDelegate: SliverChildListDelegate(
+        List.generate(
+          5,
+          (i) => ListTile(title: Text('Item ${i + 1}')),
+        ),
+      ),
+    );
   }
 
   @override
@@ -86,18 +283,21 @@ class Efw300ListView extends StatefulWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _buildExerciseCard(rowLabel(exercise1)),
-              _buildExerciseCard(rowLabel(exercise2)),
-              _buildExerciseCard(rowLabel(exercise3)),
-              _buildExerciseCard(rowLabel(exercise4)),
-              _buildExerciseCard(rowLabel(exercise5)),
-              _buildExerciseCard(rowLabel(exercise6)),
-              _buildExerciseCard(rowLabel(exercise7)),
-              _buildExerciseCard(rowLabel(exercise8)),
-              _buildExerciseCard(rowLabel(exercise9)),
-              _buildExerciseCard(rowLabel(exercise10)),
-              _buildExerciseCard(rowLabel(exercise11)),
-              _buildExerciseCard(rowLabel(exercise12)),
+              _buildExerciseCard(rowLabelEfw300(exercise1, 1)),
+              _buildExerciseCard(rowLabelEfw300(exercise2, 2)),
+              _buildExerciseCard(rowLabelEfw300(exercise3, 3)),
+              _buildExerciseCard(rowLabelEfw300(exercise4, 4)),
+              _buildExerciseCard(rowLabelEfw300(exercise5, 5)),
+              _buildExerciseCard(rowLabelEfw300(exercise6, 6)),
+              _buildExerciseCard(rowLabelEfw300(exercise7, 7)),
+              _buildExerciseCard(rowLabelEfw300(exercise8, 8)),
+              _buildExerciseCard(rowLabelEfw300(exercise9, 9)),
+              _buildExerciseCard(rowLabelEfw300(exercise10, 10)),
+              _buildExerciseCard(rowLabelEfw300(exercise11, 11)),
+              _buildExerciseCard(rowLabelEfw300(exercise12, 12)),
+              _buildExerciseCard(rowLabelEfw300(exercise13, 13)),
+              _buildExerciseCard(rowLabelEfw300(exercise14, 14)),
+              _buildExerciseCard(rowLabelEfw300(exercise15, 15)),
               const SizedBox(height: 20),
             ],
           ),

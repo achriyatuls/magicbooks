@@ -9,6 +9,9 @@ import '../../module/efd1600_list_and_map/validator/efd1600_validator.dart';
 import '../../module/efd1700_regex/validator/efd1700_validator.dart';
 import 'efw100_progress_service.dart';
 import 'efw200_progress_service.dart';
+import 'efw300_progress_service.dart';
+import 'efw301_progress_service.dart';
+import 'efw400_progress_service.dart';
 
 class ExerciseInfo {
   final String id;
@@ -215,6 +218,27 @@ class ModuleExerciseService {
         return status;
       } catch (e) {
         print('Error getting EFD1700 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFW300') {
+      try {
+        return Efw300ProgressService.instance.getExerciseStatus();
+      } catch (e) {
+        print('Error getting EFW300 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFW301') {
+      try {
+        return Efw301ProgressService.instance.getExerciseStatus();
+      } catch (e) {
+        print('Error getting EFW301 exercise status: $e');
+        return {};
+      }
+    } else if (moduleId == 'EFW400') {
+      try {
+        return Efw400ProgressService.instance.getExerciseStatus();
+      } catch (e) {
+        print('Error getting EFW400 exercise status: $e');
         return {};
       }
     }

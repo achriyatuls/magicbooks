@@ -1,54 +1,125 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
-import '../controller/efw301_list_controller.dart';
 
 class Efw301ListView extends StatefulWidget {
   const Efw301ListView({Key? key}) : super(key: key);
 
   // Exercise methods - siswa akan mengisi ini
-  bool? exercise1() {
-    // Buat ListView dengan Dismissible widget
-    return false;
+  Widget? exercise1() {
+    // ListView dengan Dismissible
+    List<String> items = ["Item 1", "Item 2", "Item 3"];
+    return ListView(
+      children: List.generate(
+        items.length,
+        (i) => Dismissible(
+          key: ValueKey('d-$i'),
+          background: Container(color: Colors.redAccent),
+          onDismissed: (_) {},
+          child: ListTile(title: Text(items[i])),
+        ),
+      ),
+    );
   }
 
-  bool? exercise2() {
-    // Buat ListView dengan RefreshIndicator
-    return false;
+  Widget? exercise2() {
+    // RefreshIndicator membungkus ListView
+    return RefreshIndicator(
+      onRefresh: () async {},
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: const [ListTile(title: Text('Pull to refresh'))],
+      ),
+    );
   }
 
-  bool? exercise3() {
-    // Buat ListView dengan AnimatedList
-    return false;
+  Widget? exercise3() {
+    // AnimatedList
+    return AnimatedList(
+      initialItemCount: 0,
+      itemBuilder: (context, index, animation) => const SizedBox.shrink(),
+    );
   }
 
-  bool? exercise4() {
-    // Buat ListView dengan ReorderableListView
-    return false;
+  Widget? exercise4() {
+    // ReorderableListView
+    return ReorderableListView(
+      onReorder: (oldIdx, newIdx) {},
+      children: List.generate(
+        3,
+        (i) => ListTile(
+          key: ValueKey('r-$i'),
+          title: Text('Item ${i + 1}'),
+        ),
+      ),
+    );
   }
 
-  bool? exercise5() {
-    // Buat ListView dengan SliverList
-    return false;
+  Widget? exercise5() {
+    // CustomScrollView dengan SliverList
+    return CustomScrollView(
+      slivers: [
+        SliverList(
+          delegate: SliverChildListDelegate([
+            const ListTile(title: Text('Sliver item 1')),
+            const ListTile(title: Text('Sliver item 2')),
+          ]),
+        ),
+      ],
+    );
   }
 
-  bool? exercise6() {
-    // Buat ListView dengan CustomScrollView
-    return false;
+  Widget? exercise6() {
+    // CustomScrollView generic
+    return CustomScrollView(
+      slivers: const [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Text('Content'),
+          ),
+        ),
+      ],
+    );
   }
 
-  bool? exercise7() {
-    // Buat ListView dengan PageView
-    return false;
+  Widget? exercise7() {
+    // PageView
+    return PageView(
+      children: const [
+        Center(child: Text('Page 1')),
+        Center(child: Text('Page 2')),
+      ],
+    );
   }
 
-  bool? exercise8() {
-    // Buat ListView dengan TabBarView
-    return false;
+  Widget? exercise8() {
+    // DefaultTabController + TabBarView
+    return const DefaultTabController(
+      length: 2,
+      child: TabBarView(
+        children: [
+          Center(child: Text('Tab 1')),
+          Center(child: Text('Tab 2')),
+        ],
+      ),
+    );
   }
 
-  bool? exercise9() {
-    // Buat ListView dengan NestedScrollView
-    return false;
+  Widget? exercise9() {
+    // NestedScrollView
+    return NestedScrollView(
+      headerSliverBuilder: (context, innerBoxIsScrolled) => const [
+        SliverAppBar(
+          title: Text('Header'),
+          pinned: true,
+        ),
+      ],
+      body: ListView(
+        children: const [
+          ListTile(title: Text('Body item')),
+        ],
+      ),
+    );
   }
 
   @override
@@ -58,9 +129,9 @@ class Efw301ListView extends StatefulWidget {
     controller.view = this;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF0E6FF),
+      backgroundColor: const Color(0xFFEAE0FF),
       appBar: AppBar(
-        title: const Text("EFW301 - ListView Advanced"),
+        title: const Text("EFW301 - ListView - Advanced"),
         backgroundColor: Colors.purple,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -71,15 +142,15 @@ class Efw301ListView extends StatefulWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _buildExerciseCard(rowLabel(exercise1)),
-              _buildExerciseCard(rowLabel(exercise2)),
-              _buildExerciseCard(rowLabel(exercise3)),
-              _buildExerciseCard(rowLabel(exercise4)),
-              _buildExerciseCard(rowLabel(exercise5)),
-              _buildExerciseCard(rowLabel(exercise6)),
-              _buildExerciseCard(rowLabel(exercise7)),
-              _buildExerciseCard(rowLabel(exercise8)),
-              _buildExerciseCard(rowLabel(exercise9)),
+              _buildExerciseCard(rowLabelEfw300(exercise1, 1)),
+              _buildExerciseCard(rowLabelEfw300(exercise2, 2)),
+              _buildExerciseCard(rowLabelEfw300(exercise3, 3)),
+              _buildExerciseCard(rowLabelEfw300(exercise4, 4)),
+              _buildExerciseCard(rowLabelEfw300(exercise5, 5)),
+              _buildExerciseCard(rowLabelEfw300(exercise6, 6)),
+              _buildExerciseCard(rowLabelEfw300(exercise7, 7)),
+              _buildExerciseCard(rowLabelEfw300(exercise8, 8)),
+              _buildExerciseCard(rowLabelEfw300(exercise9, 9)),
               const SizedBox(height: 20),
             ],
           ),

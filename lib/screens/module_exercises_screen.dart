@@ -5,11 +5,20 @@ import '../shared/service/module_exercise_service.dart';
 import '../shared/service/exercise_progress_service.dart';
 import '../shared/service/efw100_progress_service.dart';
 import '../shared/service/efw200_progress_service.dart';
+import '../shared/service/efw300_progress_service.dart';
+import '../shared/service/efw301_progress_service.dart';
+import '../shared/service/efw400_progress_service.dart';
+import '../module/efw300_list/validator/efw300_validator.dart';
+import '../module/efw301_list/validator/efw301_validator.dart';
+import '../module/efw400_grid/validator/efw400_validator.dart';
 import '../module/efw100_common_widget/validator/efw100_validator.dart';
 import '../module/efw200_layout/validator/efw200_validator.dart';
 import 'exercise_detail_screen.dart';
 import 'efw100_preview_screen.dart';
 import 'efw200_preview_screen.dart';
+import 'efw300_preview_screen.dart';
+import 'efw301_preview_screen.dart';
+import 'efw400_preview_screen.dart';
 
 class ModuleExercisesScreen extends StatefulWidget {
   final String moduleId;
@@ -287,9 +296,12 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                                               ),
                                         ),
                                         const SizedBox(width: 8),
-                                        // Show preview button for EFW100 and EFW200 exercises
+                                        // Show preview button for EFW100/200/300/301/400 exercises
                                         if (widget.moduleId == 'EFW100' ||
-                                            widget.moduleId == 'EFW200')
+                                            widget.moduleId == 'EFW200' ||
+                                            widget.moduleId == 'EFW300' ||
+                                            widget.moduleId == 'EFW301' ||
+                                            widget.moduleId == 'EFW400')
                                           Tooltip(
                                             message: 'Preview Widget',
                                             child: IconButton(
@@ -304,6 +316,9 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                                         // Show refresh button for non-EFW exercises
                                         if (widget.moduleId != 'EFW100' &&
                                             widget.moduleId != 'EFW200' &&
+                                            widget.moduleId != 'EFW300' &&
+                                            widget.moduleId != 'EFW301' &&
+                                            widget.moduleId != 'EFW400' &&
                                             _exerciseStatus[exercise.id] !=
                                                 true)
                                           IconButton(
@@ -736,9 +751,155 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
       }
     }
 
+    // EFW300 Logic
+    if (widget.moduleId == 'EFW300') {
+      final efw300View = Efw300ProgressService.instance.efw300View;
+      if (efw300View != null) {
+        try {
+          switch (exerciseNumber) {
+            case 1:
+              previewWidget = (efw300View as dynamic).exercise1();
+              break;
+            case 2:
+              previewWidget = (efw300View as dynamic).exercise2();
+              break;
+            case 3:
+              previewWidget = (efw300View as dynamic).exercise3();
+              break;
+            case 4:
+              previewWidget = (efw300View as dynamic).exercise4();
+              break;
+            case 5:
+              previewWidget = (efw300View as dynamic).exercise5();
+              break;
+            case 6:
+              previewWidget = (efw300View as dynamic).exercise6();
+              break;
+            case 7:
+              previewWidget = (efw300View as dynamic).exercise7();
+              break;
+            case 8:
+              previewWidget = (efw300View as dynamic).exercise8();
+              break;
+            case 9:
+              previewWidget = (efw300View as dynamic).exercise9();
+              break;
+            case 10:
+              previewWidget = (efw300View as dynamic).exercise10();
+              break;
+            case 11:
+              previewWidget = (efw300View as dynamic).exercise11();
+              break;
+            case 12:
+              previewWidget = (efw300View as dynamic).exercise12();
+              break;
+            case 13:
+              previewWidget = (efw300View as dynamic).exercise13();
+              break;
+            case 14:
+              previewWidget = (efw300View as dynamic).exercise14();
+              break;
+            case 15:
+              previewWidget = (efw300View as dynamic).exercise15();
+              break;
+          }
+        } catch (e) {
+          print('Error calling EFW300 exercise method: $e');
+        }
+      }
+    }
+
+    // EFW301 Logic
+    if (widget.moduleId == 'EFW301') {
+      final efw301View = Efw301ProgressService.instance.efw301View;
+      if (efw301View != null) {
+        try {
+          switch (exerciseNumber) {
+            case 1:
+              previewWidget = (efw301View as dynamic).exercise1();
+              break;
+            case 2:
+              previewWidget = (efw301View as dynamic).exercise2();
+              break;
+            case 3:
+              previewWidget = (efw301View as dynamic).exercise3();
+              break;
+            case 4:
+              previewWidget = (efw301View as dynamic).exercise4();
+              break;
+            case 5:
+              previewWidget = (efw301View as dynamic).exercise5();
+              break;
+            case 6:
+              previewWidget = (efw301View as dynamic).exercise6();
+              break;
+            case 7:
+              previewWidget = (efw301View as dynamic).exercise7();
+              break;
+            case 8:
+              previewWidget = (efw301View as dynamic).exercise8();
+              break;
+            case 9:
+              previewWidget = (efw301View as dynamic).exercise9();
+              break;
+          }
+        } catch (e) {
+          print('Error calling EFW301 exercise method: $e');
+        }
+      }
+    }
+
+    // EFW400 Logic
+    if (widget.moduleId == 'EFW400') {
+      final efw400View = Efw400ProgressService.instance.efw400View;
+      if (efw400View != null) {
+        try {
+          switch (exerciseNumber) {
+            case 1:
+              previewWidget = (efw400View as dynamic).exercise1();
+              break;
+            case 2:
+              previewWidget = (efw400View as dynamic).exercise2();
+              break;
+            case 3:
+              previewWidget = (efw400View as dynamic).exercise3();
+              break;
+            case 4:
+              previewWidget = (efw400View as dynamic).exercise4();
+              break;
+            case 5:
+              previewWidget = (efw400View as dynamic).exercise5();
+              break;
+            case 6:
+              previewWidget = (efw400View as dynamic).exercise6();
+              break;
+            case 7:
+              previewWidget = (efw400View as dynamic).exercise7();
+              break;
+            case 8:
+              previewWidget = (efw400View as dynamic).exercise8();
+              break;
+            case 9:
+              previewWidget = (efw400View as dynamic).exercise9();
+              break;
+          }
+        } catch (e) {
+          print('Error calling EFW400 exercise method: $e');
+        }
+      }
+    }
+
     // If widget not obtained from service, create default widgets
     if (previewWidget == null) {
-      previewWidget = _getDefaultWidget(exerciseNumber);
+      if (widget.moduleId == 'EFW300') {
+        previewWidget = _getDefaultEfw300Widget(exerciseNumber);
+      } else if (widget.moduleId == 'EFW301') {
+        previewWidget = _getDefaultEfw301Widget(exerciseNumber);
+      } else if (widget.moduleId == 'EFW400') {
+        previewWidget = _getDefaultEfw400Widget(exerciseNumber);
+      } else {
+        previewWidget = _getDefaultWidget(exerciseNumber);
+      }
     }
 
     // Validate widget based on module
@@ -746,6 +907,12 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
       isValid = Efw100Validator.validateExercise(exerciseNumber, previewWidget);
     } else if (widget.moduleId == 'EFW200') {
       isValid = Efw200Validator.validateExercise(exerciseNumber, previewWidget);
+    } else if (widget.moduleId == 'EFW300') {
+      isValid = Efw300Validator.validateExercise(exerciseNumber, previewWidget);
+    } else if (widget.moduleId == 'EFW301') {
+      isValid = Efw301Validator.validateExercise(exerciseNumber, previewWidget);
+    } else if (widget.moduleId == 'EFW400') {
+      isValid = Efw400Validator.validateExercise(exerciseNumber, previewWidget);
     }
 
     // Navigate to preview screen based on module
@@ -756,6 +923,39 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
           builder: (context) => Efw200PreviewScreen(
             exerciseNumber: exerciseNumber,
             widget: previewWidget!,
+            isValid: isValid,
+          ),
+        ),
+      );
+    } else if (widget.moduleId == 'EFW300') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Efw300PreviewScreen(
+            exerciseNumber: exerciseNumber,
+            widget: previewWidget!,
+            isValid: isValid,
+          ),
+        ),
+      );
+    } else if (widget.moduleId == 'EFW301') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Efw301PreviewScreen(
+            exerciseNumber: exerciseNumber,
+            widget: previewWidget!,
+            isValid: isValid,
+          ),
+        ),
+      );
+    } else if (widget.moduleId == 'EFW400') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Efw400PreviewScreen(
+            exerciseNumber: exerciseNumber,
+            preview: previewWidget,
             isValid: isValid,
           ),
         ),
@@ -1011,6 +1211,277 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
           height: 100,
           color: Colors.grey,
         );
+    }
+  }
+
+  // Helper method to create default EFW300 widgets based on exercise number
+  Widget? _getDefaultEfw300Widget(int exerciseNumber) {
+    switch (exerciseNumber) {
+      case 1:
+        return ListView(
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 2:
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (c, i) => ListTile(title: Text('Item ${i + 1}')),
+        );
+      case 3:
+        return ListView.separated(
+          itemCount: 5,
+          itemBuilder: (c, i) => ListTile(title: Text('Item ${i + 1}')),
+          separatorBuilder: (c, i) => const Divider(height: 1),
+        );
+      case 4:
+        return ListView(
+          scrollDirection: Axis.horizontal,
+          children: List.generate(
+            5,
+            (i) => Container(
+              width: 80,
+              margin: const EdgeInsets.all(8),
+              color: Colors.purpleAccent.withOpacity(0.2),
+              child: Center(child: Text('Item ${i + 1}')),
+            ),
+          ),
+        );
+      case 5:
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 6:
+        return ListView(
+          controller: ScrollController(),
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 7:
+        return ListView(
+          shrinkWrap: true,
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 8:
+        return ListView(
+          padding: const EdgeInsets.all(16),
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 9:
+        return ListView(
+          itemExtent: 100,
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 10:
+        return ListView(
+          cacheExtent: 200,
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 11:
+        return ListView.builder(
+          addAutomaticKeepAlives: true,
+          itemCount: 5,
+          itemBuilder: (c, i) => ListTile(title: Text('Item ${i + 1}')),
+        );
+      case 12:
+        return ListView.builder(
+          addRepaintBoundaries: true,
+          itemCount: 5,
+          itemBuilder: (c, i) => ListTile(title: Text('Item ${i + 1}')),
+        );
+      case 13:
+        return ListView(
+          reverse: true,
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 14:
+        return ListView(
+          primary: false,
+          shrinkWrap: true,
+          children:
+              List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+        );
+      case 15:
+        return ListView.custom(
+          childrenDelegate: SliverChildListDelegate(
+            List.generate(5, (i) => ListTile(title: Text('Item ${i + 1}'))),
+          ),
+        );
+      default:
+        return null;
+    }
+  }
+
+  // Helper method to create default EFW301 widgets based on exercise number
+  Widget? _getDefaultEfw301Widget(int exerciseNumber) {
+    switch (exerciseNumber) {
+      case 1:
+        return ListView(
+          children: List.generate(
+            3,
+            (i) => Dismissible(
+              key: ValueKey('d-$i'),
+              background: Container(color: Colors.redAccent),
+              onDismissed: (_) {},
+              child: ListTile(title: Text('Item ${i + 1}')),
+            ),
+          ),
+        );
+      case 2:
+        return RefreshIndicator(
+          onRefresh: () async {},
+          child: ListView(
+            children: const [ListTile(title: Text('Pull to refresh'))],
+          ),
+        );
+      case 3:
+        return AnimatedList(
+          initialItemCount: 0,
+          itemBuilder: (context, index, animation) => const SizedBox.shrink(),
+        );
+      case 4:
+        return ReorderableListView(
+          onReorder: (oldIndex, newIndex) {},
+          children: List.generate(
+            3,
+            (i) => ListTile(
+              key: ValueKey('r-$i'),
+              title: Text('Item ${i + 1}'),
+            ),
+          ),
+        );
+      case 5:
+        return CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate([
+                const ListTile(title: Text('Sliver item 1')),
+                const ListTile(title: Text('Sliver item 2')),
+              ]),
+            ),
+          ],
+        );
+      case 6:
+        return CustomScrollView(
+          slivers: const [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Text('Content'),
+              ),
+            ),
+          ],
+        );
+      case 7:
+        return PageView(
+          children: const [
+            Center(child: Text('Page 1')),
+            Center(child: Text('Page 2')),
+          ],
+        );
+      case 8:
+        return const DefaultTabController(
+          length: 2,
+          child: TabBarView(
+            children: [
+              Center(child: Text('Tab 1')),
+              Center(child: Text('Tab 2')),
+            ],
+          ),
+        );
+      case 9:
+        return NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) => const [
+            SliverAppBar(
+              title: Text('Header'),
+              pinned: true,
+            ),
+          ],
+          body: ListView(
+            children: const [
+              ListTile(title: Text('Body item')),
+            ],
+          ),
+        );
+      default:
+        return null;
+    }
+  }
+
+  // Helper method to create default EFW400 widgets based on exercise number
+  Widget? _getDefaultEfw400Widget(int exerciseNumber) {
+    switch (exerciseNumber) {
+      case 1:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+          children: List.generate(
+              6,
+              (i) => Container(
+                    color: Colors.purple.withOpacity(0.1),
+                  )),
+        );
+      case 2:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
+        );
+      case 3:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+        );
+      case 4:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            childAspectRatio: 1.5,
+          ),
+        );
+      case 5:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200),
+        );
+      case 6:
+        return GridView(
+          scrollDirection: Axis.horizontal,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+        );
+      case 7:
+        return GridView(
+          physics: const BouncingScrollPhysics(),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+        );
+      case 8:
+        return GridView(
+          padding: const EdgeInsets.all(16),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+        );
+      case 9:
+        return GridView(
+          cacheExtent: 200,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+          ),
+        );
+      default:
+        return null;
     }
   }
 }

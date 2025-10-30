@@ -1,54 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import 'package:magicbook/shared/widget/row_label/row_label_efw400.dart';
 import '../controller/efw400_grid_controller.dart';
 
 class Efw400GridView extends StatefulWidget {
   const Efw400GridView({Key? key}) : super(key: key);
 
   // Exercise methods - siswa akan mengisi ini
-  bool? exercise1() {
+  Widget? exercise1() {
     // Buat GridView.count dengan crossAxisCount 2 dan 6 item
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
-  bool? exercise2() {
+  Widget? exercise2() {
     // Buat GridView.builder dengan crossAxisCount 3
-    return false;
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      itemCount: 9,
+      itemBuilder: (_, __) => Container(color: Colors.purple.withOpacity(0.1)),
+    );
   }
 
-  bool? exercise3() {
+  Widget? exercise3() {
     // Buat GridView dengan crossAxisSpacing dan mainAxisSpacing
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
-  bool? exercise4() {
+  Widget? exercise4() {
     // Buat GridView dengan childAspectRatio 1.5
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
-  bool? exercise5() {
+  Widget? exercise5() {
     // Buat GridView dengan maxCrossAxisExtent 200
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
-  bool? exercise6() {
+  Widget? exercise6() {
     // Buat GridView dengan scrollDirection Axis.horizontal
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
-  bool? exercise7() {
+  Widget? exercise7() {
     // Buat GridView dengan physics BouncingScrollPhysics
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
-  bool? exercise8() {
+  Widget? exercise8() {
     // Buat GridView dengan padding EdgeInsets.all(16)
-    return false;
+    return GridView(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+    );
   }
 
-  bool? exercise9() {
+  Widget? exercise9() {
     // Buat GridView dengan cacheExtent 200
-    return false;
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      cacheExtent: 200,
+      children: List.generate(
+        6,
+        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+      ),
+    );
   }
 
   @override
@@ -71,15 +166,15 @@ class Efw400GridView extends StatefulWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              _buildExerciseCard(rowLabel(exercise1)),
-              _buildExerciseCard(rowLabel(exercise2)),
-              _buildExerciseCard(rowLabel(exercise3)),
-              _buildExerciseCard(rowLabel(exercise4)),
-              _buildExerciseCard(rowLabel(exercise5)),
-              _buildExerciseCard(rowLabel(exercise6)),
-              _buildExerciseCard(rowLabel(exercise7)),
-              _buildExerciseCard(rowLabel(exercise8)),
-              _buildExerciseCard(rowLabel(exercise9)),
+              _buildExerciseCard(rowLabelEfw400(exercise1, 1)),
+              _buildExerciseCard(rowLabelEfw400(exercise2, 2)),
+              _buildExerciseCard(rowLabelEfw400(exercise3, 3)),
+              _buildExerciseCard(rowLabelEfw400(exercise4, 4)),
+              _buildExerciseCard(rowLabelEfw400(exercise5, 5)),
+              _buildExerciseCard(rowLabelEfw400(exercise6, 6)),
+              _buildExerciseCard(rowLabelEfw400(exercise7, 7)),
+              _buildExerciseCard(rowLabelEfw400(exercise8, 8)),
+              _buildExerciseCard(rowLabelEfw400(exercise9, 9)),
               const SizedBox(height: 20),
             ],
           ),

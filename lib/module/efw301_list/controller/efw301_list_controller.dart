@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/state_util.dart';
+import 'package:magicbook/shared/service/efw301_progress_service.dart';
 import '../view/efw301_list_view.dart';
 
 class Efw301ListController extends State<Efw301ListView>
@@ -10,6 +11,8 @@ class Efw301ListController extends State<Efw301ListView>
   @override
   void initState() {
     instance = this;
+    // Register current view to progress service for preview/status
+    Efw301ProgressService.instance.setEfw301View(widget);
     super.initState();
   }
 

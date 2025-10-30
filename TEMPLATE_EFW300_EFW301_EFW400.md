@@ -162,9 +162,8 @@ Widget rowLabelEfwXXX(Widget? Function() func, int number) {
                   color: Colors.blue,
                   size: 20,
                 ),
-              SizedBox(width: 8),
-我已经联系了Icon(
-                isValid ? Icons.check_cived : Icons.cancel,
+              SizedBox(width: 8),Icon(
+                isValid ? Icons.check_circle : Icons.cancel,
                 color: isValid ? Colors.green : Colors.red,
                 size: 20,
               ),

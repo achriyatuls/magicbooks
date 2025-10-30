@@ -361,7 +361,7 @@ class Efd1100Exercises {
 
     // TULIS KODE DI SINI:
     // HINT: Tambahkan " World!" ke akhir input
-    // output = input + " World!";
+    output = input + " World!";
 
     return output; // ← JANGAN UBAH BARIS INI!
   }
