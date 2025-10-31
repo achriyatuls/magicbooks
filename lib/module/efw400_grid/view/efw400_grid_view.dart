@@ -154,6 +154,121 @@ class Efw400GridView extends StatefulWidget {
     );
   }
 
+  Widget? exercise10() {
+    // Buat GridView dengan shrinkWrap true
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      children: List.generate(
+        6,
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+      ),
+    );
+  }
+
+  Widget? exercise11() {
+    // Buat GridView dengan primary true
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      primary: true,
+      children: List.generate(
+        6,
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+      ),
+    );
+  }
+
+  Widget? exercise12() {
+    // Buat GridView.count dengan crossAxisCount 3
+    return GridView.count(
+      crossAxisCount: 3,
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
+      childAspectRatio: 1.5,
+      children: List.generate(
+        6,
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+      ),
+    );
+  }
+
+  Widget? exercise13() {
+    // Buat GridView dengan addAutomaticKeepAlives true
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      itemCount: 9,
+      addAutomaticKeepAlives: true,
+      itemBuilder: (_, __) =>
+          Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+    );
+  }
+
+  Widget? exercise14() {
+    // Buat GridView dengan addRepaintBoundaries true
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      itemCount: 9,
+      addRepaintBoundaries: true,
+      itemBuilder: (_, __) =>
+          Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+    );
+  }
+
+  Widget? exercise15() {
+    // Buat GridView dengan reverse true
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      reverse: true,
+      children: List.generate(
+        6,
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+      ),
+    );
+  }
+
+  Widget? exercise16() {
+    // Buat GridView dengan semanticChildCount 6
+    return GridView(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.5,
+      ),
+      semanticChildCount: 6,
+      children: List.generate(
+        6,
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+      ),
+    );
+  }
+
   @override
   State<Efw400GridView> createState() => Efw400GridController();
 
@@ -183,6 +298,13 @@ class Efw400GridView extends StatefulWidget {
               _buildExerciseCard(rowLabelEfw400(exercise7, 7)),
               _buildExerciseCard(rowLabelEfw400(exercise8, 8)),
               _buildExerciseCard(rowLabelEfw400(exercise9, 9)),
+              _buildExerciseCard(rowLabelEfw400(exercise10, 10)),
+              _buildExerciseCard(rowLabelEfw400(exercise11, 11)),
+              _buildExerciseCard(rowLabelEfw400(exercise12, 12)),
+              _buildExerciseCard(rowLabelEfw400(exercise13, 13)),
+              _buildExerciseCard(rowLabelEfw400(exercise14, 14)),
+              _buildExerciseCard(rowLabelEfw400(exercise15, 15)),
+              _buildExerciseCard(rowLabelEfw400(exercise16, 16)),
               const SizedBox(height: 20),
             ],
           ),

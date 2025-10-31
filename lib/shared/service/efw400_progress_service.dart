@@ -18,7 +18,7 @@ class Efw400ProgressService {
   Map<String, bool> getExerciseStatus({bool useDefault = true}) {
     try {
       Map<String, bool> status = {};
-      for (int i = 1; i <= 9; i++) {
+      for (int i = 1; i <= 16; i++) {
         final exerciseId = 'EFW400_ex$i';
         Widget? widget;
 
@@ -50,6 +50,27 @@ class Efw400ProgressService {
               break;
             case 9:
               widget = _efw400View.exercise9();
+              break;
+            case 10:
+              widget = _efw400View.exercise10();
+              break;
+            case 11:
+              widget = _efw400View.exercise11();
+              break;
+            case 12:
+              widget = _efw400View.exercise12();
+              break;
+            case 13:
+              widget = _efw400View.exercise13();
+              break;
+            case 14:
+              widget = _efw400View.exercise14();
+              break;
+            case 15:
+              widget = _efw400View.exercise15();
+              break;
+            case 16:
+              widget = _efw400View.exercise16();
               break;
           }
         } else {
@@ -187,6 +208,105 @@ class Efw400ProgressService {
             childAspectRatio: 1.5,
           ),
           cacheExtent: 200,
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
+        );
+      case 10:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
+        );
+      case 11:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          primary: true,
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
+        );
+      case 12:
+        return GridView.count(
+          crossAxisCount: 3,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          childAspectRatio: 1.5,
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
+        );
+      case 13:
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          itemCount: 9,
+          addAutomaticKeepAlives: true,
+          itemBuilder: (_, __) =>
+              Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+        );
+      case 14:
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          itemCount: 9,
+          addRepaintBoundaries: true,
+          itemBuilder: (_, __) =>
+              Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+        );
+      case 15:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          reverse: true,
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
+        );
+      case 16:
+        return GridView(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          semanticChildCount: 6,
           children: List.generate(
             6,
             (i) => Container(

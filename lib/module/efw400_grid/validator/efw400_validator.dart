@@ -27,20 +27,43 @@ class Efw400Validator {
         rule: (gv, d) =>
             d is SliverGridDelegateWithMaxCrossAxisExtent &&
             d.maxCrossAxisExtent == 200),
-    // 6: scrollDirection horizontal (lenient: accept GridView even if not set)
-    6: (w) => _isGridView(w,
+    // 6: scrollDirection horizontal
+    6: (w) =>
+        _isGridView(w, rule: (gv, d) => gv.scrollDirection == Axis.horizontal),
+    // 7: physics BouncingScrollPhysics
+    7: (w) =>
+        _isGridView(w, rule: (gv, d) => gv.physics is BouncingScrollPhysics),
+    // 8: padding EdgeInsets.all(16)
+    8: (w) => _isGridView(w,
         rule: (gv, d) =>
-            gv.scrollDirection == Axis.horizontal ||
-            d is SliverGridDelegateWithFixedCrossAxisCount),
-    // 7: physics BouncingScrollPhysics (lenient)
-    7: (w) => _isGridView(w,
-        rule: (gv, d) =>
-            gv.physics is BouncingScrollPhysics ||
-            d is SliverGridDelegateWithFixedCrossAxisCount),
-    // 8: padding EdgeInsets.all(16) (lenient)
-    8: (w) => _isGridView(w),
+            gv.padding is EdgeInsets &&
+            (gv.padding as EdgeInsets).left == 16 &&
+            (gv.padding as EdgeInsets).right == 16 &&
+            (gv.padding as EdgeInsets).top == 16 &&
+            (gv.padding as EdgeInsets).bottom == 16),
     // 9: cacheExtent 200
     9: (w) => _isGridView(w, rule: (gv, d) => (gv.cacheExtent ?? 0) == 200),
+    // 10: shrinkWrap true
+    10: (w) => _isGridView(w, rule: (gv, d) => gv.shrinkWrap == true),
+    // 11: primary true
+    11: (w) => _isGridView(w, rule: (gv, d) => gv.primary == true),
+    // 12: GridView.count
+    12: (w) => _isGridView(w,
+        rule: (gv, d) => d is SliverGridDelegateWithFixedCrossAxisCount),
+    // 13: addAutomaticKeepAlives true
+    13: (w) => _isGridView(w,
+        rule: (gv, d) =>
+            d is SliverGridDelegateWithFixedCrossAxisCount &&
+            d.crossAxisCount == 3),
+    // 14: addRepaintBoundaries true
+    14: (w) => _isGridView(w,
+        rule: (gv, d) =>
+            d is SliverGridDelegateWithFixedCrossAxisCount &&
+            d.crossAxisCount == 3),
+    // 15: reverse true
+    15: (w) => _isGridView(w, rule: (gv, d) => gv.reverse == true),
+    // 16: semanticChildCount 6
+    16: (w) => _isGridView(w, rule: (gv, d) => gv.semanticChildCount == 6),
   };
 
   static bool validateExercise(int exerciseNumber, Widget? widget) {
