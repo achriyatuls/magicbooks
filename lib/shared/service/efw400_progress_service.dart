@@ -70,17 +70,28 @@ class Efw400ProgressService {
       case 1:
         return GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2),
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
           children: List.generate(
-              6,
-              (i) => Container(
-                    color: Colors.purple.withOpacity(0.1),
-                  )),
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
         );
       case 2:
-        return GridView(
+        return GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3),
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          itemCount: 9,
+          itemBuilder: (_, __) =>
+              Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
         );
       case 3:
         return GridView(
@@ -88,46 +99,98 @@ class Efw400ProgressService {
             crossAxisCount: 3,
             mainAxisSpacing: 10,
             crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
           ),
         );
       case 4:
         return GridView(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
             childAspectRatio: 1.5,
+          ),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
           ),
         );
       case 5:
         return GridView(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200),
+            maxCrossAxisExtent: 200,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
+          ),
         );
       case 6:
         return GridView(
-          scrollDirection: Axis.horizontal,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
           ),
         );
       case 7:
         return GridView(
-          physics: const BouncingScrollPhysics(),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
           ),
         );
       case 8:
         return GridView(
-          padding: const EdgeInsets.all(16),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          padding: const EdgeInsets.all(16),
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
           ),
         );
       case 9:
         return GridView(
-          cacheExtent: 200,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1.5,
+          ),
+          cacheExtent: 200,
+          children: List.generate(
+            6,
+            (i) => Container(
+                color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
           ),
         );
       default:

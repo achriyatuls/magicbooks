@@ -18,7 +18,7 @@ class Efw400GridView extends StatefulWidget {
       ),
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -33,7 +33,8 @@ class Efw400GridView extends StatefulWidget {
         childAspectRatio: 1.5,
       ),
       itemCount: 9,
-      itemBuilder: (_, __) => Container(color: Colors.purple.withOpacity(0.1)),
+      itemBuilder: (_, __) =>
+          Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
     );
   }
 
@@ -48,7 +49,7 @@ class Efw400GridView extends StatefulWidget {
       ),
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -64,7 +65,7 @@ class Efw400GridView extends StatefulWidget {
       ),
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -80,7 +81,7 @@ class Efw400GridView extends StatefulWidget {
       ),
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -94,9 +95,10 @@ class Efw400GridView extends StatefulWidget {
         crossAxisSpacing: 10,
         childAspectRatio: 1.5,
       ),
+      scrollDirection: Axis.horizontal,
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -110,9 +112,10 @@ class Efw400GridView extends StatefulWidget {
         crossAxisSpacing: 10,
         childAspectRatio: 1.5,
       ),
+      physics: const BouncingScrollPhysics(),
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -120,11 +123,16 @@ class Efw400GridView extends StatefulWidget {
   Widget? exercise8() {
     // Buat GridView dengan padding EdgeInsets.all(16)
     return GridView(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
         childAspectRatio: 1.5,
+      ),
+      padding: const EdgeInsets.all(16),
+      children: List.generate(
+        6,
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }
@@ -141,7 +149,7 @@ class Efw400GridView extends StatefulWidget {
       cacheExtent: 200,
       children: List.generate(
         6,
-        (i) => Container(color: Colors.purple.withOpacity(0.1)),
+        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
       ),
     );
   }

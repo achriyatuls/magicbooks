@@ -236,12 +236,11 @@ class Efw400PreviewScreen extends StatelessWidget {
       );
     }
     // Berikan constraints penuh agar GridView/ScrollView bisa dirender
+    // GridView memerlukan bounded constraints dari parent
     return ClipRRect(
       borderRadius: BorderRadius.circular(6),
       child: Material(
-        child: SizedBox.expand(
-          child: widget,
-        ),
+        child: widget,
       ),
     );
   }
