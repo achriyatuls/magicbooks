@@ -185,8 +185,8 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
                                             vertical: 4,
                                           ),
                                           decoration: BoxDecoration(
-                                            color: _getDifficultyColor(
-                                                exercise.difficulty),
+                                            color: _getDifficultyBadgeColor(
+                                                exercise),
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                           ),
@@ -364,15 +364,49 @@ class _ModuleExercisesScreenState extends State<ModuleExercisesScreen> {
 
   Color _getDifficultyColor(String difficulty) {
     switch (difficulty.toLowerCase()) {
+      case 'beginner':
+        return Colors.grey; // EFW100, EFW200 - Grey badge before completion
       case 'easy':
         return Colors.green;
+      case 'intermediate':
+        return Colors.orange; // EFW300, EFW400 - Orange badge
       case 'medium':
         return Colors.orange;
+      case 'advanced':
+        return Colors.red; // EFW301 - Red badge
       case 'hard':
         return Colors.red;
       default:
         return Colors.grey;
     }
+  }
+
+  /// Get difficulty badge color based on exercise status and module
+  /// For EFW modules, badge shows grey when not validated, proper color when validated
+  Color _getDifficultyBadgeColor(ExerciseInfo exercise) {
+    final difficulty = exercise.difficulty.toLowerCase();
+    final isCompleted = _exerciseStatus[exercise.id] == true;
+
+    // Special handling for all EFW modules
+    if (widget.moduleId == 'EFW100' ||
+        widget.moduleId == 'EFW200' ||
+        widget.moduleId == 'EFW300' ||
+        widget.moduleId == 'EFW301' ||
+        widget.moduleId == 'EFW400') {
+      // Grey when not validated, proper color when validated
+      if (!isCompleted) {
+        return Colors.grey;
+      }
+    }
+
+    // For Beginner exercises in EFW100/EFW200, return green when completed
+    if (difficulty == 'beginner' &&
+        (widget.moduleId == 'EFW100' || widget.moduleId == 'EFW200')) {
+      return Colors.green;
+    }
+
+    // For other difficulties, use normal color mapping
+    return _getDifficultyColor(exercise.difficulty);
   }
 
   void _navigateToExercise(ExerciseInfo exercise) async {

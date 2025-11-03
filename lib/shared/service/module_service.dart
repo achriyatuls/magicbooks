@@ -167,7 +167,7 @@ class ModuleService {
         title: 'ListView Advanced',
         description: 'ListView dengan fitur advanced',
         category: 'UI Components',
-        totalExercises: 12,
+        totalExercises: 9,
         difficulty: 'Advanced',
         icon: '📜',
         topics: ['CustomScrollView', 'Sliver', 'RefreshIndicator'],

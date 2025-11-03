@@ -106,7 +106,7 @@ class Efw300Exercises {
         (i) => Container(
           width: 80,
           margin: const EdgeInsets.all(8),
-          color: Colors.purpleAccent.withOpacity(0.2),
+          color: Colors.purpleAccent.withValues(alpha: 0.2),
           child: Center(child: Text('Item ${i + 1}')),
         ),
       ),

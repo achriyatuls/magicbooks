@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
-import 'package:magicbook/shared/widget/row_label/row_label_efw400.dart';
-import '../controller/efw400_grid_controller.dart';
-import '../exercises/efw400_exercises.dart';
 
 class Efw400GridView extends StatefulWidget {
   const Efw400GridView({Key? key}) : super(key: key);

@@ -76,7 +76,7 @@ class ModuleExerciseService {
         case 'EFW300':
           return 15; // ListView
         case 'EFW301':
-          return 12; // ListView Advanced
+          return 9; // ListView Advanced
         case 'EFW400':
           return 16; // GridView
         default:
@@ -960,8 +960,8 @@ Widget? exercise$exerciseNumber() {
           );
         });
       case 'EFW301':
-        // Generate 12 exercises for List Advanced
-        return List.generate(12, (index) {
+        // Generate 9 exercises for List Advanced
+        return List.generate(9, (index) {
           final exerciseNum = index + 1;
           return ExerciseInfo(
             id: '${moduleId}_ex$exerciseNum',

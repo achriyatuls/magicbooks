@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
-import '../exercises/efw200_exercises.dart';
 
 class Efw200LayoutView extends StatefulWidget {
   const Efw200LayoutView({Key? key}) : super(key: key);
