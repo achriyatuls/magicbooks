@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import '../exercises/efw100_exercises.dart';
 
 class Efw100CommonWidgetView extends StatefulWidget {
   const Efw100CommonWidgetView({Key? key}) : super(key: key);
@@ -16,130 +17,22 @@ class _Efw100CommonWidgetViewState extends State<Efw100CommonWidgetView> {
     Efw100ProgressService.instance.setEfw100View(this);
   }
 
-  // Exercise methods - siswa akan mengisi ini
-  Widget? exercise1() {
-    // Buat sebuah Container dengan lebar 100, tinggi 100, dan warna merah
-    return Container(
-      width: 100,
-      height: 100,
-      color: Colors.red,
-    );
-  }
-
-  Widget? exercise2() {
-    // Buat sebuah Text dengan isi "Hello Flutter" dan ukuran font 24
-    return Text(
-      "Hello Flutter",
-      style: TextStyle(fontSize: 24),
-    );
-  }
-
-  Widget? exercise3() {
-    // Buat sebuah Icon dengan Icons.home dan warna biru
-    return Icon(
-      Icons.home,
-      color: Colors.blue,
-    );
-  }
-
-  Widget? exercise4() {
-    // Buat sebuah Image.asset dengan path "assets/images/image1.jpg"
-    return Image.asset(
-      "assets/images/image1.jpg",
-      width: 100,
-      height: 100,
-      fit: BoxFit.cover,
-    );
-  }
-
-  Widget? exercise5() {
-    // Buat sebuah CircleAvatar dengan radius 30 dan warna hijau
-    return CircleAvatar(
-      radius: 30,
-      backgroundColor: Colors.green,
-    );
-  }
-
-  Widget? exercise6() {
-    // Buat sebuah Card dengan padding 16 dan child Text "Card Content"
-    return Card(
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Text("Card Content"),
-      ),
-    );
-  }
-
-  Widget? exercise7() {
-    // Buat sebuah ListTile dengan title "List Tile" dan subtitle "Subtitle"
-    return ListTile(
-      title: Text("List Tile"),
-      subtitle: Text("Subtitle"),
-    );
-  }
-
-  Widget? exercise8() {
-    // Buat sebuah ElevatedButton dengan text "Click Me"
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text("Click Me"),
-    );
-  }
-
-  Widget? exercise9() {
-    // Buat sebuah FloatingActionButton dengan icon Icons.add
-    return FloatingActionButton(
-      onPressed: () {},
-      child: Icon(Icons.add),
-    );
-  }
-
-  Widget? exercise10() {
-    // Buat sebuah AppBar dengan title "My App"
-    return AppBar(
-      title: Text("My App"),
-    );
-  }
-
-  Widget? exercise11() {
-    // Buat sebuah Scaffold dengan AppBar dan body Text "Hello World"
-    return Scaffold(
-      appBar: AppBar(title: Text("App")),
-      body: Text("Hello World"),
-    );
-  }
-
-  Widget? exercise12() {
-    // Buat sebuah SizedBox dengan lebar 200 dan tinggi 100
-    return SizedBox(
-      width: 200,
-      height: 100,
-      child: Container(color: Colors.grey[300]),
-    );
-  }
-
-  Widget? exercise13() {
-    // Buat sebuah Padding dengan padding EdgeInsets.all(16) dan child Text "Padded Text"
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Text("Padded Text"),
-    );
-  }
-
-  Widget? exercise14() {
-    // Buat sebuah Center dengan child Text "Centered Text"
-    return Center(
-      child: Text("Centered Text"),
-    );
-  }
-
-  Widget? exercise15() {
-    // Buat sebuah Align dengan alignment Alignment.centerRight dan child Text "Right Aligned"
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Text("Right Aligned"),
-    );
-  }
+  // Exercise methods - siswa akan mengisi ini di file efw100_exercises.dart
+  Widget? exercise1() => Efw100Exercises.exercise1();
+  Widget? exercise2() => Efw100Exercises.exercise2();
+  Widget? exercise3() => Efw100Exercises.exercise3();
+  Widget? exercise4() => Efw100Exercises.exercise4();
+  Widget? exercise5() => Efw100Exercises.exercise5();
+  Widget? exercise6() => Efw100Exercises.exercise6();
+  Widget? exercise7() => Efw100Exercises.exercise7();
+  Widget? exercise8() => Efw100Exercises.exercise8();
+  Widget? exercise9() => Efw100Exercises.exercise9();
+  Widget? exercise10() => Efw100Exercises.exercise10();
+  Widget? exercise11() => Efw100Exercises.exercise11();
+  Widget? exercise12() => Efw100Exercises.exercise12();
+  Widget? exercise13() => Efw100Exercises.exercise13();
+  Widget? exercise14() => Efw100Exercises.exercise14();
+  Widget? exercise15() => Efw100Exercises.exercise15();
 
   @override
   Widget build(BuildContext context) {

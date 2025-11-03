@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../module/efw100_common_widget/validator/efw100_validator.dart';
+import '../../module/efw100_common_widget/exercises/efw100_exercises.dart';
 
 /// Service untuk mengelola progress EFW100 exercises
 class Efw100ProgressService {
@@ -123,62 +124,49 @@ class Efw100ProgressService {
         Widget? testWidget;
         switch (i) {
           case 1:
-            testWidget = Container(width: 100, height: 100, color: Colors.red);
+            testWidget = Efw100Exercises.exercise1();
             break;
           case 2:
-            testWidget = Text("Hello Flutter", style: TextStyle(fontSize: 24));
+            testWidget = Efw100Exercises.exercise2();
             break;
           case 3:
-            testWidget = Icon(Icons.home, color: Colors.blue);
+            testWidget = Efw100Exercises.exercise3();
             break;
           case 4:
-            testWidget = Image.asset("assets/images/image1.jpg",
-                width: 100, height: 100, fit: BoxFit.cover);
+            testWidget = Efw100Exercises.exercise4();
             break;
           case 5:
-            testWidget =
-                CircleAvatar(radius: 30, backgroundColor: Colors.green);
+            testWidget = Efw100Exercises.exercise5();
             break;
           case 6:
-            testWidget = Card(
-                child: Padding(
-                    padding: EdgeInsets.all(16), child: Text("Card Content")));
+            testWidget = Efw100Exercises.exercise6();
             break;
           case 7:
-            testWidget =
-                ListTile(title: Text("List Tile"), subtitle: Text("Subtitle"));
+            testWidget = Efw100Exercises.exercise7();
             break;
           case 8:
-            testWidget =
-                ElevatedButton(onPressed: () {}, child: Text("Click Me"));
+            testWidget = Efw100Exercises.exercise8();
             break;
           case 9:
-            testWidget =
-                FloatingActionButton(onPressed: () {}, child: Icon(Icons.add));
+            testWidget = Efw100Exercises.exercise9();
             break;
           case 10:
-            testWidget = AppBar(title: Text("My App"));
+            testWidget = Efw100Exercises.exercise10();
             break;
           case 11:
-            testWidget = Scaffold(
-                appBar: AppBar(title: Text("App")), body: Text("Hello World"));
+            testWidget = Efw100Exercises.exercise11();
             break;
           case 12:
-            testWidget = SizedBox(
-                width: 200,
-                height: 100,
-                child: Container(color: Colors.grey[300]));
+            testWidget = Efw100Exercises.exercise12();
             break;
           case 13:
-            testWidget = Padding(
-                padding: EdgeInsets.all(16), child: Text("Padded Text"));
+            testWidget = Efw100Exercises.exercise13();
             break;
           case 14:
-            testWidget = Center(child: Text("Centered Text"));
+            testWidget = Efw100Exercises.exercise14();
             break;
           case 15:
-            testWidget = Align(
-                alignment: Alignment.centerRight, child: Text("Right Aligned"));
+            testWidget = Efw100Exercises.exercise15();
             break;
         }
 

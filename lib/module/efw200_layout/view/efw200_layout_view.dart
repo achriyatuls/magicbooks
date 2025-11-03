@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magicbook/core.dart';
+import '../exercises/efw200_exercises.dart';
 
 class Efw200LayoutView extends StatefulWidget {
   const Efw200LayoutView({Key? key}) : super(key: key);
@@ -16,163 +17,25 @@ class _Efw200LayoutViewState extends State<Efw200LayoutView> {
     Efw200ProgressService.instance.setEfw200View(this);
   }
 
-  // Exercise methods - siswa akan mengisi ini
-  Widget? exercise1() {
-    // INSTRUKSI: Buat sebuah Row dengan 3 Container berwarna berbeda
-    return Row(
-      children: [
-        Container(width: 50, height: 50, color: Colors.red),
-        Container(width: 50, height: 50, color: Colors.green),
-        Container(width: 50, height: 50, color: Colors.blue),
-      ],
-    );
-  }
-
-  Widget? exercise2() {
-    // INSTRUKSI: Buat sebuah Column dengan 3 Text widget
-    return Column(
-      children: [
-        Text("Text 1"),
-        Text("Text 2"),
-        Text("Text 3"),
-      ],
-    );
-  }
-
-  Widget? exercise3() {
-    // INSTRUKSI: Buat sebuah Stack dengan 2 Container yang overlap
-    return Stack(
-      children: [
-        Container(width: 100, height: 100, color: Colors.red),
-        Container(width: 50, height: 50, color: Colors.green),
-      ],
-    );
-  }
-
-  Widget? exercise4() {
-    // Instruksi: Buat sebuah Positioned widget di dalam Stack
-    return Stack(
-      children: [
-        Container(width: 100, height: 100, color: Colors.red),
-        Positioned(
-            top: 20,
-            left: 20,
-            child: Container(width: 50, height: 50, color: Colors.green)),
-      ],
-    );
-  }
-
-  Widget? exercise5() {
-    // Instruksi: Buat sebuah Wrap dengan 5 Container kecil
-    return Wrap(
-      children: [
-        Container(width: 50, height: 50, color: Colors.red),
-        Container(width: 50, height: 50, color: Colors.green),
-        Container(width: 50, height: 50, color: Colors.blue),
-        Container(width: 50, height: 50, color: Colors.yellow),
-        Container(width: 50, height: 50, color: Colors.purple),
-      ],
-    );
-  }
-
-  Widget? exercise6() {
-    // Instruksi: Buat sebuah Expanded widget di dalam Row
-    return Row(
-      children: [
-        Expanded(child: Container(width: 50, height: 50, color: Colors.red)),
-        Expanded(child: Container(width: 50, height: 50, color: Colors.green)),
-      ],
-    );
-  }
-
-  Widget? exercise7() {
-// Instruksi: Buat sebuah Flexible widget di dalam Column
-    return Column(
-      children: [
-        Flexible(child: Container(width: 50, height: 50, color: Colors.red)),
-        Flexible(child: Container(width: 50, height: 50, color: Colors.green)),
-      ],
-    );
-  }
-
-  Widget? exercise8() {
-    // Instruksi: Buat sebuah SizedBox dengan lebar dan tinggi tertentu
-    return SizedBox(width: 100, height: 100);
-  }
-
-  Widget? exercise9() {
-    // Instruksi: Buat sebuah Container dengan margin dan padding
-    return Container(
-        width: 100,
-        height: 100,
-        margin: EdgeInsets.all(10),
-        padding: EdgeInsets.all(10));
-  }
-
-  Widget? exercise10() {
-    // Instruksi: Buat sebuah Padding dengan EdgeInsets.symmetric
-    return Padding(padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10));
-  }
-
-  Widget? exercise11() {
-// Instruksi: Buat sebuah Center widget dengan child Container
-    return Center(child: Container(width: 50, height: 50, color: Colors.red));
-  }
-
-  Widget? exercise12() {
-// Instruksi: Buat sebuah Align dengan alignment tertentu
-    return Align(
-        alignment: Alignment.topLeft,
-        child: Container(width: 50, height: 50, color: Colors.red));
-  }
-
-  Widget? exercise13() {
-// Instruksi: Buat sebuah AspectRatio dengan ratio 16:9
-    return AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Container(width: 50, height: 50, color: Colors.red));
-  }
-
-  Widget? exercise14() {
-// Instruksi: Buat sebuah FractionallySizedBox dengan widthFactor 0.5
-    return FractionallySizedBox(
-        widthFactor: 0.5,
-        child: Container(width: 50, height: 50, color: Colors.red));
-  }
-
-  Widget? exercise15() {
-// Instruksi: Buat sebuah LayoutBuilder untuk responsive layout
-    return LayoutBuilder(builder: (context, constraints) {
-      return Container(
-          width: constraints.maxWidth,
-          height: constraints.maxHeight,
-          color: Colors.red);
-    });
-  }
-
-  Widget? exercise16() {
-    // Instruksi: Buat sebuah Transform widget dengan rotate
-    return Transform.rotate(
-      angle: 0.5,
-      child: Container(width: 50, height: 50, color: Colors.blue),
-    );
-  }
-
-  Widget? exercise17() {
-    // Instruksi: Buat sebuah Transform widget dengan scale
-    return Transform.scale(
-      scale: 1.5,
-      child: Container(width: 50, height: 50, color: Colors.green),
-    );
-  }
-
-  Widget? exercise18() {
-    // Instruksi: Buat sebuah Transform widget dengan translate
-    return Transform.translate(
-      offset: Offset(10, 10),
-      child: Container(width: 50, height: 50, color: Colors.purple),
-    );
-  }
+  // Exercise methods - siswa akan mengisi ini di file efw200_exercises.dart
+  Widget? exercise1() => Efw200Exercises.exercise1();
+  Widget? exercise2() => Efw200Exercises.exercise2();
+  Widget? exercise3() => Efw200Exercises.exercise3();
+  Widget? exercise4() => Efw200Exercises.exercise4();
+  Widget? exercise5() => Efw200Exercises.exercise5();
+  Widget? exercise6() => Efw200Exercises.exercise6();
+  Widget? exercise7() => Efw200Exercises.exercise7();
+  Widget? exercise8() => Efw200Exercises.exercise8();
+  Widget? exercise9() => Efw200Exercises.exercise9();
+  Widget? exercise10() => Efw200Exercises.exercise10();
+  Widget? exercise11() => Efw200Exercises.exercise11();
+  Widget? exercise12() => Efw200Exercises.exercise12();
+  Widget? exercise13() => Efw200Exercises.exercise13();
+  Widget? exercise14() => Efw200Exercises.exercise14();
+  Widget? exercise15() => Efw200Exercises.exercise15();
+  Widget? exercise16() => Efw200Exercises.exercise16();
+  Widget? exercise17() => Efw200Exercises.exercise17();
+  Widget? exercise18() => Efw200Exercises.exercise18();
 
   @override
   Widget build(BuildContext context) {
