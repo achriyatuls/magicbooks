@@ -1,4 +1,7 @@
 import 'dart:io';
+import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart' show kIsWeb, defaultTargetPlatform, TargetPlatform;
 import '../../module/efd1100_variable/validator/efd1100_validator.dart';
 import '../../module/efb100_null_safety/validator/efb100_validator.dart';
 import '../../module/efd1200_datetime/validator/efd1200_validator.dart';
@@ -12,6 +15,8 @@ import 'efw200_progress_service.dart';
 import 'efw300_progress_service.dart';
 import 'efw301_progress_service.dart';
 import 'efw400_progress_service.dart';
+import 'exercise_metadata_service.dart';
+import '../model/exercise_metadata_model.dart';
 
 class ExerciseInfo {
   final String id;
@@ -36,10 +41,467 @@ class ExerciseInfo {
 }
 
 class ModuleExerciseService {
+  static final ExerciseMetadataService _metadataService = ExerciseMetadataService();
+
+  /// Get module exercises dengan priority:
+  /// 1. Firestore (metadata dari backend) - PRIORITAS TERTINGGI
+  /// 2. JSON file (local asset)
+  /// 3. Parse dari Dart file (development/desktop only)
+  /// 4. Hardcoded data (fallback)
   static Future<List<ExerciseInfo>> getModuleExercises(String moduleId) async {
-    // For now, always use sample exercises to ensure functionality
-    // TODO: Implement proper file loading later
+    try {
+      // PRIORITY 1: Load metadata dari Firestore (backend)
+      final firestoreExercises = await _loadExercisesFromFirestore(moduleId);
+      if (firestoreExercises.isNotEmpty) {
+        print('✅ Successfully loaded ${firestoreExercises.length} exercises from Firestore for $moduleId');
+        return firestoreExercises;
+      }
+    } catch (e) {
+      print('⚠️ Error loading exercises from Firestore for $moduleId: $e');
+    }
+
+    try {
+      // PRIORITY 2: Load from JSON metadata (local asset)
+      final jsonExercises = await _loadExercisesFromJson(moduleId);
+      if (jsonExercises.isNotEmpty) {
+        print('✅ Successfully loaded ${jsonExercises.length} exercises from JSON for $moduleId');
+        return jsonExercises;
+      }
+    } catch (e) {
+      print('⚠️ Error loading exercises from JSON for $moduleId: $e');
+    }
+    
+    try {
+      // PRIORITY 3: Parse exercises from Dart file (works only in development/desktop)
+      final exercises = await _parseExercisesFromFile(moduleId);
+      if (exercises.isNotEmpty) {
+        print('✅ Successfully parsed ${exercises.length} exercises from file for $moduleId');
+        return exercises;
+      }
+    } catch (e) {
+      print('⚠️ Error parsing exercises from file for $moduleId: $e');
+    }
+    
+    // PRIORITY 4: Fallback to hardcoded exercises
+    print('ℹ️ Using hardcoded exercise data for $moduleId');
     return _getSampleExercises(moduleId);
+  }
+
+  /// Load exercises metadata dari Firestore
+  /// Metadata berisi: title, description, instructions, hint, example, difficulty, isValidated
+  /// Kode exercise tetap di local file Dart
+  static Future<List<ExerciseInfo>> _loadExercisesFromFirestore(String moduleId) async {
+    try {
+      final metadataList = await _metadataService.getModuleExerciseMetadata(moduleId);
+      
+      if (metadataList.isEmpty) {
+        return [];
+      }
+
+      // Convert ExerciseMetadata ke ExerciseInfo
+      return metadataList.map((metadata) {
+        return ExerciseInfo(
+          id: metadata.id,
+          title: 'Exercise ${metadata.number}: ${metadata.title}',
+          description: metadata.description,
+          instructions: metadata.instructions,
+          difficulty: metadata.difficulty,
+          isValidated: metadata.isValidated,
+          hint: metadata.hint,
+          example: metadata.example,
+        );
+      }).toList();
+    } catch (e) {
+      print('❌ Error loading exercises from Firestore: $e');
+      return [];
+    }
+  }
+
+  /// Convert hardcoded ExerciseInfo ke ExerciseMetadata untuk upload ke Firestore
+  /// Helper method untuk admin upload metadata
+  static Future<bool> uploadHardcodedMetadataToFirestore(String moduleId) async {
+    try {
+      final hardcodedExercises = _getSampleExercises(moduleId);
+      
+      if (hardcodedExercises.isEmpty) {
+        print('⚠️ No hardcoded exercises found for $moduleId');
+        return false;
+      }
+
+      // Convert ExerciseInfo ke ExerciseMetadata
+      final metadataList = hardcodedExercises.map((exercise) {
+        // Extract exercise number from ID (e.g., "EFD1100_ex1" -> 1)
+        final exerciseNumber = int.tryParse(exercise.id.split('_ex')[1]) ?? 0;
+        
+        // Extract title without "Exercise N: " prefix
+        String title = exercise.title;
+        if (title.startsWith('Exercise $exerciseNumber: ')) {
+          title = title.substring('Exercise $exerciseNumber: '.length);
+        }
+
+        return ExerciseMetadata(
+          id: exercise.id,
+          moduleId: moduleId,
+          number: exerciseNumber,
+          title: title,
+          description: exercise.description,
+          instructions: exercise.instructions,
+          difficulty: exercise.difficulty,
+          isValidated: exercise.isValidated,
+          hint: exercise.hint,
+          example: exercise.example,
+          updatedAt: DateTime.now(),
+        );
+      }).toList();
+
+      // Upload to Firestore
+      final success = await _metadataService.saveModuleExerciseMetadata(moduleId, metadataList);
+      
+      if (success) {
+        print('✅ Successfully uploaded ${metadataList.length} exercises to Firestore for $moduleId');
+      } else {
+        print('❌ Failed to upload exercises to Firestore for $moduleId');
+      }
+      
+      return success;
+    } catch (e) {
+      print('❌ Error uploading metadata to Firestore: $e');
+      return false;
+    }
+  }
+  
+  /// Load exercises from JSON metadata file
+  static Future<List<ExerciseInfo>> _loadExercisesFromJson(String moduleId) async {
+    try {
+      final assetPath = 'assets/exercises/${moduleId.toLowerCase()}_exercises.json';
+      final jsonString = await rootBundle.loadString(assetPath);
+      final jsonData = json.decode(jsonString) as Map<String, dynamic>;
+      
+      final exercises = <ExerciseInfo>[];
+      final exercisesList = jsonData['exercises'] as List;
+      
+      for (final exerciseData in exercisesList) {
+        final data = exerciseData as Map<String, dynamic>;
+        exercises.add(ExerciseInfo(
+          id: data['id'] as String,
+          title: 'Exercise ${data['number']}: ${data['title']}',
+          description: data['description'] as String,
+          instructions: data['instructions'] as String,
+          difficulty: data['difficulty'] as String,
+          isValidated: data['isValidated'] as bool,
+          hint: data['hint'] as String?,
+          example: data['example'] as String?,
+        ));
+      }
+      
+      return exercises;
+    } catch (e) {
+      print('⚠️ Could not load JSON metadata: $e');
+      return [];
+    }
+  }
+  
+  /// Parse exercises from exercise file by reading comments
+  static Future<List<ExerciseInfo>> _parseExercisesFromFile(String moduleId) async {
+    try {
+      final fileContent = await _loadExerciseFile(moduleId);
+      if (fileContent.isEmpty) {
+        print('File is empty or not found for $moduleId');
+        return [];
+      }
+      
+      return _parseExerciseComments(fileContent, moduleId);
+    } catch (e) {
+      print('Error parsing exercises from file: $e');
+      return [];
+    }
+  }
+  
+  /// Parse exercise information from comment blocks
+  /// 
+  /// Expected format:
+  /// ```
+  /// // ═══════════════════════════════════════════════════════════════════════════
+  /// // EXERCISE N: Title (VALIDATED/BASIC)
+  /// // ═══════════════════════════════════════════════════════════════════════════
+  /// // INSTRUKSI:
+  /// // - Instruction line 1
+  /// // - Instruction line 2
+  /// //
+  /// // CONTOH: (optional)
+  /// // Input: ...
+  /// // Output: ...
+  /// //
+  /// // HINT: (optional)
+  /// // Hint text
+  /// 
+  /// static ReturnType exerciseN() {
+  ///   // Function body
+  /// }
+  /// ```
+  static List<ExerciseInfo> _parseExerciseComments(String content, String moduleId) {
+    final exercises = <ExerciseInfo>[];
+    
+    try {
+      // Split content by exercise separator
+      final separator = '// ═══════════════════════════════════════════════════════════════════════════';
+      final sections = content.split(separator);
+      
+      if (sections.length < 2) {
+        print('⚠️ No exercise sections found in file (expected separator: $separator)');
+        return [];
+      }
+      
+      for (int i = 1; i < sections.length; i++) {
+        try {
+          final section = sections[i];
+          
+          // Extract exercise number, title, and validation status
+          // Pattern: EXERCISE N: Title (VALIDATED/BASIC)
+          final exerciseMatch = RegExp(r'EXERCISE\s+(\d+):\s*(.+?)(?:\s*\((VALIDATED|BASIC)\))?', caseSensitive: false)
+              .firstMatch(section);
+          
+          if (exerciseMatch == null) {
+            print('⚠️ Could not parse exercise section $i - no EXERCISE header found');
+            continue;
+          }
+          
+          final exerciseNumber = exerciseMatch.group(1);
+          final title = exerciseMatch.group(2)?.trim() ?? 'Exercise $exerciseNumber';
+          final validationStatus = exerciseMatch.group(3)?.toUpperCase() ?? 'BASIC';
+          final isValidated = validationStatus == 'VALIDATED';
+          
+          // Extract instructions - read until we hit CONTOH, HINT, or function definition
+          String instructions = '';
+          final lines = section.split('\n');
+          bool inInstructions = false;
+          int instructionsStartIndex = -1;
+          
+          for (int j = 0; j < lines.length; j++) {
+            final line = lines[j].trim();
+            
+            if (line.toUpperCase().contains('INSTRUKSI:')) {
+              inInstructions = true;
+              instructionsStartIndex = j;
+              continue;
+            }
+            
+            if (inInstructions) {
+              // Stop at CONTOH, HINT, or function definition
+              if (line.toUpperCase().contains('CONTOH:') ||
+                  line.toUpperCase().contains('HINT:') ||
+                  line.trim().startsWith('static') ||
+                  line.trim().startsWith('Widget') ||
+                  line.isEmpty && j > instructionsStartIndex + 5) {
+                break;
+              }
+              instructions += lines[j] + '\n';
+            }
+          }
+          instructions = _cleanCommentText(instructions);
+          
+          // Extract description (first meaningful line of instructions)
+          String description = '';
+          final instructionLines = instructions.split('\n');
+          for (final line in instructionLines) {
+            final cleaned = line.trim();
+            if (cleaned.isEmpty) continue;
+            
+            // Skip lines that are clearly not descriptions
+            if (cleaned.toUpperCase().contains('HINT:') ||
+                cleaned.toUpperCase().contains('CONTOH:') ||
+                cleaned.toUpperCase().contains('TIPS:')) {
+              continue;
+            }
+            
+            // Take first meaningful line
+            if (cleaned.startsWith('-')) {
+              description = cleaned.substring(1).trim();
+            } else {
+              description = cleaned;
+            }
+            
+            // Limit description length (for UI display)
+            if (description.length > 100) {
+              description = description.substring(0, 100) + '...';
+            }
+            break;
+          }
+          if (description.isEmpty) description = title;
+          
+          // Extract example - read until HINT or function definition
+          String? example;
+          bool inExample = false;
+          String exampleText = '';
+          
+          for (int j = 0; j < lines.length; j++) {
+            final line = lines[j].trim();
+            
+            if (line.toUpperCase().contains('CONTOH:')) {
+              inExample = true;
+              continue;
+            }
+            
+            if (inExample) {
+              // Stop at HINT or function definition
+              if (line.toUpperCase().contains('HINT:') ||
+                  line.trim().startsWith('static') ||
+                  line.trim().startsWith('Widget')) {
+                break;
+              }
+              exampleText += lines[j] + '\n';
+            }
+          }
+          if (exampleText.isNotEmpty) {
+            example = _cleanCommentText(exampleText).trim();
+            if (example.isEmpty) example = null;
+          }
+          
+          // Extract hint - first try HINT:, then TIPS:, then look in function body
+          String? hint;
+          bool inHint = false;
+          String hintText = '';
+          
+          // First, try to find HINT: in header comments
+          for (int j = 0; j < lines.length; j++) {
+            final line = lines[j].trim();
+            
+            if (line.toUpperCase().contains('HINT:') && !line.trim().startsWith('static')) {
+              inHint = true;
+              // Extract text after HINT:
+              final hintPart = line.split(RegExp(r'HINT:\s*', caseSensitive: false));
+              if (hintPart.length > 1 && hintPart[1].trim().isNotEmpty) {
+                hintText = hintPart[1].trim();
+              }
+              continue;
+            }
+            
+            if (inHint) {
+              // Stop at function definition or next section
+              if (line.trim().startsWith('static') ||
+                  line.trim().startsWith('Widget') ||
+                  line.toUpperCase().contains('CONTOH:')) {
+                break;
+              }
+              hintText += ' ' + lines[j].trim();
+            }
+          }
+          
+          // If no HINT found, try to extract TIPS from INSTRUKSI
+          if (hintText.isEmpty) {
+            final tipsMatch = RegExp(r'TIPS?:\s*(.+?)(?:\n|$)', caseSensitive: false, multiLine: true)
+                .firstMatch(instructions);
+            if (tipsMatch != null) {
+              hintText = tipsMatch.group(1)?.trim() ?? '';
+            }
+          }
+          
+          // If still no hint, try to find HINT in function body (less reliable)
+          if (hintText.isEmpty) {
+            // Look for HINT: in function body comments
+            final functionHintMatch = RegExp(r'//\s*HINT:\s*(.+?)(?:\n|//|$)', caseSensitive: false, multiLine: true)
+                .firstMatch(section);
+            if (functionHintMatch != null) {
+              hintText = functionHintMatch.group(1)?.trim() ?? '';
+            }
+          }
+          
+          if (hintText.isNotEmpty) {
+            hint = _cleanCommentText(hintText).trim();
+            // Remove numbered list markers (e.g., "1. ", "2. ")
+            hint = hint.replaceAll(RegExp(r'^\d+\.\s*', multiLine: true), '');
+            // Remove leading dashes
+            hint = hint.replaceAll(RegExp(r'^\s*-\s*', multiLine: true), '');
+            // Clean up multiple spaces and newlines
+            hint = hint.replaceAll(RegExp(r'\s+'), ' ').trim();
+            if (hint.isEmpty) hint = null;
+          }
+          
+          // Determine difficulty (default to Easy, can be improved later)
+          String difficulty = _determineDifficulty(instructions, title);
+          
+          final exerciseId = '${moduleId}_ex$exerciseNumber';
+          final exerciseTitle = 'Exercise $exerciseNumber: $title';
+          
+          exercises.add(ExerciseInfo(
+            id: exerciseId,
+            title: exerciseTitle,
+            description: description.isEmpty ? title : description,
+            instructions: instructions.isEmpty ? title : instructions,
+            difficulty: difficulty,
+            isValidated: isValidated,
+            hint: hint,
+            example: example,
+          ));
+        } catch (e) {
+          print('⚠️ Error parsing exercise section $i: $e');
+          // Continue to next exercise instead of failing completely
+          continue;
+        }
+      }
+      
+      // Sort exercises by number
+      exercises.sort((a, b) {
+        try {
+          final aNum = int.tryParse(a.id.split('_ex')[1]) ?? 0;
+          final bNum = int.tryParse(b.id.split('_ex')[1]) ?? 0;
+          return aNum.compareTo(bNum);
+        } catch (e) {
+          return 0; // Keep original order if sorting fails
+        }
+      });
+      
+      print('✅ Parsed ${exercises.length} exercises from file');
+      return exercises;
+    } catch (e) {
+      print('❌ Error parsing exercise comments: $e');
+      return [];
+    }
+  }
+  
+  /// Clean comment text by removing comment markers and extra whitespace
+  static String _cleanCommentText(String text) {
+    return text
+        .split('\n')
+        .map((line) {
+          // Remove leading comment markers
+          line = line.replaceFirst(RegExp(r'^\s*//\s*'), '');
+          // Remove leading dashes from continuation lines
+          line = line.replaceFirst(RegExp(r'^\s*-\s*'), '');
+          return line.trim();
+        })
+        .where((line) => line.isNotEmpty)
+        .join('\n')
+        .trim();
+  }
+  
+  /// Determine difficulty based on instructions and title
+  static String _determineDifficulty(String instructions, String title) {
+    final text = (instructions + ' ' + title).toLowerCase();
+    
+    if (text.contains('hard') || text.contains('advanced') || text.contains('kompleks')) {
+      return 'Hard';
+    } else if (text.contains('medium') || text.contains('intermediate') || text.contains('sedang')) {
+      return 'Medium';
+    } else if (text.contains('easy') || text.contains('beginner') || text.contains('mudah')) {
+      return 'Easy';
+    }
+    
+    // Default difficulty based on keywords
+    if (text.contains('palindrome') || 
+        text.contains('regex') || 
+        text.contains('async') ||
+        text.contains('complex')) {
+      return 'Hard';
+    } else if (text.contains('average') || 
+               text.contains('min') || 
+               text.contains('max') ||
+               text.contains('validasi') ||
+               text.contains('convert')) {
+      return 'Medium';
+    }
+    
+    return 'Easy'; // Default
   }
 
   // Get total exercises for a module
@@ -253,29 +715,77 @@ class ModuleExerciseService {
 
   static Future<String> _loadExerciseFile(String moduleId) async {
     try {
-      // Map module ID to file path
-      String filePath = _getExerciseFilePath(moduleId);
-      print('Attempting to load file: $filePath');
-
-      // Load file content using dart:io
-      final file = File(filePath);
-      if (await file.exists()) {
-        final content = await file.readAsString();
-        print('Successfully loaded file: $filePath');
-        return content;
+      // NOTE: File Dart tidak bisa dibaca sebagai asset karena mereka dikompilasi.
+      // Untuk Flutter mobile, file source code tidak tersedia saat runtime.
+      // Solusi: Gunakan data hardcoded yang sudah ada di _getSampleExercises
+      // atau buat file metadata JSON terpisah yang bisa dibaca sebagai asset.
+      
+      // Try to load from file system (works only in development/desktop)
+      if (!kIsWeb && !kIsMobile) {
+        try {
+          String filePath = _getExerciseFilePath(moduleId);
+          final file = File(filePath);
+          if (await file.exists()) {
+            final content = await file.readAsString();
+            print('✅ Successfully loaded file: $filePath');
+            return content;
+          } else {
+            print('⚠️ File does not exist: $filePath');
+          }
+        } catch (fileError) {
+          print('⚠️ Could not load from file system: $fileError');
+        }
       } else {
-        print('File does not exist: $filePath');
-        return '';
+        print('ℹ️ Running on mobile/web - file source code not available at runtime');
+        print('   Using hardcoded exercise data instead');
       }
+      
+      return '';
     } catch (e) {
-      print('Error loading file for $moduleId: $e');
-      print('File path attempted: ${_getExerciseFilePath(moduleId)}');
+      print('❌ Error loading file for $moduleId: $e');
       return '';
     }
   }
+  
+  /// Check if running on mobile platform
+  static bool get kIsMobile {
+    return !kIsWeb && (defaultTargetPlatform == TargetPlatform.android || 
+                       defaultTargetPlatform == TargetPlatform.iOS);
+  }
 
+  /// Get asset path for exercise file (for rootBundle.loadString)
+  static String _getExerciseAssetPath(String moduleId) {
+    // Map module IDs to their asset paths (relative to assets root)
+    // Since lib/module/ is in assets, we use the path relative to project root
+    switch (moduleId) {
+      case 'EFD1100':
+        return 'lib/module/efd1100_variable/exercises/efd1100_exercises.dart';
+      case 'EFD1200':
+        return 'lib/module/efd1200_datetime/exercises/efd1200_exercises.dart';
+      case 'EFD1300':
+        return 'lib/module/efd1300_string/exercises/efd1300_exercises.dart';
+      case 'EFD1400':
+        return 'lib/module/efd1400_number/exercises/efd1400_exercises.dart';
+      case 'EFD1500':
+        return 'lib/module/efd1500_if_statement/exercises/efd1500_exercises.dart';
+      case 'EFB100':
+        return 'lib/module/efb100_null_safety/exercises/efb100_exercises.dart';
+      case 'EFD1600':
+        return 'lib/module/efd1600_list_and_map/exercises/efd1600_exercises.dart';
+      case 'EFD1700':
+        return 'lib/module/efd1700_regex/exercises/efd1700_exercises.dart';
+      case 'EFD1800':
+        return 'lib/module/efd1800_async_function/exercises/efd1800_exercises.dart';
+      case 'EFW100':
+        return 'lib/module/efw100_common_widget/view/efw100_common_widget_view.dart';
+      default:
+        throw Exception('Unknown module ID: $moduleId');
+    }
+  }
+
+  /// Get file system path for exercise file (for File() - only works in development/desktop)
   static String _getExerciseFilePath(String moduleId) {
-    // Map module IDs to their exercise file paths
+    // Map module IDs to their exercise file paths (for File() access)
     switch (moduleId) {
       case 'EFD1100':
         return 'lib/module/efd1100_variable/exercises/efd1100_exercises.dart';

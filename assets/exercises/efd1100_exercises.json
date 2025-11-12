@@ -1,0 +1,38 @@
+{
+  "moduleId": "EFD1100",
+  "exercises": [
+    {
+      "id": "EFD1100_ex1",
+      "number": 1,
+      "title": "Type Check",
+      "description": "Buat variabel price bertipe String dan isi nilainya",
+      "instructions": "Buat variabel price bertipe String dan isi nilainya. Pastikan TIDAK menggunakan tipe int tanpa quotes (contoh: 100). Contoh benar: \"100\" (String)\nHasil fungsi harus mengembalikan true jika price adalah String.",
+      "difficulty": "Easy",
+      "isValidated": false,
+      "hint": "Isi variabel price dengan String, bukan angka tanpa quotes. Contoh: price = \"100\";",
+      "example": null
+    },
+    {
+      "id": "EFD1100_ex2",
+      "number": 2,
+      "title": "Konversi String ke Double",
+      "description": "Ubah parameter text (String) menjadi double, dan return hasilnya",
+      "instructions": "Ubah parameter text (String) menjadi double, dan return hasilnya",
+      "difficulty": "Easy",
+      "isValidated": true,
+      "hint": "Gunakan double.parse()",
+      "example": "Input: \"100.24\"\nOutput: 100.24 (double)"
+    },
+    {
+      "id": "EFD1100_ex3",
+      "number": 3,
+      "title": "Konversi dengan Validasi",
+      "description": "String input mungkin mengandung karakter non-numeric, hilangkan karakter yang bukan angka dan titik",
+      "instructions": "String input mungkin mengandung karakter non-numeric (contoh: \"300.24a\"). Hilangkan karakter yang bukan angka dan titik, lalu konversi ke double",
+      "difficulty": "Medium",
+      "isValidated": true,
+      "hint": "Gunakan .replaceAll(RegExp(r'[^\\d.]'), '') untuk hilangkan non-numeric. Gunakan double.tryParse() untuk safety. Jika gagal, return 0.0",
+      "example": null
+    }
+  ]
+}
