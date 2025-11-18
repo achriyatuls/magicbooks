@@ -9,6 +9,7 @@ import '../shared/service/module_service.dart';
 import '../shared/model/user_model.dart';
 import '../shared/model/exercise_progress_model.dart';
 import '../shared/widget/reusable_widgets.dart';
+import '../shared/util/grade_converter.dart';
 import 'login_screen.dart';
 import 'module_exercises_screen.dart';
 import 'edit_profile_screen.dart';
@@ -195,19 +196,28 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         }
       }
 
-      // Update progress list
+      // Update progress list with latest data from Firestore
       final updatedProgress = <ModuleProgress>[];
       for (var progress in _moduleProgressList) {
         final completedCount = moduleCompletedCount[progress.moduleId] ?? 0;
         final totalScore = moduleTotalScore[progress.moduleId] ?? 0;
 
+        // Get actual total exercises count to ensure accuracy
+        int actualTotalExercises = progress.totalExercises;
+        try {
+          actualTotalExercises =
+              await ModuleExerciseService.getTotalExercises(progress.moduleId);
+        } catch (e) {
+          print('Error getting total exercises for ${progress.moduleId}: $e');
+        }
+
         updatedProgress.add(ModuleProgress(
           moduleId: progress.moduleId,
           userId: progress.userId,
-          totalExercises: progress.totalExercises,
+          totalExercises: actualTotalExercises,
           completedExercises: completedCount,
-          completionPercentage: progress.totalExercises > 0
-              ? (completedCount / progress.totalExercises) * 100
+          completionPercentage: actualTotalExercises > 0
+              ? (completedCount / actualTotalExercises) * 100
               : 0.0,
           totalScore: totalScore,
           lastAccessed: progress.lastAccessed,
@@ -930,6 +940,99 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
 
                   const SizedBox(height: 24),
 
+                  // Grade Information Card
+                  ReusableCard(
+                    backgroundColor: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Nilai Keseluruhan',
+                          style:
+                              Theme.of(context).textTheme.titleLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        const SizedBox(height: 16),
+                        if (_moduleProgressList.isNotEmpty) ...[
+                          Builder(
+                            builder: (context) {
+                              final gradeReport =
+                                  GradeConverter.getDetailedGradeReport(
+                                      _moduleProgressList);
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        width: 80,
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                          color: _getGradeColor(
+                                              gradeReport['letterGrade']
+                                                  as String),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            gradeReport['letterGrade']
+                                                as String,
+                                            style: const TextStyle(
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        gradeReport['description'] as String,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: _getGradeColor(
+                                              gradeReport['letterGrade']
+                                                  as String),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      _buildGradeInfo('Nilai',
+                                          '${gradeReport['numericGrade']}%'),
+                                      const SizedBox(height: 8),
+                                      _buildGradeInfo(
+                                        'Weighted',
+                                        '${(gradeReport['weightedProgress'] as double).toStringAsFixed(1)}%',
+                                      ),
+                                      const SizedBox(height: 8),
+                                      _buildGradeInfo(
+                                        'Modul Selesai',
+                                        '${gradeReport['completedModules']}/${gradeReport['totalModules']}',
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ] else ...[
+                          const Text(
+                            'Belum ada data progress',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
                   // Module Progress Details
                   ...(_moduleProgressList.map(
                     (module) => ReusableCard(
@@ -1202,6 +1305,45 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       default:
         return Colors.grey;
     }
+  }
+
+  Color _getGradeColor(String grade) {
+    switch (grade) {
+      case 'A':
+        return Colors.green;
+      case 'B':
+        return Colors.lightGreen;
+      case 'C':
+        return Colors.orange;
+      case 'D':
+        return Colors.deepOrange;
+      case 'E':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  Widget _buildGradeInfo(String label, String value) {
+    return Row(
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 12,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          value,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildAchievementScreen() {
