@@ -5,8 +5,10 @@ import '../model/user_model.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  bool _googleSignInInitialized = false;
 
   // Get current user
   User? get currentUser => _auth.currentUser;
@@ -14,32 +16,41 @@ class AuthService {
   // Auth state changes stream
   Stream<User?> get authStateChanges => _auth.authStateChanges();
 
+  Future<void> _ensureGoogleSignInInitialized() async {
+    if (_googleSignInInitialized) return;
+    await _googleSignIn.initialize();
+    _googleSignInInitialized = true;
+  }
+
   // Sign in with Google
   Future<UserCredential?> signInWithGoogle() async {
     try {
+      await _ensureGoogleSignInInitialized();
+
       // Trigger the authentication flow
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      
-      if (googleUser == null) {
-        return null; // User cancelled the sign-in
-      }
+      final GoogleSignInAccount googleUser = await _googleSignIn.authenticate();
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+      final GoogleSignInAuthentication googleAuth = googleUser.authentication;
 
       // Create a new credential
       final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
       // Sign in to Firebase with the Google credential
       final UserCredential userCredential = await _auth.signInWithCredential(credential);
-      
+
       // Check if user exists in Firestore, if not create new user document
       await _createUserIfNotExists(userCredential.user!);
-      
+
       return userCredential;
+    } on GoogleSignInException catch (e) {
+      if (e.code == GoogleSignInExceptionCode.canceled) {
+        return null; // User cancelled the sign-in
+      }
+      print('Error signing in with Google: $e');
+      return null;
     } catch (e) {
       print('Error signing in with Google: $e');
       return null;

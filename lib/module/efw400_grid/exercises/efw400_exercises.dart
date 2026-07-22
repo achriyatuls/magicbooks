@@ -23,18 +23,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView.count dengan crossAxisCount 2 dan 6 item
   static Widget? exercise1() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -43,17 +31,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView.builder dengan crossAxisCount 3
   static Widget? exercise2() {
     // TULIS KODE DI SINI:
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      itemCount: 9,
-      itemBuilder: (_, __) =>
-          Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -62,18 +39,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan crossAxisSpacing dan mainAxisSpacing
   static Widget? exercise3() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -82,18 +47,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan childAspectRatio 1.5
   static Widget? exercise4() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -102,18 +55,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan maxCrossAxisExtent 200
   static Widget? exercise5() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 200,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -122,19 +63,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan scrollDirection Axis.horizontal
   static Widget? exercise6() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      scrollDirection: Axis.horizontal,
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -143,19 +71,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan physics BouncingScrollPhysics
   static Widget? exercise7() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      physics: const BouncingScrollPhysics(),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -164,19 +79,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan padding EdgeInsets.all(16)
   static Widget? exercise8() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      padding: const EdgeInsets.all(16),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -185,19 +87,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan cacheExtent 200
   static Widget? exercise9() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      cacheExtent: 200,
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -206,20 +95,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan shrinkWrap true
   static Widget? exercise10() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -228,19 +103,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan primary true
   static Widget? exercise11() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      primary: true,
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -249,16 +111,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView.count dengan crossAxisCount 3
   static Widget? exercise12() {
     // TULIS KODE DI SINI:
-    return GridView.count(
-      crossAxisCount: 3,
-      mainAxisSpacing: 10,
-      crossAxisSpacing: 10,
-      childAspectRatio: 1.5,
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -267,18 +119,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan addAutomaticKeepAlives true
   static Widget? exercise13() {
     // TULIS KODE DI SINI:
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      itemCount: 9,
-      addAutomaticKeepAlives: true,
-      itemBuilder: (_, __) =>
-          Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -287,18 +127,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan addRepaintBoundaries true
   static Widget? exercise14() {
     // TULIS KODE DI SINI:
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      itemCount: 9,
-      addRepaintBoundaries: true,
-      itemBuilder: (_, __) =>
-          Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -307,19 +135,6 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan reverse true
   static Widget? exercise15() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      reverse: true,
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -328,18 +143,5 @@ class Efw400Exercises {
   // INSTRUKSI: Buat GridView dengan semanticChildCount 6
   static Widget? exercise16() {
     // TULIS KODE DI SINI:
-    return GridView(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        childAspectRatio: 1.5,
-      ),
-      semanticChildCount: 6,
-      children: List.generate(
-        6,
-        (i) => Container(color: Color(0xFF8B4513)), // Saddle Brown (merah bata)
-      ),
-    );
   }
 }

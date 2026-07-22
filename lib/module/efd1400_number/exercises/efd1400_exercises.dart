@@ -68,7 +68,7 @@ class Efd1400Exercises {
     double? number;
 
     // TULIS KODE DI SINI:
-    number = input;
+
     return number; // ← JANGAN UBAH BARIS INI!
   }
 
@@ -85,7 +85,7 @@ class Efd1400Exercises {
     double? number;
 
     // TULIS KODE DI SINI:
-    number = double.tryParse(input) ?? 0.0;
+
     return number; // ← JANGAN UBAH BARIS INI!
   }
 

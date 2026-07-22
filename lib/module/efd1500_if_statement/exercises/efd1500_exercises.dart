@@ -50,13 +50,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (num > 0) {
-      result = "Positif";
-    } else if (num < 0) {
-      result = "Negatif";
-    } else {
-      result = "Nol";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -74,13 +67,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (num1 > num2) {
-      result = "Lebih besar";
-    } else if (num1 < num2) {
-      result = "Lebih kecil";
-    } else {
-      result = "Sama";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -98,13 +84,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (score >= 75) {
-      result = "Baik";
-    } else if (score >= 60) {
-      result = "Cukup";
-    } else {
-      result = "Kurang";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -122,15 +101,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (score >= 90) {
-      result = "Luar Biasa";
-    } else if (score >= 75) {
-      result = "Baik";
-    } else if (score >= 50) {
-      result = "Sedang";
-    } else {
-      result = "Kurang";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -148,15 +118,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (score < 50) {
-      result = "Buruk";
-    } else if (score < 70) {
-      result = "Cukup";
-    } else if (score < 85) {
-      result = "Baik";
-    } else {
-      result = "Sangat Baik";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -174,11 +135,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (value is int) {
-      result = "Bilangan Bulat";
-    } else {
-      result = "Bukan Bilangan Bulat";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -196,13 +152,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (number < 0) {
-      result = "Bilangan Negatif";
-    } else if (number > 0) {
-      result = "Bilangan Positif";
-    } else {
-      result = "Nol";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -220,7 +169,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = number1 > number2;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -238,7 +186,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = number1 < number2;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -256,7 +203,6 @@ class Efd1500Exercises {
     bool? isSunday;
 
     // TULIS KODE DI SINI:
-    isSunday = now.weekday == DateTime.sunday;
 
     return isSunday; // ← JANGAN UBAH BARIS INI!
   }
@@ -274,11 +220,6 @@ class Efd1500Exercises {
     int? age;
 
     // TULIS KODE DI SINI:
-    age = today.year - birthday.year;
-    if (today.month < birthday.month ||
-        (today.month == birthday.month && today.day < birthday.day)) {
-      age = age - 1;
-    }
 
     return age; // ← JANGAN UBAH BARIS INI!
   }
@@ -296,7 +237,6 @@ class Efd1500Exercises {
     bool? isJanuaryFirst;
 
     // TULIS KODE DI SINI:
-    isJanuaryFirst = (date.year == 2022 && date.month == 1 && date.day == 1);
 
     return isJanuaryFirst; // ← JANGAN UBAH BARIS INI!
   }
@@ -314,7 +254,6 @@ class Efd1500Exercises {
     bool? isSunday;
 
     // TULIS KODE DI SINI:
-    isSunday = date.weekday == DateTime.sunday;
 
     return isSunday; // ← JANGAN UBAH BARIS INI!
   }
@@ -332,7 +271,6 @@ class Efd1500Exercises {
     bool? isSaturday;
 
     // TULIS KODE DI SINI:
-    isSaturday = date.weekday == DateTime.saturday;
 
     return isSaturday; // ← JANGAN UBAH BARIS INI!
   }
@@ -350,7 +288,6 @@ class Efd1500Exercises {
     bool? isFriday;
 
     // TULIS KODE DI SINI:
-    isFriday = date.weekday == DateTime.friday;
 
     return isFriday; // ← JANGAN UBAH BARIS INI!
   }
@@ -368,7 +305,6 @@ class Efd1500Exercises {
     bool? isThursday;
 
     // TULIS KODE DI SINI:
-    isThursday = date.weekday == DateTime.thursday;
 
     return isThursday; // ← JANGAN UBAH BARIS INI!
   }
@@ -386,7 +322,6 @@ class Efd1500Exercises {
     bool? isWednesday;
 
     // TULIS KODE DI SINI:
-    isWednesday = date.weekday == DateTime.wednesday;
 
     return isWednesday; // ← JANGAN UBAH BARIS INI!
   }
@@ -422,7 +357,6 @@ class Efd1500Exercises {
     bool? isMonday;
 
     // TULIS KODE DI SINI:
-    isMonday = date.weekday == DateTime.monday;
 
     return isMonday; // ← JANGAN UBAH BARIS INI!
   }
@@ -458,7 +392,6 @@ class Efd1500Exercises {
     bool? allEven;
 
     // TULIS KODE DI SINI:
-    allEven = numbers.every((n) => n % 2 == 0);
 
     return allEven; // ← JANGAN UBAH BARIS INI!
   }
@@ -476,7 +409,6 @@ class Efd1500Exercises {
     bool? hasGreaterThanFive;
 
     // TULIS KODE DI SINI:
-    hasGreaterThanFive = numbers.any((n) => n > 5);
 
     return hasGreaterThanFive; // ← JANGAN UBAH BARIS INI!
   }
@@ -494,7 +426,6 @@ class Efd1500Exercises {
     bool? hasLessThanZero;
 
     // TULIS KODE DI SINI:
-    hasLessThanZero = numbers.any((n) => n < 0);
 
     return hasLessThanZero; // ← JANGAN UBAH BARIS INI!
   }
@@ -512,9 +443,6 @@ class Efd1500Exercises {
     bool? oddCountEqualEvenCount;
 
     // TULIS KODE DI SINI:
-    final oddCount = numbers.where((n) => n % 2 != 0).length;
-    final evenCount = numbers.where((n) => n % 2 == 0).length;
-    oddCountEqualEvenCount = oddCount == evenCount;
 
     return oddCountEqualEvenCount; // ← JANGAN UBAH BARIS INI!
   }
@@ -532,8 +460,6 @@ class Efd1500Exercises {
     bool? largestIsFive;
 
     // TULIS KODE DI SINI:
-    final maxVal = numbers.reduce((a, b) => a > b ? a : b);
-    largestIsFive = maxVal == 5;
 
     return largestIsFive; // ← JANGAN UBAH BARIS INI!
   }
@@ -551,8 +477,6 @@ class Efd1500Exercises {
     bool? smallestIsOne;
 
     // TULIS KODE DI SINI:
-    final minVal = numbers.reduce((a, b) => a < b ? a : b);
-    smallestIsOne = minVal == 1;
 
     return smallestIsOne; // ← JANGAN UBAH BARIS INI!
   }
@@ -570,7 +494,6 @@ class Efd1500Exercises {
     bool? countIsFive;
 
     // TULIS KODE DI SINI:
-    countIsFive = numbers.length == 5;
 
     return countIsFive; // ← JANGAN UBAH BARIS INI!
   }
@@ -588,7 +511,6 @@ class Efd1500Exercises {
     bool? hasDuplicate;
 
     // TULIS KODE DI SINI:
-    hasDuplicate = numbers.length != numbers.toSet().length;
 
     return hasDuplicate; // ← JANGAN UBAH BARIS INI!
   }
@@ -606,13 +528,6 @@ class Efd1500Exercises {
     String? result;
 
     // TULIS KODE DI SINI:
-    if (number < 0) {
-      result = "Negatif";
-    } else if (number > 0) {
-      result = "Positif";
-    } else {
-      result = "Nol";
-    }
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -630,7 +545,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = num1 > 0 && num2 > 5;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -648,7 +562,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = num1 > 0 || num2 > 15;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -666,7 +579,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = num1 > 0 || num2 < 5;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -684,7 +596,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = num1 > 0 && num2 < 5;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }
@@ -702,7 +613,6 @@ class Efd1500Exercises {
     bool? result;
 
     // TULIS KODE DI SINI:
-    result = num1 < 0 || num2 > 5;
 
     return result; // ← JANGAN UBAH BARIS INI!
   }

@@ -24,11 +24,6 @@ class Efw100Exercises {
   // - Buat sebuah Container dengan lebar 100, tinggi 100, dan warna merah
   static Widget? exercise1() {
     // TULIS KODE DI SINI:
-    return Container(
-      width: 100,
-      height: 100,
-      color: Colors.red,
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -38,10 +33,6 @@ class Efw100Exercises {
   // - Buat sebuah Text dengan isi "Hello Flutter" dan ukuran font 24
   static Widget? exercise2() {
     // TULIS KODE DI SINI:
-    return Text(
-      "Hello Flutter",
-      style: TextStyle(fontSize: 24),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -51,10 +42,6 @@ class Efw100Exercises {
   // - Buat sebuah Icon dengan Icons.home dan warna biru
   static Widget? exercise3() {
     // TULIS KODE DI SINI:
-    return Icon(
-      Icons.home,
-      color: Colors.blue,
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -64,12 +51,6 @@ class Efw100Exercises {
   // - Buat sebuah Image.asset dengan path "assets/images/image1.jpg"
   static Widget? exercise4() {
     // TULIS KODE DI SINI:
-    return Image.asset(
-      "assets/images/image1.jpg",
-      width: 100,
-      height: 100,
-      fit: BoxFit.cover,
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -79,10 +60,6 @@ class Efw100Exercises {
   // - Buat sebuah CircleAvatar dengan radius 30 dan warna hijau
   static Widget? exercise5() {
     // TULIS KODE DI SINI:
-    return CircleAvatar(
-      radius: 30,
-      backgroundColor: Colors.green,
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -107,10 +84,6 @@ class Efw100Exercises {
   // - Buat sebuah ListTile dengan title "List Tile" dan subtitle "Subtitle"
   static Widget? exercise7() {
     // TULIS KODE DI SINI:
-    return ListTile(
-      title: Text("List Tile"),
-      subtitle: Text("Subtitle"),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -120,10 +93,6 @@ class Efw100Exercises {
   // - Buat sebuah ElevatedButton dengan text "Click Me"
   static Widget? exercise8() {
     // TULIS KODE DI SINI:
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text("Click Me"),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -133,10 +102,6 @@ class Efw100Exercises {
   // - Buat sebuah FloatingActionButton dengan icon Icons.add
   static Widget? exercise9() {
     // TULIS KODE DI SINI:
-    return FloatingActionButton(
-      onPressed: () {},
-      child: Icon(Icons.add),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -146,9 +111,6 @@ class Efw100Exercises {
   // - Buat sebuah AppBar dengan title "My App"
   static Widget? exercise10() {
     // TULIS KODE DI SINI:
-    return AppBar(
-      title: Text("My App"),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -158,10 +120,6 @@ class Efw100Exercises {
   // - Buat sebuah Scaffold dengan AppBar dan body Text "Hello World"
   static Widget? exercise11() {
     // TULIS KODE DI SINI:
-    return Scaffold(
-      appBar: AppBar(title: Text("App")),
-      body: Text("Hello World"),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -171,11 +129,6 @@ class Efw100Exercises {
   // - Buat sebuah SizedBox dengan lebar 200 dan tinggi 100
   static Widget? exercise12() {
     // TULIS KODE DI SINI:
-    return SizedBox(
-      width: 200,
-      height: 100,
-      child: Container(color: Colors.grey[300]),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -185,10 +138,6 @@ class Efw100Exercises {
   // - Buat sebuah Padding dengan padding EdgeInsets.all(16) dan child Text "Padded Text"
   static Widget? exercise13() {
     // TULIS KODE DI SINI:
-    return Padding(
-      padding: EdgeInsets.all(16),
-      child: Text("Padded Text"),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -198,9 +147,6 @@ class Efw100Exercises {
   // - Buat sebuah Center dengan child Text "Centered Text"
   static Widget? exercise14() {
     // TULIS KODE DI SINI:
-    return Center(
-      child: Text("Centered Text"),
-    );
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -210,9 +156,5 @@ class Efw100Exercises {
   // - Buat sebuah Align dengan alignment Alignment.centerRight dan child Text "Right Aligned"
   static Widget? exercise15() {
     // TULIS KODE DI SINI:
-    return Align(
-      alignment: Alignment.centerRight,
-      child: Text("Right Aligned"),
-    );
   }
 }
