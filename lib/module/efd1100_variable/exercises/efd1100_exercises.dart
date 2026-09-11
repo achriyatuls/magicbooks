@@ -58,7 +58,7 @@ class Efd1100Exercises {
     double? price;
 
     // TULIS KODE DI SINI:
-    // Contoh: price = double.parse(text);
+    price = double.parse(text);
 
     return price; // ← JANGAN UBAH BARIS INI!
   }
