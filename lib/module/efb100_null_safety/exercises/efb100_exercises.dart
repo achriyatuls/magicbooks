@@ -33,11 +33,8 @@ class Efb100Exercises {
     String? output;
 
     // TULIS KODE DI SINI:
-    String? name; // name = null
-    String? uppercaseResult = name?.toUpperCase(); // Hasil: null
 
     // Convert null (dari toUpperCase) menjadi string "null"
-    output = uppercaseResult ?? "null";
 
     return output; // ← JANGAN UBAH BARIS INI! Expected: "null"
   }
