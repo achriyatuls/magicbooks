@@ -175,10 +175,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     child: _selectedImage == null &&
                                             _uploadedImageUrl == null
                                         ? Text(
-                                            _userData?.nama
+                                            (_userData?.nama.isNotEmpty ?? false)
+                                                ? _userData!.nama
                                                     .substring(0, 1)
-                                                    .toUpperCase() ??
-                                                'U',
+                                                    .toUpperCase()
+                                                : 'U',
                                             style: const TextStyle(
                                               fontSize: 40,
                                               fontWeight: FontWeight.bold,

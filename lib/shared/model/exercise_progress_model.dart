@@ -54,8 +54,8 @@ class ExerciseProgress {
       userCode: map['userCode'],
       uiPreview: map['uiPreview'],
       metadata: map['metadata'],
-      completedAt: (map['completedAt'] as Timestamp).toDate(),
-      updatedAt: (map['updatedAt'] as Timestamp).toDate(),
+      completedAt: (map['completedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (map['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 
@@ -130,8 +130,8 @@ class ModuleProgress {
       completedExercises: map['completedExercises'] ?? 0,
       completionPercentage: (map['completionPercentage'] ?? 0.0).toDouble(),
       totalScore: map['totalScore'] ?? 0,
-      lastAccessed: (map['lastAccessed'] as Timestamp).toDate(),
-      updatedAt: (map['updatedAt'] as Timestamp).toDate(),
+      lastAccessed: (map['lastAccessed'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (map['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
     );
   }
 }

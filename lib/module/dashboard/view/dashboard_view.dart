@@ -32,10 +32,11 @@ class DashboardView extends StatefulWidget {
                           : null,
                       child: controller.userData?.photoURL == null
                           ? Text(
-                              controller.userData?.nama
+                              (controller.userData?.nama.isNotEmpty ?? false)
+                                  ? controller.userData!.nama
                                       .substring(0, 1)
-                                      .toUpperCase() ??
-                                  'U',
+                                      .toUpperCase()
+                                  : 'U',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,

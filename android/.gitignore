@@ -11,3 +11,7 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+# Shared debug keystore IS tracked on purpose: same SHA-1 for every dev machine.
+# Never reuse this for a release build.
+!app/shared-debug.keystore

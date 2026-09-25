@@ -1129,8 +1129,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                             : null,
                         child: _userData?.photoURL == null
                             ? Text(
-                                _userData?.nama.substring(0, 1).toUpperCase() ??
-                                    'U',
+                                (_userData?.nama.isNotEmpty ?? false)
+                                    ? _userData!.nama.substring(0, 1).toUpperCase()
+                                    : 'U',
                                 style: const TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,

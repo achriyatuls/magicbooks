@@ -30,6 +30,18 @@ android {
         versionCode 1
         versionName "1.0.0"
     }
+     // Shared debug keystore, committed to repo, so every dev machine has the
+    // same SHA-1 registered in Firebase. Do NOT use this signingConfig for
+    // release builds shipped to users; replace with a proper release keystore
+    // before publishing.
+    signingConfigs {
+        debug {
+            storeFile file("shared-debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
+    }
 
     buildTypes {
         release {

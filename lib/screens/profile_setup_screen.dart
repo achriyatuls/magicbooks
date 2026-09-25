@@ -122,10 +122,11 @@ class _ProfileSetupScreenState extends State<ProfileSetupScreen> {
                               : null,
                           child: _userData?.photoURL == null
                               ? Text(
-                                  _userData?.nama
+                                  (_userData?.nama.isNotEmpty ?? false)
+                                      ? _userData!.nama
                                           .substring(0, 1)
-                                          .toUpperCase() ??
-                                      'U',
+                                          .toUpperCase()
+                                      : 'U',
                                   style: const TextStyle(
                                     fontSize: 32,
                                     fontWeight: FontWeight.bold,

@@ -100,7 +100,7 @@ class AuthService {
     try {
       final doc = await _firestore.collection('users').doc(uid).get();
       if (doc.exists) {
-        return UserModel.fromMap(doc.data()!);
+        return UserModel.fromMap({...doc.data()!, 'uid': doc.id});
       }
       return null;
     } catch (e) {
@@ -113,7 +113,10 @@ class AuthService {
   Future<bool> updateUserData(UserModel userModel) async {
     try {
       final updatedUser = userModel.copyWith(updatedAt: DateTime.now());
-      await _firestore.collection('users').doc(userModel.uid).update(updatedUser.toMap());
+      await _firestore
+          .collection('users')
+          .doc(userModel.uid)
+          .set(updatedUser.toMap(), SetOptions(merge: true));
       return true;
     } catch (e) {
       print('Error updating user data: $e');
